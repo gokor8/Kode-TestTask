@@ -1,9 +1,8 @@
 package com.example.kode.domain.usecase
 
 import com.example.kode.domain.core.Base
-import com.example.kode.domain.core.BaseState
-import com.example.kode.domain.entity.fail.SimpleFail
-import com.example.kode.domain.mappers.ExceptionToSimpleFailMapper
+import com.example.kode.domain.entity.workers.WorkersEntity
+import com.example.kode.domain.mappers.ExceptionToExceptionEntityMapper
 import com.example.kode.domain.repository.WorkersRepository
 import org.junit.Assert
 import org.junit.Before
@@ -12,72 +11,70 @@ import java.io.IOException
 
 class TestGetWorkersUseCase {
 
-    private lateinit var returnedStateMapper: Base.Mapper<TestReturnedStates, BaseState>
-    private lateinit var exceptionToSimpleFailMapper: ExceptionToSimpleFailMapper
+    private lateinit var returnedStateMapper: Base.Mapper<TestDataStates, WorkersEntity> // из di
+    private lateinit var exceptionToExceptionEntityMapper: ExceptionToExceptionEntityMapper
 
     @Before
     fun before_test() {
-        returnedStateMapper = TestReturnedStatesMapper()
-        exceptionToSimpleFailMapper = ExceptionToSimpleFailMapper(
-            SimpleFail("test", "test"),
-            SimpleFail("unknownTest", "unknownTest")
-        )
+        returnedStateMapper = TestDataStatesToEntityMapper()
+        exceptionToExceptionEntityMapper = ExceptionToExceptionEntityMapper()
     }
 
     @Test
     fun `get success workers list`() {
-        val returnedState = TestReturnedStates.Success()
+        val returnedState = TestDataStates.Success()
         val testWorkersRepository = TestWorkersRepository(returnedState, returnedStateMapper)
-        val workersUseCase = GetWorkers(testWorkersRepository, exceptionToSimpleFailMapper)
+        val workersUseCase = GetWorkers(testWorkersRepository, exceptionToExceptionEntityMapper)
 
         val actual = workersUseCase.getWorkers()
-        val expected = TestSuccessEntity("success")
+        val expected = WorkersEntity.SuccessEntity("success", "success", "success", "success")
 
         Assert.assertEquals(expected, actual)
-        Assert.assertEquals(expected.message, (actual as TestSuccessEntity).message)
     }
+
     // Сделать маппер BaseState : Base.IgnorantMapper<BaseState>
     // BaseStateToTestEntity : Mapper<BaseState,
     @Test
     fun `get fail workers list`() {
-        val returnedState = TestReturnedStates.Fail()
+        val returnedState = TestDataStates.Fail()
         val testWorkersRepository = TestWorkersRepository(returnedState, returnedStateMapper)
-        val workersUseCase = GetWorkers(testWorkersRepository, exceptionToSimpleFailMapper)
+        val workersUseCase = GetWorkers(testWorkersRepository, exceptionToExceptionEntityMapper)
 
         val actual = workersUseCase.getWorkers()
-        val expected = TestFailEntity("fail")
+        val expected = WorkersEntity.FailEntity("fail", "fail")
 
         Assert.assertEquals(expected, actual)
-        Assert.assertEquals(expected.message, (actual as TestFailEntity).message)
     }
 
-    sealed class TestReturnedStates : Base.IgnorantMapper<TestReturnedStates> {
-        class Success : TestReturnedStates() {
-            override fun <I : Base.Mapper<TestReturnedStates, R>, R> map(model: I): R = model.map(this)
+    sealed interface TestDataStates : Base.IgnorantMapper<TestDataStates> {
+        class Success : TestDataStates {
+            override fun <I : Base.Mapper<TestDataStates, R>, R> map(model: I): R =
+                model.map(this)
         }
-        class Fail : TestReturnedStates() {
-            override fun <I : Base.Mapper<TestReturnedStates, R>, R> map(model: I): R = model.map(this)
-        }
-        class Exception : TestReturnedStates() {
-            override fun <I : Base.Mapper<TestReturnedStates, R>, R> map(model: I): R = model.map(this)
-        }
-    }
 
-    class TestReturnedStatesMapper : Base.Mapper<TestReturnedStates, BaseState> {
-        override fun map(model: TestReturnedStates): BaseState = when (model) {
-            is TestReturnedStates.Success -> TestSuccessEntity("success")
-            is TestReturnedStates.Fail -> TestFailEntity("fail")
-            is TestReturnedStates.Exception -> throw IOException()
+        class Fail : TestDataStates {
+            override fun <I : Base.Mapper<TestDataStates, R>, R> map(model: I): R =
+                model.map(this)
+        }
+
+        class Exception : TestDataStates {
+            override fun <I : Base.Mapper<TestDataStates, R>, R> map(model: I): R =
+                model.map(this)
         }
     }
 
-    data class TestSuccessEntity(val message: String) : BaseState.Success
-    data class TestFailEntity(val message: String) : BaseState.Fail
+    class TestDataStatesToEntityMapper : Base.Mapper<TestDataStates, WorkersEntity> {
+        override fun map(model: TestDataStates) = when (model) {
+            is TestDataStates.Success -> WorkersEntity.SuccessEntity("success","success","success","success")
+            is TestDataStates.Fail -> WorkersEntity.FailEntity("fail", "fail")
+            is TestDataStates.Exception -> throw IOException()
+        }
+    }
 
     class TestWorkersRepository(
-        private val testReturnedState: TestReturnedStates,
-        private val testReturnedStatesMapper: Base.Mapper<TestReturnedStates, BaseState>
+        private val testReturnedState: TestDataStates,
+        private val testDataStatesMapper: Base.Mapper<TestDataStates, WorkersEntity>
     ) : WorkersRepository {
-        override fun getWorkers(): BaseState = testReturnedState.map(testReturnedStatesMapper)
+        override fun getWorkers(): WorkersEntity = testReturnedState.map(testDataStatesMapper)
     }
 }

@@ -1,8 +1,6 @@
 package com.example.kode.domain.repository
 
-import com.example.kode.domain.core.BaseState
+interface WorkersRepository<out R> {
 
-interface WorkersRepository {
-
-    fun getWorkers() : BaseState
+    fun getWorkers(): R
 }
