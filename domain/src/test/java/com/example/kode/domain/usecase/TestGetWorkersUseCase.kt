@@ -1,5 +1,6 @@
 package com.example.kode.domain.usecase
 
+import com.example.kode.domain.core.TestBadRequest
 import com.example.kode.domain.core.Base
 import com.example.kode.domain.core.Exceptions
 import com.example.kode.domain.entity.custom_exceptions.NoConnectionException
@@ -18,21 +19,22 @@ class TestGetWorkersUseCase {
     // Второй сложные(TestRepository<DifficultEntity> + DataToDifficultDomainMapper<TestDataModel, DifficultEntity)
     // И теперь все просто. Когда надо получить один тип данных, даем его, когда другой, то другой
 
-    private lateinit var returnedStateMapper: Base.Mapper<TestDataStates, WorkersEntity> // из di
-    private lateinit var exceptionToExceptionEntityMapper: TestExceptionToExceptionEntityMapper // из di
+    private lateinit var returnedStateMapper: Base.Mapper<TestDataState, WorkersEntity> // из di
+    private lateinit var exceptionToExceptionEntityMapper: TestExceptionToEntityMapper // из di
 
     // di
     @Before
     fun before_test() {
-        returnedStateMapper = TestDataStatesToEntityMapper()
-        exceptionToExceptionEntityMapper = TestExceptionToExceptionEntityMapper()
+        returnedStateMapper = TestDataStateToEntityMapper()
+        exceptionToExceptionEntityMapper = TestExceptionToEntityMapper()
     }
 
     @Test
     fun `get success workers list`() {
-        val returnedState = TestDataStates.Success()
+        val returnedState = TestDataState.Success()
         val testWorkersRepository = TestWorkersRepository(returnedState, returnedStateMapper)
-        val workersUseCase = GetWorkers(testWorkersRepository, exceptionToExceptionEntityMapper)
+        val workersUseCase =
+            GetWorkersUseCase(testWorkersRepository, exceptionToExceptionEntityMapper)
 
         val actual = workersUseCase.getWorkers()
         val expected = WorkersEntity.SuccessEntity("success", "success", "success", "success")
@@ -44,21 +46,22 @@ class TestGetWorkersUseCase {
     // BaseStateToTestEntity : Mapper<BaseState,
     @Test
     fun `get fail workers list`() {
-        val returnedState = TestDataStates.Fail()
+        val returnedState = TestDataState.Exception(TestBadRequest())
         val testWorkersRepository = TestWorkersRepository(returnedState, returnedStateMapper)
-        val workersUseCase = GetWorkers(testWorkersRepository, exceptionToExceptionEntityMapper)
+        val workersUseCase =
+            GetWorkersUseCase(testWorkersRepository, exceptionToExceptionEntityMapper)
 
         val actual = workersUseCase.getWorkers()
-        val expected = WorkersEntity.FailEntity("fail", "fail")
 
-        Assert.assertEquals(expected, actual)
+        Assert.assertTrue(actual is WorkersEntity.FailEntity)
     }
 
     @Test
     fun `get exception workers list`() {
-        val returnedState = TestDataStates.Exception()
+        val returnedState = TestDataState.Exception(IOException())
         val testWorkersRepository = TestWorkersRepository(returnedState, returnedStateMapper)
-        val workersUseCase = GetWorkers(testWorkersRepository, exceptionToExceptionEntityMapper)
+        val workersUseCase =
+            GetWorkersUseCase(testWorkersRepository, exceptionToExceptionEntityMapper)
 
         val actual = workersUseCase.getWorkers()
         val expected = WorkersEntity.ExceptionEntity(Exceptions.GENERIC_EXCEPTION)
@@ -67,43 +70,42 @@ class TestGetWorkersUseCase {
     }
 
     class TestWorkersRepository<out R>(
-        private val testReturnedState: TestDataStates,
-        private val testDataStatesMapper: Base.Mapper<TestDataStates, R>
+        private val testReturnedState: TestDataState,
+        private val testDataStateMapper: Base.Mapper<TestDataState, R>
     ) : WorkersRepository<R> {
 
-        override fun getWorkers(): R = testReturnedState.map(testDataStatesMapper)
-    }
-
-    class TestDataStatesToEntityMapper : Base.Mapper<TestDataStates, WorkersEntity> {
-        override fun map(model: TestDataStates) = when (model) {
-            is TestDataStates.Success -> WorkersEntity.SuccessEntity("success","success","success","success")
-            is TestDataStates.Fail -> WorkersEntity.FailEntity("fail", "fail")
-            is TestDataStates.Exception -> throw IOException()
+        override fun getWorkers(): R {
+            return testReturnedState.map(testDataStateMapper)
         }
     }
 
-    class TestExceptionToExceptionEntityMapper : Base.Mapper<Exception, WorkersEntity.ExceptionEntity> {
+    class TestDataStateToEntityMapper : Base.Mapper<TestDataState, WorkersEntity> {
+        override fun map(model: TestDataState) = when(model) {
+            is TestDataState.Success ->
+                WorkersEntity.SuccessEntity(
+                    "success",
+                    "success",
+                    "success",
+                    "success"
+                )
+            is TestDataState.Exception -> throw model.exception
+        }
+    }
+
+    class TestExceptionToEntityMapper : Base.Mapper<Exception, WorkersEntity> {
         override fun map(model: Exception) = when (model) {
+            is TestBadRequest -> WorkersEntity.FailEntity()
             is NoConnectionException -> WorkersEntity.ExceptionEntity(Exceptions.NO_CONNECTION_EXCEPTION)
             else -> WorkersEntity.ExceptionEntity(Exceptions.GENERIC_EXCEPTION)
         }
     }
 
-    sealed interface TestDataStates : Base.IgnorantMapper<TestDataStates> {
-        class Success : TestDataStates {
-            override fun <I : Base.Mapper<TestDataStates, R>, R> map(model: I): R =
-                model.map(this)
-        }
+    sealed class TestDataState : Base.IgnorantMapper<TestDataState> {
+        override fun <I : Base.Mapper<TestDataState, R>, R> map(model: I): R =
+            model.map(this)
 
-        class Fail : TestDataStates {
-            override fun <I : Base.Mapper<TestDataStates, R>, R> map(model: I): R =
-                model.map(this)
-        }
+        class Success : TestDataState()
 
-        class Exception : TestDataStates {
-            override fun <I : Base.Mapper<TestDataStates, R>, R> map(model: I): R =
-                model.map(this)
-        }
+        class Exception(val exception: IOException) : TestDataState()
     }
-
 }

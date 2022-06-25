@@ -1,51 +1,99 @@
 package com.example.kode.data.repository
 
+import com.example.kode.data.workers.WorkersDataToDomainMapper
+import com.example.kode.data.workers.WorkersRepositoryImpl
+import com.example.kode.data.workers.cache.WorkersCacheDataSource
 import com.example.kode.data.workers.cloud.WorkersCloudDataSource
-import com.example.kode.data.workers.cloud.WorkersResponse
+import com.example.kode.data.workers.cloud.WorkersCloudToDataMapper
 import com.example.kode.data.workers.model.WorkersDataModel
 import com.example.kode.domain.core.Base
 import com.example.kode.domain.entity.workers.WorkersEntity
+import org.junit.Assert
 import org.junit.Test
 import java.io.IOException
 
 class TestWorkersRepository {
 
     @Test
-    fun `get success mapped workers list`() {
+    fun `get success mapped workers list from cloud and save`() {
         val command = TestCommands.Success()
 
-        val testCacheDataSource = WorkersCacheDataSource<WorkersDataModel>()
+        val testCacheDataSource = TestWorkersCacheDataSource()
         val testCloudDataSource = TestWorkersCloudDataSource(command)
-        val mapper = Base.Mapper<WorkersDataModel, WorkersEntity>()
-        val repository = WorkersRepositoryImpl<WorkersEntity>(
-            testCacheDataSource,
+        val mapper = WorkersDataToDomainMapper()
+        val repository = WorkersRepositoryImpl(
             testCloudDataSource,
+            testCacheDataSource,
             mapper
         )
 
+        val actual = repository.getWorkers()
+        val expected = WorkersEntity.SuccessEntity(
+            "test",
+            "test",
+            "test",
+            "test"
+        )
+        Assert.assertEquals(expected, actual)
+    }
+
+    @Test
+    fun `save and get success workers list from cache`() {
+        val command = TestCommands.Success()
+
+        val testCacheDataSource = TestWorkersCacheDataSource()
+        val testCloudDataSource = TestWorkersCloudDataSource(command)
+        val mapper = WorkersDataToDomainMapper()
+        val repository = WorkersRepositoryImpl(
+            testCloudDataSource,
+            testCacheDataSource,
+            mapper
+        )
+
+        val actual = repository.getWorkers()
+        val expected = WorkersEntity.SuccessEntity(
+            "test",
+            "test",
+            "test",
+            "test"
+        )
+        Assert.assertEquals(expected, actual)
     }
 
     sealed class TestCommands {
-        class Success() : TestCommands()
-        class Fail() : TestCommands()
-        class Exception() : TestCommands()
+        class Success : TestCommands()
+        class Fail : TestCommands()
+        class Exception : TestCommands()
     }
 
-    class TestWorkersCloudDataSource(val testCommands: TestCommands) : WorkersCloudDataSource {
+    class TestWorkersCloudDataSource(private val testCommands: TestCommands) :
+        WorkersCloudDataSource<WorkersDataModel> {
 
-        override fun getWorkers(): WorkersResponse = when(testCommands) {
-            is TestCommands.Success -> WorkersResponse("test",
+        override fun get(): WorkersDataModel = when (testCommands) {
+            is TestCommands.Success -> WorkersDataModel(
                 "test",
                 "test",
                 "test",
-                "test",
-                "test",
-                "test",
-                listOf("test"),
                 "test"
-                )
+            )
             is TestCommands.Fail -> throw TestBadRequest()
             is TestCommands.Exception -> throw IOException()
+        }
+    }
+
+    class TestWorkersCacheDataSource() : WorkersCacheDataSource<WorkersDataModel> {
+
+        private var listDataModels: WorkersDataModel? = null
+
+        override fun get(): WorkersDataModel = listDataModels ?: WorkersDataModel(
+            "",
+            "",
+            "",
+            "",
+        )
+
+        override fun save(model: WorkersDataModel) {
+            listDataModels = model
         }
     }
 

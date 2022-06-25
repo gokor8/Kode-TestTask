@@ -4,9 +4,9 @@ import com.example.kode.domain.core.Base
 import com.example.kode.domain.entity.workers.WorkersEntity
 import com.example.kode.domain.repository.WorkersRepository
 
-class GetWorkers(
+class GetWorkersUseCase(
     private val workersRepository: WorkersRepository<WorkersEntity>,
-    private val failMapper: Base.Mapper<Exception, WorkersEntity.ExceptionEntity>
+    private val failMapper: Base.Mapper<Exception, WorkersEntity>
 ) {
 
     fun getWorkers(): WorkersEntity = try {
