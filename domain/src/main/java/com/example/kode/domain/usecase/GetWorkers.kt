@@ -6,7 +6,6 @@ import com.example.kode.domain.repository.WorkersRepository
 
 class GetWorkers(
     private val workersRepository: WorkersRepository<WorkersEntity>,
-    private val dataToDomainMapper: Base.Mapper<Base.Model, WorkersEntity>,
     private val failMapper: Base.Mapper<Exception, WorkersEntity.ExceptionEntity>
 ) {
 

@@ -1,4 +1,4 @@
-package com.example.kode.domain.mappers
+package com.example.kode.data.mappers
 
 import com.example.kode.domain.core.Base
 import com.example.kode.domain.core.Exceptions
