@@ -1,4 +1,4 @@
-package com.example.kode.domain.usecase
+package com.example.kode.domain.usecase.workers
 
 import com.example.kode.domain.core.Base
 import com.example.kode.domain.entity.workers.WorkersEntity

@@ -14,7 +14,5 @@ sealed class WorkersEntity : Base.IgnorantMapper<WorkersEntity> {
         val position: String
     ) : WorkersEntity()
 
-    class FailEntity : WorkersEntity()
-
-    data class ExceptionEntity(val exception: Exceptions): WorkersEntity()
+    data class FailEntity(val exception: Exceptions): WorkersEntity()
 }

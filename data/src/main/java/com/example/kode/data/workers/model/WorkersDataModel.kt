@@ -13,9 +13,4 @@ sealed class WorkersDataModel : Base.IgnorantMapper<WorkersDataModel> {
         val userTag: String,
         val position: String
     ) : WorkersDataModel()
-
-    data class WithException(
-        val success: Success,
-        val exception: Exception
-    ) : WorkersDataModel()
 }
