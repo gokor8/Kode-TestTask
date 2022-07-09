@@ -9,7 +9,7 @@ import com.example.kode.domain.repository.WorkersRepository
 
 class WorkersRepositoryImpl<R>(
     private val cloudDataSource: WorkersCloudDataSource<WorkersDataModel.Success>,
-    private val cacheDataSource: WorkersCacheDataSource<WorkersDataModel.Success, WorkersDataModel.WithException>,
+    private val cacheDataSource: WorkersCacheDataSource<WorkersDataModel.Success, WorkersDataModel>,
     private val mapper: Base.Mapper<WorkersDataModel, R>
 ) : WorkersRepository<R> {
     override fun getWorkers(): R {

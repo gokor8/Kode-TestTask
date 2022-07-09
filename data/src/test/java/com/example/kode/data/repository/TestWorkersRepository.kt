@@ -1,12 +1,10 @@
 package com.example.kode.data.repository
 
-import com.example.kode.data.workers.WorkersDataToDomainMapper
+import com.example.kode.data.workers.WorkersSuccessDataToDomainMapper
 import com.example.kode.data.workers.WorkersRepositoryImpl
 import com.example.kode.data.workers.cache.WorkersCacheDataSource
 import com.example.kode.data.workers.cloud.WorkersCloudDataSource
-import com.example.kode.data.workers.cloud.WorkersCloudToDataMapper
 import com.example.kode.data.workers.model.WorkersDataModel
-import com.example.kode.domain.core.Base
 import com.example.kode.domain.entity.workers.WorkersEntity
 import org.junit.Assert
 import org.junit.Test
@@ -20,7 +18,7 @@ class TestWorkersRepository {
 
         val testCacheDataSource = TestWorkersCacheDataSource()
         val testCloudDataSource = TestWorkersCloudDataSource(command)
-        val mapper = WorkersDataToDomainMapper()
+        val mapper = WorkersSuccessDataToDomainMapper()
         val repository = WorkersRepositoryImpl(
             testCloudDataSource,
             testCacheDataSource,
@@ -43,7 +41,7 @@ class TestWorkersRepository {
 
         val testCacheDataSource = TestWorkersCacheDataSource()
         val testCloudDataSource = TestWorkersCloudDataSource(command)
-        val mapper = WorkersDataToDomainMapper()
+        val mapper = WorkersSuccessDataToDomainMapper()
         val repository = WorkersRepositoryImpl(
             testCloudDataSource,
             testCacheDataSource,

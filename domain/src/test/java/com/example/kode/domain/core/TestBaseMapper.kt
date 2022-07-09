@@ -6,6 +6,7 @@ import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import java.rmi.MarshalledObject
 
+@Deprecated("Old realization mapper without FunMapper.kt")
 class TestBaseMapper {
 
     @Test
