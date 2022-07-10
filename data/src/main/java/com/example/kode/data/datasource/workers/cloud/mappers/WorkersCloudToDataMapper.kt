@@ -1,6 +1,7 @@
-package com.example.kode.data.workers.cloud
+package com.example.kode.data.datasource.workers.cloud.mappers
 
-import com.example.kode.data.workers.model.WorkersDataModel
+import com.example.kode.data.datasource.workers.cloud.models.WorkersResponse
+import com.example.kode.data.repository.workers.models.WorkersDataModel
 import com.example.kode.domain.core.Base
 
 class WorkersCloudToDataMapper : Base.Mapper<WorkersResponse, WorkersDataModel> {

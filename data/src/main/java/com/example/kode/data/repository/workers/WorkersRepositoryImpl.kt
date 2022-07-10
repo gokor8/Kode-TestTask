@@ -1,15 +1,15 @@
-package com.example.kode.data.workers
+package com.example.kode.data.repository.workers
 
-import com.example.kode.data.workers.cache.WorkersCacheDataSource
-import com.example.kode.data.workers.cloud.WorkersCloudDataSource
-import com.example.kode.data.workers.model.WorkersDataModel
+import com.example.kode.data.datasource.workers.cache.WorkersCacheDataSource
+import com.example.kode.data.datasource.workers.cloud.WorkersCloudDataSource
+import com.example.kode.data.repository.workers.models.WorkersDataModel
 import com.example.kode.domain.core.Base
 import com.example.kode.domain.entity.custom_exceptions.NoConnectionException
 import com.example.kode.domain.repository.WorkersRepository
 
 class WorkersRepositoryImpl<R>(
-    private val cloudDataSource: WorkersCloudDataSource<WorkersDataModel.Success>,
-    private val cacheDataSource: WorkersCacheDataSource<WorkersDataModel.Success, WorkersDataModel>,
+    private val cloudDataSource: WorkersCloudDataSource<WorkersDataModel>,
+    private val cacheDataSource: WorkersCacheDataSource<WorkersDataModel, WorkersDataModel>,
     private val mapper: Base.Mapper<WorkersDataModel, R>
 ) : WorkersRepository<R> {
     override fun getWorkers(): R {

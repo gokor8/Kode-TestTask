@@ -1,4 +1,4 @@
-package com.example.kode.data.workers.cloud
+package com.example.kode.data.datasource.workers.cloud.models
 
 data class WorkersResponse(
     val id: String,

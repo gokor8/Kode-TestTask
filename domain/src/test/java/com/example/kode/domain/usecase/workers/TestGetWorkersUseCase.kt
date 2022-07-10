@@ -47,7 +47,7 @@ class TestGetWorkersUseCase {
 
     @Test
     fun `get exception workers list`() {
-        val returnedState = TestDataState.Exception(IOException())
+        val returnedState = TestDataState.Exception()
         val testWorkersRepository = TestWorkersRepository(returnedState, returnedStateMapper)
         val workersUseCase =
             GetWorkersUseCase(testWorkersRepository, exceptionToExceptionEntityMapper)
@@ -77,16 +77,12 @@ class TestGetWorkersUseCase {
                     "success",
                     "success"
                 )
-            is TestDataState.Exception -> throw model.exception
+            is TestDataState.Exception -> throw IOException()
         }
     }
 
     class TestExceptionToEntityMapper : Base.Mapper<Exception, WorkersEntity> {
-        override fun map(model: Exception) = when (model) {
-            is TestBadRequestException -> WorkersEntity.FailEntity(Exceptions.GENERIC_EXCEPTION)
-            is NoConnectionException -> WorkersEntity.FailEntity(Exceptions.NO_CONNECTION_EXCEPTION)
-            else -> WorkersEntity.FailEntity(Exceptions.GENERIC_EXCEPTION)
-        }
+        override fun map(model: Exception) = WorkersEntity.FailEntity(Exceptions.GENERIC_EXCEPTION)
     }
 
     sealed class TestDataState : Base.IgnorantMapper<TestDataState> {
@@ -95,6 +91,6 @@ class TestGetWorkersUseCase {
 
         class Success : TestDataState()
 
-        class Exception(val exception: IOException) : TestDataState()
+        class Exception() : TestDataState()
     }
 }

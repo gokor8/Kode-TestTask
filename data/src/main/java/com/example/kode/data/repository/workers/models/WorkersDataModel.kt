@@ -1,7 +1,6 @@
-package com.example.kode.data.workers.model
+package com.example.kode.data.repository.workers.models
 
 import com.example.kode.domain.core.Base
-import java.lang.Exception
 
 sealed class WorkersDataModel : Base.IgnorantMapper<WorkersDataModel> {
 
