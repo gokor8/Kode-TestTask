@@ -1,6 +1,7 @@
 package com.example.kode.data.datasource.workers.cloud
 
 import com.example.kode.data.datasource.workers.cloud.models.WorkersResponse
+import com.example.kode.data.datasource.workers.cloud.service.WorkersService
 import com.example.kode.data.repository.workers.models.WorkersDataModel
 import com.example.kode.domain.core.Base
 import org.junit.Assert
@@ -13,7 +14,7 @@ class TestWorkersCloudDataSourceImpl {
 
     @Test
     fun `test get success data from api`() {
-        val workersCloudDataSource = WorkersCloudDataSourceImpl<WorkersDataModel>(
+        val workersCloudDataSource = WorkersCloudDataSourceImpl(
             apiService,
             workersResponseToRepositoryMapper
         )
