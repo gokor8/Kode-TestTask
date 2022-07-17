@@ -1,23 +1,22 @@
 package com.example.kode.data.datasource.workers.cache
 
-import com.example.kode.data.datasource.workers.cache.models.RealmWorkersModel
-import com.example.kode.data.repository.workers.models.WorkersDataModel
 import com.example.kode.domain.core.Base
 import io.realm.Realm
-import io.realm.RealmConfiguration
+import io.realm.RealmObject
 import io.realm.kotlin.executeTransactionAwait
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Dispatchers.IO
-import okhttp3.Dispatcher
 
-class RealmWorkersCacheDataSource<M : Base.IgnorantMapper<M>> constructor(
-    private val realm: Realm
-    private val mapperToRealmModel: Base.Mapper<M, RealmWorkersModel>
-) : WorkersCacheDataSource<WorkersDataModel, WorkersDataModel> {
+class RealmWorkersCacheDataSource<M : Base.IgnorantMapper<M>, RM : RealmObject> constructor(
+    private val realm: Realm,
+    private val getClass: Class<RM>,
+    private val mapperToRealmModel: Base.Mapper<M, List<RM>>,
+    private val mapperFromRealmModel: Base.Mapper<List<RM>, M>
+) : WorkersCacheDataSource<M, M> {
 
-    override fun get(): WorkersDataModel {
-
-    }
+    override suspend fun get(): M =
+        realm.where(getClass)
+            .findAll()
+            .let(mapperFromRealmModel::map)
 
     override suspend fun save(model: M) {
         realm.executeTransactionAwait(Dispatchers.IO) {

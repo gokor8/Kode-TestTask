@@ -1,5 +1,6 @@
 package com.example.kode.data.datasource.workers.cache.models
 
+import com.example.kode.domain.core.Base
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 import io.realm.annotations.Required
@@ -15,4 +16,7 @@ class RealmWorkersModel(
     var userTag: String,
     @Required
     var position: String
-) : RealmObject()
+) : RealmObject(), Base.IgnorantMapper<RealmWorkersModel> {
+
+    override fun <I : Base.Mapper<RealmWorkersModel, R>, R> map(model: I) = model.map(this)
+}

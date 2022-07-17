@@ -7,6 +7,7 @@ import com.example.kode.domain.core.Base
 import com.example.kode.domain.entity.custom_exceptions.GenericException
 import com.example.kode.domain.entity.custom_exceptions.NoConnectionException
 import com.example.kode.domain.entity.workers.WorkersEntity
+import kotlinx.coroutines.runBlocking
 import org.junit.Assert
 import org.junit.Test
 import java.io.IOException
@@ -16,7 +17,7 @@ class TestWorkersRepository {
     private val dataToEntityMapper = TestRepositoryModelToEntityModelMapper()
 
     @Test
-    fun `get success from cloud and save`() {
+    fun `get success from cloud and save`() = runBlocking {
         val command = TestCommands.Success()
         val expected = TestEntityModel(
             "mapped cloud 1"
@@ -43,7 +44,7 @@ class TestWorkersRepository {
     }
 
     @Test
-    fun `get saved data from cache`() {
+    fun `get saved data from cache`() = runBlocking {
         val command = TestCommands.NoConnection()
         val savedCacheModel = TestRepositoryModel("cached 1")
 
@@ -62,7 +63,7 @@ class TestWorkersRepository {
     }
 
     @Test(expected = TestNoCacheException::class)
-    fun `get empty cache exception`() {
+    fun `get empty cache exception`() = runBlocking {
         val command = TestCommands.NoConnection()
 
         val repository = WorkersRepositoryImpl(
@@ -75,7 +76,7 @@ class TestWorkersRepository {
     }
 
     @Test(expected = GenericException::class)
-    fun `get generic exception`() {
+    fun `get generic exception`() = runBlocking {
         val command = TestCommands.Exception()
 
         val repository = WorkersRepositoryImpl(
@@ -124,9 +125,9 @@ class TestWorkersRepository {
 
         private var listDataModels: TestRepositoryModel? = cacheDataModel
 
-        override fun get() = listDataModels ?: throw TestNoCacheException()
+        override suspend fun get() = listDataModels ?: throw TestNoCacheException()
 
-        override fun save(model: TestRepositoryModel) {
+        override suspend fun save(model: TestRepositoryModel) {
             listDataModels = model
         }
     }

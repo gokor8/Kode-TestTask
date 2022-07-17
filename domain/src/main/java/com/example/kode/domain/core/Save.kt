@@ -1,6 +1,12 @@
 package com.example.kode.domain.core
 
-interface Save<I, R> {
+sealed interface Save {
 
-    fun save(model: I): R
+    interface Base<I, R> {
+        fun save(model: I): R
+    }
+
+    interface Suspend<I, R> {
+        suspend fun save(model: I): R
+    }
 }
