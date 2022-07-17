@@ -4,12 +4,12 @@ import com.example.kode.domain.core.Base
 import com.example.kode.domain.entity.workers.WorkersEntity
 import com.example.kode.domain.repository.WorkersRepository
 
-class GetWorkersUseCase(
-    private val workersRepository: WorkersRepository<WorkersEntity>,
-    private val failMapper: Base.Mapper<Exception, WorkersEntity>
+class GetWorkersUseCase<M : Base.FuncMapper>(
+    private val workersRepository: WorkersRepository<M>,
+    private val failMapper: Base.Mapper<Exception, M>
 ) {
 
-    fun getWorkers(): WorkersEntity = try {
+    fun getWorkers(): M = try {
         workersRepository.getWorkers()
     } catch (e: Exception) {
         failMapper.map(e)

@@ -7,13 +7,13 @@ import com.example.kode.domain.core.Base
 import com.example.kode.domain.entity.custom_exceptions.NoConnectionException
 import com.example.kode.domain.repository.WorkersRepository
 
-class WorkersRepositoryImpl<R>(
-    private val cloudDataSource: WorkersCloudDataSource<WorkersDataModel>,
-    private val cacheDataSource: WorkersCacheDataSource<WorkersDataModel, WorkersDataModel>,
-    private val mapper: Base.Mapper<WorkersDataModel, R>
+class WorkersRepositoryImpl<R : Any, M : Base.IgnorantMapper<M>>(
+    private val cloudDataSource: WorkersCloudDataSource<M>,
+    private val cacheDataSource: WorkersCacheDataSource<M, M>,
+    private val mapper: Base.Mapper<M, R>
 ) : WorkersRepository<R> {
     override fun getWorkers(): R {
-        var data: WorkersDataModel
+        var data: M
         try {
             data = cloudDataSource.get()
             cacheDataSource.save(data)

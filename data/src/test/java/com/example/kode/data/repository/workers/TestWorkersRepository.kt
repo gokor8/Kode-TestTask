@@ -4,6 +4,7 @@ import com.example.kode.data.datasource.workers.cache.WorkersCacheDataSource
 import com.example.kode.data.datasource.workers.cloud.WorkersCloudDataSource
 import com.example.kode.data.repository.workers.models.WorkersDataModel
 import com.example.kode.domain.core.Base
+import com.example.kode.domain.entity.custom_exceptions.GenericException
 import com.example.kode.domain.entity.custom_exceptions.NoConnectionException
 import com.example.kode.domain.entity.workers.WorkersEntity
 import org.junit.Assert
@@ -12,29 +13,22 @@ import java.io.IOException
 
 class TestWorkersRepository {
 
-    private val dataToEntityMapper = TestWorkersDataToEntityMapper()
+    private val dataToEntityMapper = TestRepositoryModelToEntityModelMapper()
 
     @Test
     fun `get success from cloud and save`() {
         val command = TestCommands.Success()
-        val expected = WorkersEntity.SuccessEntity(
-            "test",
-            "test",
-            "test",
-            "test"
+        val expected = TestEntityModel(
+            "mapped cloud 1"
         )
-        val expectedCacheData = WorkersDataModel.Success(
-            "test",
-            "test",
-            "test",
-            "test"
+        val expectedCacheData = TestRepositoryModel(
+            "cloud 1"
         )
 
         val testCacheDataSource = TestWorkersCacheDataSource()
-        val testCloudDataSource = TestWorkersCloudDataSource(command)
 
         val repository = WorkersRepositoryImpl(
-            testCloudDataSource,
+            TestWorkersCloudDataSource(command),
             testCacheDataSource,
             dataToEntityMapper
         )
@@ -51,22 +45,18 @@ class TestWorkersRepository {
     @Test
     fun `get saved data from cache`() {
         val command = TestCommands.NoConnection()
+        val savedCacheModel = TestRepositoryModel("cached 1")
 
-        val testCacheDataSource = TestWorkersSavedCacheDataSource()
-        val testCloudDataSource = TestWorkersCloudDataSource(command)
         val repository = WorkersRepositoryImpl(
-            testCloudDataSource,
-            testCacheDataSource,
+            TestWorkersCloudDataSource(command),
+            TestWorkersCacheDataSource(savedCacheModel),
             dataToEntityMapper
         )
 
         // Проверка сохраненных данных из кэша, если нету интернета
         val actual = repository.getWorkers()
-        val expected = WorkersEntity.SuccessEntity(
-            "saved",
-            "saved",
-            "saved",
-            "saved"
+        val expected = TestEntityModel(
+            "mapped cached 1"
         )
         Assert.assertEquals(expected, actual)
     }
@@ -75,91 +65,83 @@ class TestWorkersRepository {
     fun `get empty cache exception`() {
         val command = TestCommands.NoConnection()
 
-        val testCacheDataSource = TestWorkersCacheDataSource()
-        val testCloudDataSource = TestWorkersCloudDataSource(command)
         val repository = WorkersRepositoryImpl(
-            testCloudDataSource,
-            testCacheDataSource,
+            TestWorkersCloudDataSource(command),
+            TestWorkersCacheDataSource(),
             dataToEntityMapper
         )
 
-        val actual = repository.getWorkers()
-        val expected = WorkersEntity.SuccessEntity(
-            "test",
-            "test",
-            "test",
-            "test"
+        repository.getWorkers()
+    }
+
+    @Test(expected = GenericException::class)
+    fun `get generic exception`() {
+        val command = TestCommands.Exception()
+
+        val repository = WorkersRepositoryImpl(
+            TestWorkersCloudDataSource(command),
+            TestWorkersCacheDataSource(),
+            dataToEntityMapper
         )
-        Assert.assertEquals(expected, actual)
+
+        repository.getWorkers()
+    }
+
+
+    // TEST REALIZATIONS
+
+    data class TestRepositoryModel(val name: String) : Base.IgnorantMapper<TestRepositoryModel> {
+        override fun <I : Base.Mapper<TestRepositoryModel, R>, R> map(model: I) = model.map(this)
+    }
+
+    data class TestEntityModel(val name: String) : Base.IgnorantMapper<TestEntityModel> {
+        override fun <I : Base.Mapper<TestEntityModel, R>, R> map(model: I) = model.map(this)
     }
 
     sealed class TestCommands {
         class Success : TestCommands()
         class NoConnection : TestCommands()
-        class Fail : TestCommands()
         class Exception : TestCommands()
     }
 
     // DataSources
     class TestWorkersCloudDataSource(private val testCommands: TestCommands) :
-        WorkersCloudDataSource<WorkersDataModel> {
+        WorkersCloudDataSource<TestRepositoryModel> {
 
-        override fun get(): WorkersDataModel = when (testCommands) {
-            is TestCommands.Success -> WorkersDataModel.Success(
-                "test",
-                "test",
-                "test",
-                "test"
+        override fun get(): TestRepositoryModel = when (testCommands) {
+            is TestCommands.Success -> TestRepositoryModel(
+                "cloud 1",
             )
             is TestCommands.NoConnection -> throw NoConnectionException()
-            is TestCommands.Fail -> throw TestBadRequestException()
-            is TestCommands.Exception -> throw IOException()
+            is TestCommands.Exception -> throw GenericException()
         }
     }
 
-    class TestWorkersCacheDataSource() :
-        WorkersCacheDataSource<WorkersDataModel, WorkersDataModel> {
+    class TestWorkersCacheDataSource(
+        cacheDataModel: TestRepositoryModel? = null
+    ) :
+        WorkersCacheDataSource<TestRepositoryModel, TestRepositoryModel> {
 
-        private var listDataModels: WorkersDataModel.Success? = null
+        private var listDataModels: TestRepositoryModel? = cacheDataModel
 
         override fun get() = listDataModels ?: throw TestNoCacheException()
 
-        override fun save(model: WorkersDataModel) {
-            if (model is WorkersDataModel.Success) listDataModels = model
+        override fun save(model: TestRepositoryModel) {
+            listDataModels = model
         }
     }
 
-    class TestWorkersSavedCacheDataSource() :
-        WorkersCacheDataSource<WorkersDataModel, WorkersDataModel> {
-
-        private var listDataModels: WorkersDataModel.Success = WorkersDataModel.Success(
-            "saved",
-            "saved",
-            "saved",
-            "saved"
-        )
-
-        override fun get() = listDataModels
-
-        override fun save(model: WorkersDataModel) {}
-    }
-
     // Custom Exceptions
-    class TestBadRequestException : IOException()
     class TestNoCacheException : IOException()
-
+    class GenericException : IOException()
 
     // Mappers
-    class TestWorkersDataToEntityMapper :
-        Base.Mapper<WorkersDataModel, WorkersEntity> {
+    class TestRepositoryModelToEntityModelMapper :
+        Base.Mapper<TestRepositoryModel, TestEntityModel> {
 
-        override fun map(model: WorkersDataModel): WorkersEntity =
-            when (model) {
-                is WorkersDataModel.Success -> with(model) {
-                    WorkersEntity.SuccessEntity(
-                        name, lastName, userTag, position
-                    )
-                }
-            }
+        override fun map(model: TestRepositoryModel): TestEntityModel =
+            TestEntityModel(
+                "mapped ${model.name}"
+            )
     }
 }
