@@ -1,8 +1,8 @@
 package com.example.kode.data.datasource.workers.cloud.service
 
-import com.example.kode.data.datasource.workers.cloud.models.WorkersResponse
+import com.example.kode.domain.core.Base
 
-interface WorkersService {
+interface WorkersService<R : Base.IgnorantMapper<R>> {
 
-    fun getWorkers(): WorkersResponse
+    fun getWorkers(): R
 }
