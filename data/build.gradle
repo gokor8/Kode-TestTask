@@ -34,9 +34,6 @@ android {
 dependencies {
     api project(':domain')
 
-    implementation 'androidx.appcompat:appcompat:1.4.2'
-    implementation 'com.google.android.material:material:1.6.1'
-
     // UNIT TESTs
     implementation 'junit:junit:4.13.2'
     testImplementation 'junit:junit:4.13.2'

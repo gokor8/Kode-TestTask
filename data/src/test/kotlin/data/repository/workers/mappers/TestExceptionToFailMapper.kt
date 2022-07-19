@@ -2,18 +2,18 @@ package com.example.kode.data.repository.workers.mappers
 
 import com.example.kode.domain.core.Exceptions
 import com.example.kode.domain.entity.custom_exceptions.NoConnectionException
-import com.example.kode.domain.entity.workers.WorkersEntity
+import com.example.kode.domain.entity.workers.WorkersStateEntity
 import org.junit.Assert
 import org.junit.Test
 import java.io.IOException
 
-class TestExceptionToFailEntityMapper {
+class TestExceptionToFailMapper {
 
     val exceptionToFailEntityMapper = ExceptionToFailEntityMapper()
 
     @Test
     fun `test Generic exception`() {
-        val expected = WorkersEntity.FailEntity(Exceptions.GENERIC_EXCEPTION)
+        val expected = WorkersStateEntity.Fail(Exceptions.GENERIC_EXCEPTION)
         val exception = IOException()
 
         val actual = exceptionToFailEntityMapper.map(exception)
@@ -23,7 +23,7 @@ class TestExceptionToFailEntityMapper {
 
     @Test
     fun `test NoConnection exception`() {
-        val expected = WorkersEntity.FailEntity(Exceptions.NO_CONNECTION_EXCEPTION)
+        val expected = WorkersStateEntity.Fail(Exceptions.NO_CONNECTION_EXCEPTION)
         val exception = NoConnectionException()
 
         val actual = exceptionToFailEntityMapper.map(exception)
@@ -33,7 +33,7 @@ class TestExceptionToFailEntityMapper {
 
     /*@Test
     fun `test BadRequest exception`() {
-        val expected = WorkersEntity.FailEntity(Exceptions.BAD_REQUEST_EXCEPTION)
+        val expected = WorkersStateEntity.Fail(Exceptions.BAD_REQUEST_EXCEPTION)
         val exception = IOException()
 
         val actual = exceptionToFailEntityMapper.map(exception)

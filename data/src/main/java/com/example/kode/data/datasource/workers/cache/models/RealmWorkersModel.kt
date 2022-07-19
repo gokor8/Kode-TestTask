@@ -5,17 +5,17 @@ import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 import io.realm.annotations.Required
 
-class RealmWorkersModel(
+open class RealmWorkersModel constructor(
     @PrimaryKey
-    var id: Int,
+    var id: Int = 0,
     @Required
-    var name: String,
+    var name: String = "",
     @Required
-    var lastName: String,
+    var lastName: String = "",
     @Required
-    var userTag: String,
+    var userTag: String = "",
     @Required
-    var position: String
+    var position: String = ""
 ) : RealmObject(), Base.IgnorantMapper<RealmWorkersModel> {
 
     override fun <I : Base.Mapper<RealmWorkersModel, R>, R> map(model: I) = model.map(this)

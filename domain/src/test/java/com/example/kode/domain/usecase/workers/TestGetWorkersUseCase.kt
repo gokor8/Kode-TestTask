@@ -2,9 +2,7 @@ package com.example.kode.domain.usecase.workers
 
 import com.example.kode.domain.core.Base
 import com.example.kode.domain.core.Exceptions
-import com.example.kode.domain.core.TestBadRequestException
-import com.example.kode.domain.entity.custom_exceptions.NoConnectionException
-import com.example.kode.domain.entity.workers.WorkersEntity
+import com.example.kode.domain.entity.workers.WorkersStateEntity
 import com.example.kode.domain.repository.WorkersRepository
 import org.junit.Assert
 import org.junit.Before
@@ -20,7 +18,7 @@ class TestGetWorkersUseCase {
     // Второй сложные(TestRepository<DifficultEntity> + DataToDifficultDomainMapper<TestDataModel, DifficultEntity)
     // И теперь все просто. Когда надо получить один тип данных, даем его, когда другой, то другой
 
-    private lateinit var returnedStateMapper: Base.Mapper<TestDataState, WorkersEntity> // из di
+    private lateinit var returnedStateMapper: Base.Mapper<TestDataState, WorkersStateEntity> // из di
     private lateinit var exceptionToExceptionEntityMapper: TestExceptionToEntityMapper // из di
 
     // di
@@ -31,14 +29,14 @@ class TestGetWorkersUseCase {
     }
 
     @Test
-    fun `get success workers list`() {
+    fun `get success workers list`() = runBlocking {
         val returnedState = TestDataState.Success()
         val testWorkersRepository = TestWorkersRepository(returnedState, returnedStateMapper)
         val workersUseCase =
             GetWorkersUseCase(testWorkersRepository, exceptionToExceptionEntityMapper)
 
         val actual = workersUseCase.getWorkers()
-        val expected = WorkersEntity.SuccessEntity(
+        val expected = WorkersStateEntity.Success(
             "success", "success", "success", "success"
         )
 
@@ -46,14 +44,14 @@ class TestGetWorkersUseCase {
     }
 
     @Test
-    fun `get exception workers list`() {
+    fun `get exception workers list`() = runBlocking {
         val returnedState = TestDataState.Exception()
         val testWorkersRepository = TestWorkersRepository(returnedState, returnedStateMapper)
         val workersUseCase =
             GetWorkersUseCase(testWorkersRepository, exceptionToExceptionEntityMapper)
 
         val actual = workersUseCase.getWorkers()
-        val expected = WorkersEntity.FailEntity(Exceptions.GENERIC_EXCEPTION)
+        val expected = WorkersStateEntity.Fail(Exceptions.GENERIC_EXCEPTION)
 
         Assert.assertEquals(expected, actual)
     }
@@ -63,15 +61,15 @@ class TestGetWorkersUseCase {
         private val testDataStateMapper: Base.Mapper<TestDataState, R>
     ) : WorkersRepository<R> {
 
-        override fun getWorkers(): R {
+        override suspend fun getWorkers(): R {
             return testReturnedState.map(testDataStateMapper)
         }
     }
 
-    class TestDataStateToEntityMapper : Base.Mapper<TestDataState, WorkersEntity> {
+    class TestDataStateToEntityMapper : Base.Mapper<TestDataState, WorkersStateEntity> {
         override fun map(model: TestDataState) = when (model) {
             is TestDataState.Success ->
-                WorkersEntity.SuccessEntity(
+                WorkersStateEntity.Success(
                     "success",
                     "success",
                     "success",
@@ -81,8 +79,8 @@ class TestGetWorkersUseCase {
         }
     }
 
-    class TestExceptionToEntityMapper : Base.Mapper<Exception, WorkersEntity> {
-        override fun map(model: Exception) = WorkersEntity.FailEntity(Exceptions.GENERIC_EXCEPTION)
+    class TestExceptionToEntityMapper : Base.Mapper<Exception, WorkersStateEntity> {
+        override fun map(model: Exception) = WorkersStateEntity.Fail(Exceptions.GENERIC_EXCEPTION)
     }
 
     sealed class TestDataState : Base.IgnorantMapper<TestDataState> {

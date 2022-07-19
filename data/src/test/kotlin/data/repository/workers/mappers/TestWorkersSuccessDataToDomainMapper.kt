@@ -1,7 +1,7 @@
 package com.example.kode.data.repository.workers.mappers
 
 import com.example.kode.data.repository.workers.models.WorkersDataModel
-import com.example.kode.domain.entity.workers.WorkersEntity
+import com.example.kode.domain.entity.workers.WorkersStateEntity
 import org.junit.Assert
 import org.junit.Test
 
@@ -16,7 +16,7 @@ class TestWorkersSuccessDataToDomainMapper {
         )
 
         val actual = workersSuccessDataToDomainMapper.map(workersSuccessDataModel)
-        val expected = WorkersEntity.SuccessEntity(
+        val expected = WorkersStateEntity.SuccessEntity(
             "test", "test", "test", "test"
         )
 

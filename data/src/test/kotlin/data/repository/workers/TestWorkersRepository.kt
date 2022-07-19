@@ -119,7 +119,7 @@ class TestWorkersRepository {
     class TestWorkersCacheDataSource(
         cacheDataModel: TestRepositoryModel? = null
     ) :
-        WorkersCacheDataSource<TestRepositoryModel, TestRepositoryModel> {
+        WorkersCacheDataSource<TestRepositoryModel> {
 
         private var listDataModels: TestRepositoryModel? = cacheDataModel
 
