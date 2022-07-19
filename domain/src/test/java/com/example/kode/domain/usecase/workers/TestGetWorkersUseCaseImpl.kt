@@ -9,7 +9,7 @@ import org.junit.Before
 import org.junit.Test
 import java.io.IOException
 
-class TestGetWorkersUseCase {
+class TestGetWorkersUseCaseImpl {
 
     // Для чего такие сложности?
     // Представим задачу.
@@ -33,7 +33,7 @@ class TestGetWorkersUseCase {
         val returnedState = TestDataState.Success()
         val testWorkersRepository = TestWorkersRepository(returnedState, returnedStateMapper)
         val workersUseCase =
-            GetWorkersUseCase(testWorkersRepository, exceptionToExceptionEntityMapper)
+            GetWorkersUseCaseImpl(testWorkersRepository, exceptionToExceptionEntityMapper)
 
         val actual = workersUseCase.getWorkers()
         val expected = WorkersStateEntity.Success(
@@ -48,7 +48,7 @@ class TestGetWorkersUseCase {
         val returnedState = TestDataState.Exception()
         val testWorkersRepository = TestWorkersRepository(returnedState, returnedStateMapper)
         val workersUseCase =
-            GetWorkersUseCase(testWorkersRepository, exceptionToExceptionEntityMapper)
+            GetWorkersUseCaseImpl(testWorkersRepository, exceptionToExceptionEntityMapper)
 
         val actual = workersUseCase.getWorkers()
         val expected = WorkersStateEntity.Fail(Exceptions.GENERIC_EXCEPTION)
