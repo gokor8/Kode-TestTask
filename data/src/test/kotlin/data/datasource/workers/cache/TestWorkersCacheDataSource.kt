@@ -8,7 +8,7 @@ import org.junit.Test
 
 class TestWorkersCacheDataSource {
 
-    private lateinit var cacheDataSource: WorkersCacheDataSource<TestModel, TestModel>
+    private lateinit var cacheDataSource: WorkersCacheDataSource<TestModel>
        // RealmWorkersCacheDataSource()
 
     @Test

@@ -1,20 +1,24 @@
 package com.example.kode.domain.core
 
-sealed interface Read<R> {
+sealed interface Read {
 
-    interface Base<R> : Read<R> {
-        fun get(): R
+    sealed interface Abstract<R> : Read {
+        interface Base<R> : Abstract<R> {
+            fun get(): R
+        }
+
+        interface Suspend<R> : Abstract<R> {
+            suspend fun get(): R
+        }
     }
 
-    interface Suspend<R> : Read<R> {
-        suspend fun get(): R
-    }
+    sealed interface AbstractId<R> : Read {
+        interface BaseEqualable<I, R> : AbstractId<R> {
+            fun get(equalsAttribute: I): R
+        }
 
-    interface WithId<I, R> : Read<R> {
-        fun read(id: I): R
-    }
-
-    interface SuspendWithId<I, R> : Read<R> {
-        suspend fun read(id: I): R
+        interface SuspendEqualable<I, R> : AbstractId<R> {
+            suspend fun get(equalsAttribute: I): R
+        }
     }
 }
