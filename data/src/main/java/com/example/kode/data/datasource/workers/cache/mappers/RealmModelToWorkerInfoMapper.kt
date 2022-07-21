@@ -3,15 +3,14 @@ package com.example.kode.data.datasource.workers.cache.mappers
 import com.example.kode.data.datasource.workers.cache.models.RealmWorkerModel
 import com.example.kode.data.repository.workers.models.WorkerInfoDataModel
 import com.example.kode.domain.core.Base
+import com.example.kode.domain.entity.workers.WorkersStateEntity
 
-class WorkerDataModelToRealmMapper : Base.Mapper<WorkerInfoDataModel.Success, RealmWorkerModel> {
-
-    override fun map(model: WorkerInfoDataModel.Success): RealmWorkerModel = with(model) {
-        RealmWorkerModel(
-            0,
+class RealmModelToWorkerInfoMapper : Base.Mapper<RealmWorkerModel, WorkerInfoDataModel.Success> {
+    override fun map(model: RealmWorkerModel): WorkerInfoDataModel.Success = with(model) {
+        WorkerInfoDataModel.Success(
             id,
             avatarUrl,
-            firstName,
+            name,
             lastName,
             userTag,
             department,

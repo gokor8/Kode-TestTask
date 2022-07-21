@@ -7,8 +7,6 @@ import io.realm.annotations.Required
 
 open class RealmWorkerModel constructor(
     @PrimaryKey
-    var pId: Int = 0,
-    @Required
     var id: String = "",
     @Required
     val avatarUrl: String = "",
