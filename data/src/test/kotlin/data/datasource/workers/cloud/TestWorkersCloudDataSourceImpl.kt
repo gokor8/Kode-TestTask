@@ -1,10 +1,10 @@
-package com.example.kode.data.datasource.workers.cloud
+package data.datasource.workers.cloud
 
-import com.example.kode.data.TestModel
-import com.example.kode.data.TestReturnedModel
+import com.example.kode.data.datasource.workers.cloud.WorkersCloudDataSourceImpl
 import com.example.kode.data.datasource.workers.cloud.service.WorkersService
-import com.example.kode.data.repository.workers.models.WorkersDataModel
 import com.example.kode.domain.core.Base
+import data.core.TestModel
+import data.core.TestReturnedModel
 import org.junit.Assert
 import org.junit.Test
 
@@ -34,8 +34,9 @@ class TestWorkersCloudDataSourceImpl {
 
     class TestModelToTestReturnedModelMapper : Base.Mapper<TestModel, TestReturnedModel> {
 
-        override fun map(model: TestModel): TestReturnedModel = TestReturnedModel(
-            "mapped ${model.name}"
-        )
+        override fun map(model: TestModel): TestReturnedModel =
+            TestReturnedModel(
+                "mapped ${model.name}"
+            )
     }
 }

@@ -6,7 +6,7 @@ import io.realm.RealmObject
 import io.realm.kotlin.executeTransactionAwait
 import kotlinx.coroutines.Dispatchers
 
-class RealmWorkersCacheDataSource<M : Base.IgnorantMapper<M>, RM : RealmObject>
+class RealmWorkersCacheDataSource<M : Any, RM : RealmObject>
 constructor(
     private val realm: Realm,
     private val realmModelClass: Class<RM>,
@@ -21,7 +21,7 @@ constructor(
 
     override suspend fun save(model: M) {
         realm.executeTransactionAwait(Dispatchers.IO) {
-            it.insert(model.map(mapperToRealmModel))
+            it.insert(model.let(mapperToRealmModel::map))
         }
     }
 }

@@ -1,6 +1,8 @@
-package com.example.kode.data.repository.workers.mappers
+package data.repository.workers.mappers
 
-import com.example.kode.data.repository.workers.models.WorkersDataModel
+import com.example.kode.data.repository.workers.mappers.WorkersStateDataToEntityMapper
+import com.example.kode.data.repository.workers.mappers.WorkersSuccessDataToDomainMapper
+import com.example.kode.data.repository.workers.models.WorkerInfoDataModel
 import com.example.kode.domain.entity.workers.WorkersStateEntity
 import org.junit.Assert
 import org.junit.Test
@@ -13,13 +15,25 @@ class TestWorkersStateDataToEntityMapper {
         val workersStateDataToEntityMapper =
             WorkersStateDataToEntityMapper(workersSuccessDataToDomainMapper)
 
-        val workersDataModel = WorkersDataModel.Success(
-            "test", "test", "test", "test"
+        val workerInfoDataModel = WorkerInfoDataModel.Success(
+            "test",
+            "test",
+            "test",
+            "test",
+            "test",
+            "test",
+            "test",
+            listOf("test"),
+            "test"
         )
 
-        val actual = workersStateDataToEntityMapper.map(workersDataModel)
-        val expected = WorkersStateEntity.SuccessEntity(
-            "test", "test", "test", "test"
+        val actual = workersStateDataToEntityMapper.map(workerInfoDataModel)
+        val expected = WorkersStateEntity.Success(
+            "test",
+            "test",
+            "test",
+            "test",
+            "test"
         )
 
         Assert.assertEquals(expected, actual)

@@ -1,23 +1,38 @@
-package com.example.kode.data.datasource.workers.cache
+package data.datasource.workers.cache
 
-import com.example.kode.data.TestModel
+import android.app.Application
+import android.content.Context
+import com.example.kode.data.datasource.workers.cache.RealmWorkersCacheDataSource
+import com.example.kode.data.datasource.workers.cache.WorkersCacheDataSource
 import com.example.kode.domain.core.Base
+import data.core.TestModel
+import io.realm.Realm
 import io.realm.RealmObject
-import io.realm.annotations.PrimaryKey
 import io.realm.annotations.Required
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 
+@Deprecated("Cant testing")
 class TestRealmWorkersCacheDataSource {
 
-    private val cacheDataSource: WorkersCacheDataSource<TestModel> = RealmWorkersCacheDataSource(
-        ,
-        TestRealmModel::class.java,
-        TestModelToRealmMapper(),
-        TestRealmToModelMapper()
-    )
+    private lateinit var cacheDataSource: WorkersCacheDataSource<TestModel>
+
+    @Before
+    fun setup() {
+        /*val realmTestConfiguration: RealmConfiguration = RealmConfiguration.Builder()
+            .inMemory()
+            .name("test-realm")
+            .build()*/
+
+        cacheDataSource =  RealmWorkersCacheDataSource(
+            Realm.getDefaultInstance(),
+            TestRealmModel::class.java,
+            TestModelToRealmMapper(),
+            TestRealmToModelMapper()
+        )
+    }
 
     @Test
     fun `test save and get data`() = runBlocking {
@@ -37,11 +52,13 @@ class TestRealmWorkersCacheDataSource {
         val name: String = ""
     ) : RealmObject()
 
-    class TestModelToRealmMapper : Base.Mapper<TestModel, TestRealmModel> {
-        override fun map(model: TestModel): TestRealmModel = TestRealmModel(model.name)
+    class TestModelToRealmMapper : Base.Mapper<TestModel, List<TestRealmModel>> {
+        override fun map(model: TestModel): List<TestRealmModel> =
+            listOf(TestRealmModel(model.name))
     }
 
-    class TestRealmToModelMapper : Base.Mapper<TestRealmModel, TestModel> {
-        override fun map(model: TestRealmModel): TestModel = TestModel(model.name)
+    class TestRealmToModelMapper : Base.Mapper<List<TestRealmModel>, TestModel> {
+        override fun map(model: List<TestRealmModel>): TestModel =
+            TestModel(model[0].name)
     }
 }

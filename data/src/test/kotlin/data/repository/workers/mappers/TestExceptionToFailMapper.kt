@@ -1,5 +1,6 @@
-package com.example.kode.data.repository.workers.mappers
+package data.repository.workers.mappers
 
+import com.example.kode.data.repository.workers.mappers.ExceptionToFailEntityMapper
 import com.example.kode.domain.core.Exceptions
 import com.example.kode.domain.entity.custom_exceptions.NoConnectionException
 import com.example.kode.domain.entity.workers.WorkersStateEntity

@@ -1,4 +1,4 @@
-package com.example.kode.data
+package data.core
 
 import com.example.kode.domain.core.Base
 

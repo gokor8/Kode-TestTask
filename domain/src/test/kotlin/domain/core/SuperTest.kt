@@ -1,8 +1,9 @@
-package com.example.kode.domain.core
+package domain.core
 
-import org.junit.Assert
+import com.example.kode.domain.core.Base
 import org.junit.Test
 
+@Deprecated("Хз че за тест, но выглядит прикольное, оставлю")
 class SuperTest {
 
     @Test

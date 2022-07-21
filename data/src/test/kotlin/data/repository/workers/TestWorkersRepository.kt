@@ -15,7 +15,7 @@ class TestWorkersRepository {
     private val dataToEntityMapper = TestRepositoryModelToEntityModelMapper()
 
     @Test
-    fun `get success from cloud and save`() = runBlocking {
+    fun `test success from cloud and save`() = runBlocking {
         val command = TestCommands.Success()
         val expected = TestEntityModel(
             "mapped cloud 1"
@@ -42,7 +42,7 @@ class TestWorkersRepository {
     }
 
     @Test
-    fun `get saved data from cache`() = runBlocking {
+    fun `test saved data from cache`() = runBlocking {
         val command = TestCommands.NoConnection()
         val savedCacheModel = TestRepositoryModel("cached 1")
 
@@ -61,7 +61,7 @@ class TestWorkersRepository {
     }
 
     @Test(expected = TestNoCacheException::class)
-    fun `get empty cache exception`() = runBlocking {
+    fun `test empty cache exception`(): Unit = runBlocking {
         val command = TestCommands.NoConnection()
 
         val repository = WorkersRepositoryImpl(
@@ -74,7 +74,7 @@ class TestWorkersRepository {
     }
 
     @Test(expected = GenericException::class)
-    fun `get generic exception`() = runBlocking {
+    fun `test generic exception`(): Unit = runBlocking {
         val command = TestCommands.Exception()
 
         val repository = WorkersRepositoryImpl(
