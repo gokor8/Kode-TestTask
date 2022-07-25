@@ -33,7 +33,7 @@ class TestWorkerInfoDataModelToRealmMapper {
             "test",
             "test",
             "test",
-            listOf("test"),
+            "test",
             "test"
         )
 

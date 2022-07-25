@@ -20,7 +20,7 @@ class TestRealmModelToWorkerInfoMapper {
             "test",
             "test",
             "test",
-            listOf("test"),
+            "test",
             "test"
         )
 

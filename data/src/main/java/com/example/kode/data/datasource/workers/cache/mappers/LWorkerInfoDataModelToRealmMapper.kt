@@ -5,9 +5,9 @@ import com.example.kode.data.repository.workers.models.WorkerInfoDataModel
 import com.example.kode.domain.core.Base
 
 class LWorkerInfoDataModelToRealmMapper(
-    private val mapper: Base.Mapper<WorkerInfoDataModel, RealmWorkerModel>
+    private val mapper: Base.Mapper<WorkerInfoDataModel.Success, RealmWorkerModel>
 ) :
-    Base.Mapper<List<WorkerInfoDataModel>, List<RealmWorkerModel>> {
-    override fun map(model: List<WorkerInfoDataModel>): List<RealmWorkerModel> =
-        model.map { it.map(mapper) }
+    Base.Mapper<List<WorkerInfoDataModel.Success>, List<RealmWorkerModel>> {
+    override fun map(model: List<WorkerInfoDataModel.Success>): List<RealmWorkerModel> =
+        model.map { mapper.map(it) }
 }

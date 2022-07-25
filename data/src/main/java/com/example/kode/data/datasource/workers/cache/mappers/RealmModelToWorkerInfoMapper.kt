@@ -15,7 +15,7 @@ class RealmModelToWorkerInfoMapper : Base.Mapper<RealmWorkerModel, WorkerInfoDat
             userTag,
             department,
             position,
-            birthday,
+            listOf(birthday),
             phone
         )
     }

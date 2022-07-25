@@ -15,7 +15,7 @@ class WorkerInfoDataModelToRealmMapper : Base.Mapper<WorkerInfoDataModel.Success
             userTag,
             department,
             position,
-            birthday,
+            birthday.first(),
             phone
         )
     }
