@@ -2,13 +2,14 @@ package com.example.kode.data.repository.workers.mappers
 
 import com.example.kode.data.repository.workers.models.WorkerInfoDataModel
 import com.example.kode.domain.core.Base
+import com.example.kode.domain.entity.workers.WorkerInfoEntity
 import com.example.kode.domain.entity.workers.WorkersStateEntity
 
-class WorkersSuccessDataToDomainMapper :
-    Base.Mapper<WorkerInfoDataModel.Success, WorkersStateEntity.Success> {
-    override fun map(model: WorkerInfoDataModel.Success): WorkersStateEntity.Success =
+class WorkerInfoDataModelToDomainMapper :
+    Base.Mapper<WorkerInfoDataModel, WorkerInfoEntity> {
+    override fun map(model: WorkerInfoDataModel): WorkerInfoEntity =
         with(model) {
-            WorkersStateEntity.Success(
+            WorkerInfoEntity(
                 avatarUrl,
                 firstName,
                 lastName,

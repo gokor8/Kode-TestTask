@@ -1,7 +1,7 @@
 package data.repository.workers.mappers
 
 import com.example.kode.data.repository.workers.mappers.WorkersStateDataToEntityMapper
-import com.example.kode.data.repository.workers.mappers.WorkersSuccessDataToDomainMapper
+import com.example.kode.data.repository.workers.mappers.WorkerInfoDataModelToDomainMapper
 import com.example.kode.data.repository.workers.models.WorkerInfoDataModel
 import com.example.kode.domain.entity.workers.WorkersStateEntity
 import org.junit.Assert
@@ -11,9 +11,9 @@ class TestWorkersStateDataToEntityMapper {
 
     @Test
     fun `test success data model map`() {
-        val workersSuccessDataToDomainMapper = WorkersSuccessDataToDomainMapper()
+        val workerInfoDataModelToDomainMapper = WorkerInfoDataModelToDomainMapper()
         val workersStateDataToEntityMapper =
-            WorkersStateDataToEntityMapper(workersSuccessDataToDomainMapper)
+            WorkersStateDataToEntityMapper(workerInfoDataModelToDomainMapper)
 
         val workerInfoDataModel = WorkerInfoDataModel.Success(
             "test",

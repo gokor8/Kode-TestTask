@@ -8,12 +8,8 @@ sealed class WorkersStateEntity : Base.IgnorantMapper<WorkersStateEntity> {
     override fun <I : Base.Mapper<WorkersStateEntity, R>, R> map(model: I): R = model.map(this)
 
     data class Success(
-        val avatarUrl: String,
-        val name: String,
-        val lastName: String,
-        val userTag: String,
-        val position: String
+        val workers: List<WorkerInfoEntity>
     ) : WorkersStateEntity()
 
-    data class Fail(val exception: Exceptions): WorkersStateEntity()
+    data class Fail(val exception: Exceptions) : WorkersStateEntity()
 }

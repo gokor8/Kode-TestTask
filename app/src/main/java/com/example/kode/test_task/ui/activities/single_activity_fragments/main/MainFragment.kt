@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.example.kode.test_task.R
 import com.example.kode.test_task.databinding.FragmentMainBinding
-import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.MainUIStates
+import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.MainStatesUI
 import com.example.kode.test_task.ui.core.BaseFragment
 
-class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel<MainUIStates, *>>() {
+class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel<MainStatesUI, *>>() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -22,9 +22,9 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel<MainUIState
     override fun setObservers() {
         viewModel.observe(viewLifecycleOwner) {
             when(it) {
-                is MainUIStates.Success -> {}
-                is MainUIStates.Fail -> {}
-                is MainUIStates.NoConnection -> {}
+                is MainStatesUI.Success -> {}
+                is MainStatesUI.Fail -> {}
+                is MainStatesUI.NoConnection -> {}
             }
         }
     }
