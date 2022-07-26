@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.viewbinding.ViewBinding
 
-abstract class BaseActivity<VB : ViewBinding, VM : BaseViewModel> : Activity(),
+abstract class BaseActivity<VB : ViewBinding, VM : BaseViewModel<*>> : Activity(),
     BaseInterfaceView<VB, VM> {
 
     val binding: VB by lazy { setBind() }

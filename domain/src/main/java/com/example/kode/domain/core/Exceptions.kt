@@ -1,7 +1,6 @@
 package com.example.kode.domain.core
 
-enum class Exceptions {
-    GENERIC_EXCEPTION,
-    NO_CONNECTION_EXCEPTION,
-    BAD_REQUEST_EXCEPTION
+sealed class Exceptions {
+    class GenericException : Exceptions()
+    class NoConnection() : Exceptions()
 }

@@ -1,5 +1,7 @@
 package com.example.kode.test_task.ui.activities.single_activity_fragments.main.models
 
+import com.example.kode.test_task.R
+
 sealed class MainStatesUI {
 
     data class Success(
@@ -7,7 +9,9 @@ sealed class MainStatesUI {
     ) : MainStatesUI()
 
     sealed class Fail : MainStatesUI() {
-        class Error : Fail()
-        class NoConnection : Fail()
+        class Error(val errorId: Int) : Fail()
+        class NoConnection : Fail() {
+            val errorId: Int = R.string.no_connection
+        }
     }
 }

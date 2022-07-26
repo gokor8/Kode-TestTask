@@ -7,7 +7,7 @@ import com.example.kode.domain.entity.custom_exceptions.NoConnectionException
 
 class ExceptionToFailEntityMapper : Base.Mapper<Exception, WorkersStateEntity.Fail> {
     override fun map(model: Exception) = when (model) {
-        is NoConnectionException -> WorkersStateEntity.Fail(Exceptions.NO_CONNECTION_EXCEPTION)
-        else -> WorkersStateEntity.Fail(Exceptions.GENERIC_EXCEPTION)
+        is NoConnectionException -> WorkersStateEntity.Fail(Exceptions.NoConnection())
+        else -> WorkersStateEntity.Fail(Exceptions.GenericException())
     }
 }

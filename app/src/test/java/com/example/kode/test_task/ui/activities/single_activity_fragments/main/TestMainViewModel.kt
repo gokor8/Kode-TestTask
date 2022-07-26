@@ -18,7 +18,7 @@ class TestMainViewModel {
             TestEntityStates.Success("1")
         )
         val communication = TestCommunications()
-        val viewModel = MainViewModel(communication, testUseCase)
+        //val viewModel = MainViewModel(communication, testUseCase)
 
     }
 

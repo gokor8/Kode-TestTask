@@ -7,7 +7,7 @@ class TestLWorkersEntityMapperToUIMapper {
 
     @Test
     fun `test success mapping`() {
-        val mapper = LWorkersEntityMapperToUIMapper()
+        /*val mapper = LWorkersEntityMapperToUIMapper()
         val testData = listOf(
             WorkersStateEntity.Success(
                 "test",
@@ -42,6 +42,6 @@ class TestLWorkersEntityMapperToUIMapper {
                 "test1",
             )
         )
-
+*/
     }
 }
