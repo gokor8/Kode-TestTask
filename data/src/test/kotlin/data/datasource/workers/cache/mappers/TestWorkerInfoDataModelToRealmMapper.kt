@@ -12,7 +12,7 @@ class TestWorkerInfoDataModelToRealmMapper {
     fun `test mapping`(){
         val mapper = WorkerInfoDataModelToRealmMapper()
 
-        val testData = WorkerInfoDataModel.Success(
+        val testData = WorkerInfoDataModel(
             "test",
             "test",
             "test",

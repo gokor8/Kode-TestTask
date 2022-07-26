@@ -25,7 +25,7 @@ class TestRealmModelToWorkerInfoMapper {
         )
 
         val actual = mapper.map(testData)
-        val expected = WorkerInfoDataModel.Success(
+        val expected = WorkerInfoDataModel(
             "test",
             "test",
             "test",

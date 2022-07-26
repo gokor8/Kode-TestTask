@@ -25,7 +25,7 @@ class TestWorkerInfoResponseToDataMapper {
             "test")
 
         val actual = testData.map(mapper)
-        val expected = WorkerInfoDataModel.Success(
+        val expected = WorkerInfoDataModel(
             "test",
             "test",
             "test",

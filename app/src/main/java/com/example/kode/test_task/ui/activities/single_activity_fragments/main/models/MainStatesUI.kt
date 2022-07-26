@@ -6,8 +6,8 @@ sealed class MainStatesUI {
         val workers: List<WorkerInfoUIModel>
     ) : MainStatesUI()
 
-    sealed class Fail {
-        class Error : MainStatesUI()
-        class NoConnection : MainStatesUI()
+    sealed class Fail : MainStatesUI() {
+        class Error : Fail()
+        class NoConnection : Fail()
     }
 }

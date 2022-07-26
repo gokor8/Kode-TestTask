@@ -4,6 +4,7 @@ import com.example.kode.data.datasource.workers.cache.mappers.LWorkerInfoDataMod
 import com.example.kode.data.datasource.workers.cache.mappers.WorkerInfoDataModelToRealmMapper
 import com.example.kode.data.datasource.workers.cache.models.RealmWorkerModel
 import com.example.kode.data.repository.workers.models.WorkerInfoDataModel
+import com.example.kode.data.repository.workers.models.WorkersInfoStateDataModel
 import org.junit.Assert
 import org.junit.Test
 
@@ -14,28 +15,30 @@ class TestLWorkerInfoDataModelToRealmMapper {
         val mapper = WorkerInfoDataModelToRealmMapper()
         val listMapper = LWorkerInfoDataModelToRealmMapper(mapper)
 
-        val testData = listOf(
-            WorkerInfoDataModel.Success(
-                "test",
-                "test",
-                "test",
-                "test",
-                "test",
-                "test",
-                "test",
-                listOf("test"),
-                "test"
-            ),
-            WorkerInfoDataModel.Success(
-                "test1",
-                "test1",
-                "test1",
-                "test1",
-                "test1",
-                "test1",
-                "test1",
-                listOf("test1"),
-                "test1"
+        val testData = WorkersInfoStateDataModel.Success(
+            listOf(
+                WorkerInfoDataModel(
+                    "test",
+                    "test",
+                    "test",
+                    "test",
+                    "test",
+                    "test",
+                    "test",
+                    listOf("test"),
+                    "test"
+                ),
+                WorkerInfoDataModel(
+                    "test1",
+                    "test1",
+                    "test1",
+                    "test1",
+                    "test1",
+                    "test1",
+                    "test1",
+                    listOf("test1"),
+                    "test1"
+                )
             )
         )
 

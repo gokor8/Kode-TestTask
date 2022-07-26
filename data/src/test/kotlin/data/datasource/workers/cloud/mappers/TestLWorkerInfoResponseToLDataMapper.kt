@@ -41,7 +41,7 @@ class TestLWorkerInfoResponseToLDataMapper {
 
         val actual = listMapper.map(testData)
         val expected = listOf(
-            WorkerInfoDataModel.Success(
+            WorkerInfoDataModel(
                 "test",
                 "test",
                 "test",
@@ -52,7 +52,7 @@ class TestLWorkerInfoResponseToLDataMapper {
                 listOf("test"),
                 "test"
             ),
-            WorkerInfoDataModel.Success(
+            WorkerInfoDataModel(
                 "test1",
                 "test1",
                 "test1",
