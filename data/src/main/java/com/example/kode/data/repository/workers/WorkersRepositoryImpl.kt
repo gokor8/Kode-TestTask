@@ -6,7 +6,7 @@ import com.example.kode.domain.core.Base
 import com.example.kode.domain.entity.custom_exceptions.NoConnectionException
 import com.example.kode.domain.repository.WorkersRepository
 
-class WorkersRepositoryImpl<R : Any, M : Base.IgnorantMapper<M>>(
+class WorkersRepositoryImpl<R : Any, M : Base.IgnorantMapper<M>> @Inject constructor(
     private val cloudDataSource: WorkersCloudDataSource<M>,
     private val cacheDataSource: WorkersCacheDataSource<M>,
     private val mapper: Base.Mapper<M, R>

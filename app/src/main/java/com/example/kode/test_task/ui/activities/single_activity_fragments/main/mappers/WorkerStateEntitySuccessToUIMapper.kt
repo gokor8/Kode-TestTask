@@ -5,8 +5,9 @@ import com.example.kode.domain.entity.workers.WorkerInfoEntity
 import com.example.kode.domain.entity.workers.WorkersStateEntity
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.MainStatesUI
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.WorkerInfoUIModel
+import javax.inject.Inject
 
-class WorkerStateEntitySuccessToUIMapper(
+class WorkerStateEntitySuccessToUIMapper @Inject constructor(
     private val mapper : Base.Mapper<WorkerInfoEntity, WorkerInfoUIModel>
 ) :
     Base.Mapper<WorkersStateEntity.Success, MainStatesUI.Success> {

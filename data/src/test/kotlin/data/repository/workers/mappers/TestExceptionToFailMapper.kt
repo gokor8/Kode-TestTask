@@ -14,7 +14,7 @@ class TestExceptionToFailMapper {
 
     @Test
     fun `test Generic exception`() {
-        val expected = WorkersStateEntity.Fail(Exceptions.GENERIC_EXCEPTION)
+        val expected = WorkersStateEntity.Fail(Exceptions.GenericException())
         val exception = IOException()
 
         val actual = exceptionToFailEntityMapper.map(exception)
@@ -24,7 +24,7 @@ class TestExceptionToFailMapper {
 
     @Test
     fun `test NoConnection exception`() {
-        val expected = WorkersStateEntity.Fail(Exceptions.NO_CONNECTION_EXCEPTION)
+        val expected = WorkersStateEntity.Fail(Exceptions.NoConnection())
         val exception = NoConnectionException()
 
         val actual = exceptionToFailEntityMapper.map(exception)

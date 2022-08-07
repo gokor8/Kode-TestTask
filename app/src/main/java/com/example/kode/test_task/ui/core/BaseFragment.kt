@@ -10,7 +10,7 @@ import androidx.viewbinding.ViewBinding
 abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel<*>> : Fragment(),
     BaseInterfaceView<VB, VM> {
 
-    val binding: VB by lazy { setBind() }
+    private val binding: VB by lazy { setBind() }
     val viewModel: VM by lazy { setViewModel() }
 
     override fun onCreateView(

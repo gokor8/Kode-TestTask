@@ -5,8 +5,9 @@ import com.example.kode.domain.core.Exceptions
 import com.example.kode.domain.entity.workers.WorkersStateEntity
 import com.example.kode.test_task.R
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.MainStatesUI
+import javax.inject.Inject
 
-class WorkerStateEntityFailToUIMapper : Base.Mapper<WorkersStateEntity.Fail, MainStatesUI.Fail> {
+class WorkerStateEntityFailToUIMapper @Inject constructor() : Base.Mapper<WorkersStateEntity.Fail, MainStatesUI.Fail> {
     override fun map(model: WorkersStateEntity.Fail): MainStatesUI.Fail = when(model.exception) {
         is Exceptions.GenericException -> MainStatesUI.Fail.Error(R.string.generic_error)
         is Exceptions.NoConnection -> MainStatesUI.Fail.NoConnection()

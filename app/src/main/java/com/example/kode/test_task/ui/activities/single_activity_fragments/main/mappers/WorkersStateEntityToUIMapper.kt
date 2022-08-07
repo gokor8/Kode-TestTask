@@ -3,8 +3,9 @@ package com.example.kode.test_task.ui.activities.single_activity_fragments.main.
 import com.example.kode.domain.core.Base
 import com.example.kode.domain.entity.workers.WorkersStateEntity
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.MainStatesUI
+import javax.inject.Inject
 
-class WorkersStateEntityToUIMapper(
+class WorkersStateEntityToUIMapper @Inject constructor(
     private val successMapper: Base.Mapper<WorkersStateEntity.Success, MainStatesUI.Success>,
     private val failMapper: Base.Mapper<WorkersStateEntity.Fail, MainStatesUI.Fail>
 ) : Base.Mapper<WorkersStateEntity, MainStatesUI> {
