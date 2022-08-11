@@ -5,9 +5,10 @@ import com.example.kode.data.repository.workers.models.WorkersInfoStateDataModel
 import com.example.kode.domain.core.Base
 import com.example.kode.domain.entity.workers.WorkerInfoEntity
 import com.example.kode.domain.entity.workers.WorkersStateEntity
+import javax.inject.Inject
 
 // Если появится другое состояние, то будет легко добавить его сюда и написать к нему маппер
-class WorkersStateDataToEntityMapper(
+class WorkersStateDataToEntityMapper @Inject constructor(
     private val successMapper: Base.Mapper<WorkersInfoStateDataModel.Success, WorkersStateEntity.Success>
 ) :
     Base.Mapper<WorkersInfoStateDataModel, WorkersStateEntity> {

@@ -1,6 +1,6 @@
 package com.example.kode.domain.repository
 
-interface WorkersRepository<out R> {
+interface WorkersRepository<R> {
 
     suspend fun getWorkers(): R
 }

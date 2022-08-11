@@ -2,7 +2,7 @@ package com.example.kode.domain.core
 
 interface Base {
 
-    interface Mapper<in I, out R> {
+    interface Mapper<I, R> {
         fun map(model: I): R
     }
 

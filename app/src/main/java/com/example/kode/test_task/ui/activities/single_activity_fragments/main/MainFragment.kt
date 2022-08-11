@@ -1,6 +1,7 @@
 package com.example.kode.test_task.ui.activities.single_activity_fragments.main
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,8 +28,12 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel<MainStatesU
     override fun setObservers() {
         viewModel.observe(viewLifecycleOwner) {
             when(it) {
-                is MainStatesUI.Success -> {}
-                is MainStatesUI.Fail.Error -> {}
+                is MainStatesUI.Success -> {
+                    Log.i("MainFragmentInfo", it.workers.toString())
+                }
+                is MainStatesUI.Fail.Error -> {
+                    Log.i("MainFragmentInfo", resources.getString(it.errorId))
+                }
                 is MainStatesUI.Fail.NoConnection -> {}
             }
         }
@@ -38,4 +43,7 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel<MainStatesU
 
     override fun setViewModel() = registrationViewModel
 
+    override fun setUI() {
+        viewModel.getWorkers()
+    }
 }

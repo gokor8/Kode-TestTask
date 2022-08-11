@@ -1,18 +1,18 @@
 package data.datasource.workers.cloud.mappers
 
-import com.example.kode.data.datasource.workers.cloud.mappers.LWorkerInfoResponseToLDataMapper
+import com.example.kode.data.datasource.workers.cloud.mappers.LWorkerInfoResponseToWorkerInfoDataMapper
 import com.example.kode.data.datasource.workers.cloud.mappers.WorkerInfoResponseToDataMapper
 import com.example.kode.data.datasource.workers.cloud.models.WorkerInfoResponse
 import com.example.kode.data.repository.workers.models.WorkerInfoDataModel
 import org.junit.Assert
 import org.junit.Test
 
-class TestLWorkerInfoResponseToLDataMapper {
+class TestLWorkerInfoResponseToWorkerInfoDataMapper {
 
     @Test
     fun `test mapping`() {
         val mapper = WorkerInfoResponseToDataMapper()
-        val listMapper = LWorkerInfoResponseToLDataMapper(mapper)
+        val listMapper = LWorkerInfoResponseToWorkerInfoDataMapper(mapper)
 
         val testData = listOf(
             WorkerInfoResponse(

@@ -5,8 +5,9 @@ import com.example.kode.data.repository.workers.models.WorkersInfoStateDataModel
 import com.example.kode.domain.core.Base
 import com.example.kode.domain.entity.workers.WorkerInfoEntity
 import com.example.kode.domain.entity.workers.WorkersStateEntity
+import javax.inject.Inject
 
-class WorkersStateDataSuccessToEntityMapper(
+class WorkersStateDataSuccessToEntityMapper @Inject constructor(
     private val mapper: Base.Mapper<WorkerInfoDataModel, WorkerInfoEntity>
 ) :
     Base.Mapper<WorkersInfoStateDataModel.Success, WorkersStateEntity.Success> {
