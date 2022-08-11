@@ -13,6 +13,7 @@ import dagger.Module
 interface BCloudDataSourceMapperModule {
 
     // Dagger генерирует java.util.List а у меня котиновский List
+    // Все работает mutable list
     @Binds
     fun bindLWorkerInfoResponseToWorkerInfoDataMapper(mapper: LWorkerInfoResponseToLDataMapperImpl)
             : Base.Mapper<@JvmSuppressWildcards MutableList<WorkerInfoResponse>, WorkersInfoStateDataModel>
