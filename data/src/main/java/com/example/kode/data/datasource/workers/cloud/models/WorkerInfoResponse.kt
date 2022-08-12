@@ -10,7 +10,7 @@ data class WorkerInfoResponse(
     val userTag: String,
     val department: String,
     val position: String,
-    val birthday: List<String>,
+    val birthday: String,
     val phone: String
 ) : Base.IgnorantMapper<WorkerInfoResponse> {
     override fun <I : Base.Mapper<WorkerInfoResponse, R>, R> map(model: I): R = model.map(this)

@@ -1,5 +1,6 @@
 package com.example.kode.test_task.ui.activities.single_activity_fragments.main
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -7,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.example.kode.domain.entity.workers.WorkersStateEntity
+import com.example.kode.test_task.App
 import com.example.kode.test_task.R
 import com.example.kode.test_task.databinding.FragmentMainBinding
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.MainStatesUI
@@ -37,6 +39,12 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel<MainStatesU
                 is MainStatesUI.Fail.NoConnection -> {}
             }
         }
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        (requireActivity().application as App).daggerAppComponent.inject(this)
     }
 
     override fun setBind() = FragmentMainBinding.inflate(layoutInflater)

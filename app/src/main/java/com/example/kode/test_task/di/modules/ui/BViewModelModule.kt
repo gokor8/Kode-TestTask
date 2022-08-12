@@ -10,6 +10,6 @@ import dagger.Module
 @Module(includes = [BCommunicationModule::class, BUIMapperModule::class, BUseCaseModule::class])
 interface BViewModelModule {
 
-    @Binds
-    fun bindMainViewModel(mainViewModel: MainViewModel<MainStatesUI, WorkersStateEntity>): MainViewModel<*, *>
+    /*@Binds
+    fun bindMainViewModel(mainViewModel: MainViewModel<MainStatesUI, WorkersStateEntity>): MainViewModel<*, *>*/
 }

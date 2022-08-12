@@ -8,10 +8,12 @@ import io.realm.RealmConfiguration
 
 class App : Application() {
 
+    lateinit var daggerAppComponent: AppComponent
+
     override fun onCreate() {
         super.onCreate()
 
-        DaggerAppComponent.factory().create(applicationContext, resources)
+        daggerAppComponent = DaggerAppComponent.factory().create(applicationContext, resources)
 
         Realm.init(this.applicationContext)
     }

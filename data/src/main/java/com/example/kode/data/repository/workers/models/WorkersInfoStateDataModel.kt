@@ -7,6 +7,6 @@ sealed class WorkersInfoStateDataModel : Base.IgnorantMapper<WorkersInfoStateDat
     override fun <I : Base.Mapper<WorkersInfoStateDataModel, R>, R> map(model: I): R = model.map(this)
 
     data class Success(
-        val workers: List<WorkerInfoDataModel>
+        val workers: MutableList<WorkerInfoDataModel>
     ) : WorkersInfoStateDataModel()
 }

@@ -9,5 +9,5 @@ class WorkersCloudDataSourceImpl<R, M : Any> @Inject constructor(
     private val workersResponseMapper: Base.Mapper<M, R>
     ) : WorkersCloudDataSource<R> {
 
-    override fun get(): R = apiService.getWorkers().let(workersResponseMapper::map)
+    override suspend fun get(): R = apiService.getWorkers().let(workersResponseMapper::map)
 }

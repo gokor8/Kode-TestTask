@@ -15,7 +15,7 @@ class WorkerInfoResponseToDataMapper @Inject constructor() : Base.Mapper<WorkerI
             position,
             userTag,
             department,
-            birthday,
+            listOf(birthday),
             phone
         )
     }

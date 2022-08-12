@@ -16,6 +16,7 @@ class GetWorkersUseCaseImpl<M : Base.IgnorantMapper<M>> @Inject constructor(
         try {
             workersRepository.getWorkers()
         } catch (e: Exception) {
+            e.printStackTrace()
             failMapper.map(e)
         }
     }
