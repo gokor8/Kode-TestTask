@@ -13,21 +13,21 @@ import dagger.Binds
 import dagger.Module
 
 @Module
-abstract class BUIMapperModule {
+interface BUIMapperModule {
 
     @Binds
-    abstract fun bindWorkerStateEntityToUIMapper(mapper: WorkersStateEntityToUIMapper)
+    fun bindWorkerStateEntityToUIMapper(mapper: WorkersStateEntityToUIMapper)
             : Base.Mapper<WorkersStateEntity, MainStatesUI>
 
     @Binds
-    abstract fun bindWorkerStateEntitySuccessToUIMapper(successToUIMapper: WorkerStateEntitySuccessToUIMapper)
+    fun bindWorkerStateEntitySuccessToUIMapper(successToUIMapper: WorkerStateEntitySuccessToUIMapper)
             : Base.Mapper<WorkersStateEntity.Success, MainStatesUI.Success>
 
     @Binds
-    abstract fun bindWorkerStateEntityFailToUIMapper(failToUIMapper: WorkerStateEntityFailToUIMapper)
+    fun bindWorkerStateEntityFailToUIMapper(failToUIMapper: WorkerStateEntityFailToUIMapper)
             : Base.Mapper<WorkersStateEntity.Fail, MainStatesUI.Fail>
 
-/*    @Binds
-    abstract fun bindWorkerInfoEntityToUIMapper(workerStateEntityFailToUIMapper: WorkerInfoEntityToUIMapper)
-            : Base.Mapper<WorkerInfoEntity, WorkerInfoUIModel>*/
+    @Binds
+    fun bindWorkerInfoEntityToUIMapper(workerStateEntityFailToUIMapper: WorkerInfoEntityToUIMapper)
+            : Base.Mapper<WorkerInfoEntity, WorkerInfoUIModel>
 }

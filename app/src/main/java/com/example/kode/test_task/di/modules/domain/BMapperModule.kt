@@ -6,11 +6,10 @@ import com.example.kode.domain.entity.workers.WorkersStateEntity
 import dagger.Binds
 import dagger.Module
 
-/*
 @Module
-abstract class BMapperModule {
+interface BMapperModule {
 
     @Binds
-    abstract fun bindExceptionToFailEntityMapper(mapper: ExceptionToFailEntityMapper)
-            : Base.Mapper<Exception, WorkersStateEntity.Fail>
-}*/
+    fun bindExceptionToFailEntityMapper(mapper: ExceptionToFailEntityMapper)
+            : Base.Mapper<Exception, WorkersStateEntity>
+}

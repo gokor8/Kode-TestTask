@@ -6,5 +6,5 @@ import retrofit2.http.GET
 interface WorkersApi {
 
     @GET("users/")
-    fun getWorkers(): List<WorkerInfoResponse>
+    fun getWorkers(): MutableList<WorkerInfoResponse>
 }

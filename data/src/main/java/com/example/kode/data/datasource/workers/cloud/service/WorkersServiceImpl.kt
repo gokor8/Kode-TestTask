@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 class WorkersServiceImpl @Inject constructor(
     private val api: WorkersApi,
-) : WorkersService<List<WorkerInfoResponse>> {
+) : WorkersService<MutableList<WorkerInfoResponse>> {
 
-    override fun getWorkers(): List<WorkerInfoResponse> = api.getWorkers()
+    override fun getWorkers(): MutableList<WorkerInfoResponse> = api.getWorkers()
 }

@@ -12,17 +12,17 @@ import dagger.Binds
 import dagger.Module
 
 @Module
-abstract class BMapperModule {
+interface BMapperModule {
 
     @Binds
-    abstract fun bindWorkersStateDataToEntityMapper(mapper: WorkersStateDataToEntityMapper)
+    fun bindWorkersStateDataToEntityMapper(mapper: WorkersStateDataToEntityMapper)
             : Base.Mapper<WorkersInfoStateDataModel, WorkersStateEntity>
 
     @Binds
-    abstract fun bindWorkersStateDataSuccessToEntityMapper(mapper: WorkersStateDataSuccessToEntityMapper)
+    fun bindWorkersStateDataSuccessToEntityMapper(mapper: WorkersStateDataSuccessToEntityMapper)
             : Base.Mapper<WorkersInfoStateDataModel.Success, WorkersStateEntity.Success>
 
     @Binds
-    abstract fun bindWorkerInfoDataModelToDomainMapper(mapper: WorkerInfoDataModelToDomainMapper)
+    fun bindWorkerInfoDataModelToDomainMapper(mapper: WorkerInfoDataModelToDomainMapper)
             : Base.Mapper<WorkerInfoDataModel, WorkerInfoEntity>
 }

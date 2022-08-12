@@ -7,9 +7,9 @@ import dagger.Binds
 import dagger.Module
 
 @Module
-abstract class BCommunicationModule {
+interface BCommunicationModule {
 
     @Binds
-    abstract fun bindMainCommunication(communication: MainCommunication): BaseCommunication<MainStatesUI>
+    fun bindMainCommunication(communication: MainCommunication): BaseCommunication<MainStatesUI>
 
 }
