@@ -19,8 +19,9 @@ class TestWorkerInfoResponseToDataMapper {
             "test",
             "test",
             "test",
-            listOf("test"),
-            "test")
+            "test",
+            "test"
+        )
 
         val actual = testData.map(mapper)
         val expected = WorkerInfoDataModel(

@@ -6,6 +6,7 @@ import com.example.kode.domain.entity.workers.WorkersStateEntity
 import com.example.kode.domain.repository.WorkersRepository
 import com.example.kode.domain.usecase.workers.GetWorkersUseCaseImpl
 import domain.core.TestDomainModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert
 import org.junit.Before
@@ -32,11 +33,15 @@ class TestGetWorkersUseCaseImpl {
     }
 
     @Test
-    fun `get success workers list`() = runBlocking {
+    fun `get success workers list`(): Unit = runBlocking {
         val returnedState = TestDataState.Success()
         val testWorkersRepository = TestWorkersRepository(returnedState, returnedStateMapper)
         val workersUseCase =
-            GetWorkersUseCaseImpl(testWorkersRepository, exceptionToExceptionEntityMapper)
+            GetWorkersUseCaseImpl(
+                this.coroutineContext,
+                testWorkersRepository,
+                exceptionToExceptionEntityMapper
+            )
 
         val actual = workersUseCase.getWorkers()
         val expected = TestDomainModel.Success(
@@ -47,14 +52,18 @@ class TestGetWorkersUseCaseImpl {
     }
 
     @Test
-    fun `get exception workers list`() = runBlocking {
+    fun `get exception workers list`(): Unit = runBlocking {
         val returnedState = TestDataState.Exception()
         val testWorkersRepository = TestWorkersRepository(returnedState, returnedStateMapper)
         val workersUseCase =
-            GetWorkersUseCaseImpl(testWorkersRepository, exceptionToExceptionEntityMapper)
+            GetWorkersUseCaseImpl(
+                this.coroutineContext,
+                testWorkersRepository,
+                exceptionToExceptionEntityMapper
+            )
 
         val actual = workersUseCase.getWorkers()
-        val expected = TestDomainModel.Fail(Exceptions.GENERIC_EXCEPTION)
+        val expected = TestDomainModel.Fail(Exceptions.GenericException)
 
         Assert.assertEquals(expected, actual)
     }
@@ -62,7 +71,7 @@ class TestGetWorkersUseCaseImpl {
 
     // TEST REALIZATION
 
-    class TestWorkersRepository<out R>(
+    class TestWorkersRepository<R>(
         private val testReturnedState: TestDataState,
         private val testDataStateMapper: Base.Mapper<TestDataState, R>
     ) : WorkersRepository<R> {
@@ -83,14 +92,14 @@ class TestGetWorkersUseCaseImpl {
     }
 
     class TestExceptionToEntityMapper : Base.Mapper<Exception, TestDomainModel> {
-        override fun map(model: Exception) = TestDomainModel.Fail(Exceptions.GENERIC_EXCEPTION)
+        override fun map(model: Exception) = TestDomainModel.Fail(Exceptions.GenericException)
     }
 
     sealed class TestDataState : Base.IgnorantMapper<TestDataState> {
         override fun <I : Base.Mapper<TestDataState, R>, R> map(model: I): R =
             model.map(this)
 
-        class Success : TestDataState()
+        class Success() : TestDataState()
 
         class Exception() : TestDataState()
     }

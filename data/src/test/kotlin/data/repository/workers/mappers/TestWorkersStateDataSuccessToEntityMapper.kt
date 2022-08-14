@@ -2,6 +2,7 @@ package data.repository.workers.mappers
 
 import com.example.kode.data.repository.workers.mappers.WorkerInfoDataModelToDomainMapper
 import com.example.kode.data.repository.workers.mappers.WorkersStateDataSuccessToEntityMapper
+import com.example.kode.data.repository.workers.mappers.WorkersStateDataToEntityMapper
 import com.example.kode.data.repository.workers.models.WorkerInfoDataModel
 import com.example.kode.data.repository.workers.models.WorkersInfoStateDataModel
 import com.example.kode.domain.entity.workers.WorkerInfoEntity
@@ -14,10 +15,11 @@ class TestWorkersStateDataSuccessToEntityMapper {
     @Test
     fun `test mapping`() {
         val infoMapper = WorkerInfoDataModelToDomainMapper()
-        val mapper = WorkersStateDataSuccessToEntityMapper(infoMapper)
+        val successMapper = WorkersStateDataSuccessToEntityMapper(infoMapper)
+        val mapper = WorkersStateDataToEntityMapper(successMapper)
 
         val testData = WorkersInfoStateDataModel.Success(
-            listOf(
+            mutableListOf(
                 WorkerInfoDataModel(
                     "test",
                     "test",

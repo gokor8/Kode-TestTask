@@ -9,7 +9,7 @@ import org.junit.Test
 class TestWorkerInfoDataModelToRealmMapper {
 
     @Test
-    fun `test mapping`(){
+    fun `test mapping`() {
         val mapper = WorkerInfoDataModelToRealmMapper()
 
         val testData = WorkerInfoDataModel(

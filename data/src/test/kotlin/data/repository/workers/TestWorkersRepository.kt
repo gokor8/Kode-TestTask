@@ -107,7 +107,7 @@ class TestWorkersRepository {
     class TestWorkersCloudDataSource(private val testCommands: TestCommands) :
         WorkersCloudDataSource<TestRepositoryModel> {
 
-        override fun get(): TestRepositoryModel = when (testCommands) {
+        override suspend fun get(): TestRepositoryModel = when (testCommands) {
             is TestCommands.Success -> TestRepositoryModel(
                 "cloud 1",
             )

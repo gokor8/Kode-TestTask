@@ -21,7 +21,7 @@ class TestWorkersStateDataToEntityMapper {
             WorkersStateDataToEntityMapper(workersStateDataSuccessToEntityMapper)
 
         val testData = WorkersInfoStateDataModel.Success(
-            listOf(
+            mutableListOf(
                 WorkerInfoDataModel(
                     "test",
                     "test",

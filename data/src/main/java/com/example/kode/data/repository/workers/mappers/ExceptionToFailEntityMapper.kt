@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 class ExceptionToFailEntityMapper @Inject constructor() : Base.Mapper<Exception, WorkersStateEntity> {
     override fun map(model: Exception) = when (model) {
-        is NoConnectionException -> WorkersStateEntity.Fail(Exceptions.NoConnection())
-        else -> WorkersStateEntity.Fail(Exceptions.GenericException())
+        is NoConnectionException -> WorkersStateEntity.Fail(Exceptions.NoConnection)
+        else -> WorkersStateEntity.Fail(Exceptions.GenericException)
     }
 }
