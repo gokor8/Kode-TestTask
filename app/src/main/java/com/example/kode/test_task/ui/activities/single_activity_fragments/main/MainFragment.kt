@@ -1,30 +1,19 @@
 package com.example.kode.test_task.ui.activities.single_activity_fragments.main
 
 import android.content.Context
-import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
 import com.example.kode.domain.entity.workers.WorkersStateEntity
 import com.example.kode.test_task.App
-import com.example.kode.test_task.R
 import com.example.kode.test_task.databinding.FragmentMainBinding
 import com.example.kode.test_task.databinding.ItemMainBinding
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.MainStatesUI
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.WorkerInfoUIModel
-import com.example.kode.test_task.ui.activities.single_activity_fragments.main.recycler_view.MainRV
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.recycler_view.MainViewHolder
 import com.example.kode.test_task.ui.core.BaseFragment
 import com.example.kode.test_task.ui.core.recycler_view.BaseDiffUtilCallback
 import com.example.kode.test_task.ui.core.recycler_view.BaseRecyclerViewAdapter
 import com.example.kode.test_task.ui.core.recycler_view.BaseViewHolderFactory
 import com.google.android.material.snackbar.Snackbar
-import java.util.*
 import javax.inject.Inject
 
 class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel<MainStatesUI, *>>() {
@@ -35,9 +24,9 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel<MainStatesU
     @Inject
     lateinit var holderFactory: BaseViewHolderFactory<ItemMainBinding, MainViewHolder>
 
-    val diffUtils: BaseDiffUtilCallback<WorkerInfoUIModel> = BaseDiffUtilCallback()
+    private val diffUtils: BaseDiffUtilCallback<WorkerInfoUIModel> = BaseDiffUtilCallback()
 
-    var recyclerAdapter: ListAdapter<WorkerInfoUIModel, MainRV.WorkerViewHolder>? = null//BaseRecyclerViewAdapter<WorkerInfoUIModel, ItemMainBinding, MainViewHolder>? = null
+    private var recyclerAdapter: BaseRecyclerViewAdapter<WorkerInfoUIModel, ItemMainBinding, MainViewHolder>? = null
 
     override fun setObservers() {
         viewModel.observe(viewLifecycleOwner) {
@@ -71,10 +60,10 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel<MainStatesU
 
     override fun setUI() {
 
-        recyclerAdapter = MainRV()/* BaseRecyclerViewAdapter(
+        recyclerAdapter = BaseRecyclerViewAdapter(
             holderFactory,
             diffUtils
-        )*/
+        )
 
         binding.rvMain.adapter = recyclerAdapter
         binding.rvMain.layoutManager = LinearLayoutManager(context)
@@ -83,7 +72,6 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel<MainStatesU
 
     override fun onDestroy() {
         recyclerAdapter = null
-
         super.onDestroy()
     }
 

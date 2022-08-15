@@ -21,15 +21,15 @@ class TestWorkersStateDataSuccessToEntityMapper {
         val testData = WorkersInfoStateDataModel.Success(
             mutableListOf(
                 WorkerInfoDataModel(
-                    "test",
-                    "test",
-                    "test",
-                    "test",
-                    "test",
-                    "test",
-                    "test",
-                    listOf("test"),
-                    "test",
+                    "id",
+                    "avatar",
+                    "name",
+                    "lastName",
+                    "userTag",
+                    "department",
+                    "position",
+                    listOf("birthday"),
+                    "phone",
                 )
             )
         )
@@ -38,11 +38,11 @@ class TestWorkersStateDataSuccessToEntityMapper {
         val expected = WorkersStateEntity.Success(
             listOf(
                 WorkerInfoEntity(
-                    "test",
-                    "test",
-                    "test",
-                    "test",
-                    "test"
+                    "avatar",
+                    "name",
+                    "lastName",
+                    "userTag",
+                    "position"
                 )
             )
         )

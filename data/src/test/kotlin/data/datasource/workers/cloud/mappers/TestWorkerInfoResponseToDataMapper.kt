@@ -12,28 +12,28 @@ class TestWorkerInfoResponseToDataMapper {
     fun `test mapping`() {
         val mapper = WorkerInfoResponseToDataMapper()
         val testData = WorkerInfoResponse(
-            "test",
-            "test",
-            "test",
-            "test",
-            "test",
-            "test",
-            "test",
-            "test",
-            "test"
+            "id",
+            "avatar",
+            "name",
+            "lastName",
+            "userTag",
+            "department",
+            "position",
+            "birthday",
+            "phone"
         )
 
         val actual = testData.map(mapper)
         val expected = WorkerInfoDataModel(
-            "test",
-            "test",
-            "test",
-            "test",
-            "test",
-            "test",
-            "test",
-            listOf("test"),
-            "test"
+            "id",
+            "avatar",
+            "name",
+            "lastName",
+            "userTag",
+            "department",
+            "position",
+            listOf("birthday"),
+            "phone"
         )
 
         Assert.assertEquals(expected, actual)

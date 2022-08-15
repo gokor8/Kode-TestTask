@@ -9,12 +9,12 @@ class WorkerInfoResponseToDataMapper @Inject constructor() : Base.Mapper<WorkerI
     override fun map(model: WorkerInfoResponse): WorkerInfoDataModel = with(model) {
         WorkerInfoDataModel(
             id,
+            avatarUrl,
             firstName,
             lastName,
             userTag,
-            position,
-            userTag,
             department,
+            position,
             listOf(birthday),
             phone
         )
