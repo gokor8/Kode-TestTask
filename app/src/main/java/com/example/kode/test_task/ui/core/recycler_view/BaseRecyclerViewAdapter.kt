@@ -1,18 +1,23 @@
 package com.example.kode.test_task.ui.core.recycler_view
 
+import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
+import androidx.viewbinding.ViewBinding
 
-class BaseRecyclerViewAdapter<M : BaseRecyclerViewModel<*>, VH : BaseViewHolder<M>>(
-    private val viewHolderFactory: BaseViewHolderFactory<VH>,
-    diffUtilCallback: BaseDiffUtilCallback<M>
+class BaseRecyclerViewAdapter<M : BaseRecyclerViewModel<*>, VB : ViewBinding, VH : BaseViewHolder<M, VB>>(
+    private val viewHolderFactory: BaseViewHolderFactory<VB, VH>,
+    diffUtilCallback: DiffUtil.ItemCallback<M>
 ) : ListAdapter<M, VH>(diffUtilCallback) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH = viewHolderFactory.create()
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
+        return viewHolderFactory.create(
+            LayoutInflater.from(parent.context), parent, viewType
+        )
+    }
 
     override fun onBindViewHolder(holder: VH, position: Int) {
-        val itemPosition = getItem(position)
-
-        holder.onBind(itemPosition)
+        holder.onBind(currentList[position])
     }
 }

@@ -11,4 +11,5 @@ data class WorkerInfoUIModel(
 ) : BaseRecyclerViewModel<Int> {
 
     override fun getRVEqualsValue(): Int = hashCode()
+    // Если будет id, можно его юзать
 }

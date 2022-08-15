@@ -2,12 +2,13 @@ package com.example.kode.test_task.di
 
 import android.content.Context
 import android.content.res.Resources
+import com.example.kode.test_task.di.modules.ui.BRecyclerView
 import com.example.kode.test_task.di.modules.ui.BViewModelModule
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.MainFragment
 import dagger.BindsInstance
 import dagger.Component
 
-@Component(modules = [BViewModelModule::class])
+@Component(modules = [BViewModelModule::class, BRecyclerView::class])
 interface AppComponent {
 
     @Component.Factory

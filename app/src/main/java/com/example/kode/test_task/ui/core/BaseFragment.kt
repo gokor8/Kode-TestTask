@@ -10,16 +10,14 @@ import androidx.viewbinding.ViewBinding
 abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel<*>> : Fragment(),
     BaseInterfaceView<VB, VM> {
 
-    private val binding: VB by lazy { setBind() }
+    lateinit var binding: VB
     val viewModel: VM by lazy { setViewModel() }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        return binding.root
-    }
+    ) = setBind().also { binding = it }.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setUI()

@@ -4,10 +4,11 @@ import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
+import kotlin.coroutines.CoroutineContext
 
 @Module
 class PCoroutineDispatcherModule {
 
   @Provides
-  fun provideIODispatcher(): CoroutineDispatcher = Dispatchers.IO
+  fun provideIODispatcher(): CoroutineContext = Dispatchers.IO
 }

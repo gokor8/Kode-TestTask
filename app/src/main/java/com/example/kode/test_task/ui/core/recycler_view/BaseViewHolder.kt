@@ -2,8 +2,9 @@ package com.example.kode.test_task.ui.core.recycler_view
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewbinding.ViewBinding
 
-abstract class BaseViewHolder<M : Any>(item: View) : RecyclerView.ViewHolder(item) {
+abstract class BaseViewHolder<M : Any, VB : ViewBinding>(protected val viewBinding: VB) : RecyclerView.ViewHolder(viewBinding.root) {
 
     abstract fun onBind(model: M)
 }
