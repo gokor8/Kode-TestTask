@@ -15,7 +15,7 @@ class TestLWorkerInfoDataModelToRealmMapper {
         val mapper = WorkerInfoDataModelToRealmMapper()
         val listMapper = LWorkerInfoDataModelToRealmMapper(mapper)
 
-        val testData = WorkersInfoStateDataModel.Success(
+        val testData = WorkersInfoStateDataModel.Cloud(
             mutableListOf(
                 WorkerInfoDataModel(
                     "test",

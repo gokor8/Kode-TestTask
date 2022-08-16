@@ -1,7 +1,7 @@
 package data.repository.workers.mappers
 
 import com.example.kode.data.repository.workers.mappers.WorkerInfoDataModelToDomainMapper
-import com.example.kode.data.repository.workers.mappers.WorkersStateDataSuccessToEntityMapper
+import com.example.kode.data.repository.workers.mappers.WorkersStateDataCloudToEntityMapper
 import com.example.kode.data.repository.workers.mappers.WorkersStateDataToEntityMapper
 import com.example.kode.data.repository.workers.models.WorkerInfoDataModel
 import com.example.kode.data.repository.workers.models.WorkersInfoStateDataModel
@@ -10,15 +10,14 @@ import com.example.kode.domain.entity.workers.WorkersStateEntity
 import org.junit.Assert
 import org.junit.Test
 
-class TestWorkersStateDataSuccessToEntityMapper {
+class TestWorkersStateDataCloudToEntityMapper {
 
     @Test
     fun `test mapping`() {
         val infoMapper = WorkerInfoDataModelToDomainMapper()
-        val successMapper = WorkersStateDataSuccessToEntityMapper(infoMapper)
-        val mapper = WorkersStateDataToEntityMapper(successMapper)
+        val mapper = WorkersStateDataCloudToEntityMapper(infoMapper)
 
-        val testData = WorkersInfoStateDataModel.Success(
+        val testData = WorkersInfoStateDataModel.Cloud(
             mutableListOf(
                 WorkerInfoDataModel(
                     "id",
@@ -29,12 +28,12 @@ class TestWorkersStateDataSuccessToEntityMapper {
                     "department",
                     "position",
                     listOf("birthday"),
-                    "phone",
+                    "phone"
                 )
             )
         )
 
-        val actual = testData.map(mapper)
+        val actual = testData.let(mapper::map)
         val expected = WorkersStateEntity.Success(
             listOf(
                 WorkerInfoEntity(

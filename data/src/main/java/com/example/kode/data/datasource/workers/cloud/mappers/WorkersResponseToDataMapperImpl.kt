@@ -12,5 +12,5 @@ class WorkersResponseToDataMapperImpl @Inject constructor(
     private val mapper: Base.Mapper<WorkerInfoResponse, WorkerInfoDataModel>
 ) : Base.Mapper<WorkersResponse, WorkersInfoStateDataModel> {
     override fun map(model: WorkersResponse): WorkersInfoStateDataModel =
-        WorkersInfoStateDataModel.Success(model.items.map { it.map(mapper) }.toMutableList())
+        WorkersInfoStateDataModel.Cloud(model.items.map { it.map(mapper) }.toMutableList())
 }

@@ -19,7 +19,7 @@ class WorkersRepositoryImpl<R : Any, M : Base.IgnorantMapper<M>> @Inject constru
             cacheDataSource.save(data)
         } catch (e: NoConnectionException) {
             data = cacheDataSource.get()
-            // Либо создать альтернативу Success и возвращать её в data
+            // Либо создать альтернативу Cloud и возвращать её в data
             // cacheDataSource.get().map(noConnectionMapper)
         }
 

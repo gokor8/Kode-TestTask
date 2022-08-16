@@ -33,7 +33,6 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel<MainStatesU
             when (it) {
                 is MainStatesUI.Success -> {
                     recyclerAdapter?.submitList(it.workers)
-                    //Log.i("MainFragmentInfo", it.workers.toString())
                 }
                 is MainStatesUI.Fail.Error -> {
                     Snackbar.make(
@@ -41,7 +40,6 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel<MainStatesU
                         resources.getString(it.errorId),
                         Snackbar.LENGTH_LONG
                     ).show()
-                    //Log.i("MainFragmentInfo", resources.getString(it.errorId))
                 }
                 is MainStatesUI.Fail.NoConnection -> {}
             }

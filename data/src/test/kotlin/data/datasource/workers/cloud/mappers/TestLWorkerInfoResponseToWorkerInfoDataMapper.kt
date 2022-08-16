@@ -6,7 +6,6 @@ import com.example.kode.data.datasource.workers.cloud.models.WorkerInfoResponse
 import com.example.kode.data.datasource.workers.cloud.models.WorkersResponse
 import com.example.kode.data.repository.workers.models.WorkerInfoDataModel
 import com.example.kode.data.repository.workers.models.WorkersInfoStateDataModel
-import com.example.kode.domain.entity.workers.WorkersStateEntity
 import org.junit.Assert
 import org.junit.Test
 
@@ -45,7 +44,7 @@ class TestLWorkerInfoResponseToWorkerInfoDataMapper {
         )
 
         val actual = listMapper.map(testData)
-        val expected = WorkersInfoStateDataModel.Success(
+        val expected = WorkersInfoStateDataModel.Cloud(
             mutableListOf(
                 WorkerInfoDataModel(
                     "test",

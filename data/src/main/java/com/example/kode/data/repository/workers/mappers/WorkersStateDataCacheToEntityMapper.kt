@@ -7,12 +7,11 @@ import com.example.kode.domain.entity.workers.WorkerInfoEntity
 import com.example.kode.domain.entity.workers.WorkersStateEntity
 import javax.inject.Inject
 
-class WorkersStateDataSuccessToEntityMapper @Inject constructor(
+class WorkersStateDataCacheToEntityMapper @Inject constructor(
     private val mapper: Base.Mapper<WorkerInfoDataModel, WorkerInfoEntity>
-) :
-    Base.Mapper<WorkersInfoStateDataModel.Success, WorkersStateEntity.Success> {
-    override fun map(model: WorkersInfoStateDataModel.Success): WorkersStateEntity.Success =
-        WorkersStateEntity.Success(
-            model.workers.map { it.map(mapper) }
-        )
+) : Base.Mapper<WorkersInfoStateDataModel.Cache, WorkersStateEntity.NoConnection> {
+
+    override fun map(model: WorkersInfoStateDataModel.Cache): WorkersStateEntity.NoConnection =
+        WorkersStateEntity.NoConnection(model.workers.map { it.map(mapper) })
+
 }
