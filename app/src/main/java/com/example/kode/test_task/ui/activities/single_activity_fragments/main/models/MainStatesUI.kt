@@ -12,10 +12,5 @@ sealed class MainStatesUI {
         val workers: List<WorkerInfoUIModel>
     ) : MainStatesUI()
 
-    sealed class Fail : MainStatesUI() {
-        class Error(val errorId: Int) : Fail()
-        class NoConnection : Fail() {
-            val errorId: Int = R.string.no_connection
-        }
-    }
+    class Error(val errorId: Int) : MainStatesUI()
 }

@@ -13,12 +13,12 @@ class PCacheDataSourceModule {
     fun provideRealmDataSource(): WorkersCacheDataSource<WorkersInfoStateDataModel> =
         object : WorkersCacheDataSource<WorkersInfoStateDataModel> {
             override suspend fun get(): WorkersInfoStateDataModel =
-                WorkersInfoStateDataModel.Cloud(
+                WorkersInfoStateDataModel.Cache(
                     mutableListOf<WorkerInfoDataModel>(
                         WorkerInfoDataModel(
                             "",
                             "",
-                            "",
+                            "Aboba",
                             "",
                             "",
                             "",
@@ -34,5 +34,4 @@ class PCacheDataSourceModule {
             }
 
         }
-
 }

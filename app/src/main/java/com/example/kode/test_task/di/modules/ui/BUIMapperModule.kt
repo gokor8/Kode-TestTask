@@ -26,7 +26,7 @@ interface BUIMapperModule {
 
     @Binds
     fun bindWorkerStateEntityFailToUIMapper(failToUIMapper: WorkerStateEntityFailToUIMapper)
-            : Base.Mapper<WorkersStateEntity.Fail, MainStatesUI.Fail>
+            : Base.Mapper<WorkersStateEntity.Fail, MainStatesUI.Error>
 
     @Binds
     fun bindWorkerInfoEntityToUIMapper(workerStateEntityFailToUIMapper: WorkerInfoEntityToUIMapper)

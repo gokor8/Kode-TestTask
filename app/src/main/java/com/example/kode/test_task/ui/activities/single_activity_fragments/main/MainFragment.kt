@@ -34,14 +34,17 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel<MainStatesU
                 is MainStatesUI.Success -> {
                     recyclerAdapter?.submitList(it.workers)
                 }
-                is MainStatesUI.Fail.Error -> {
+                is MainStatesUI.Error -> {
                     Snackbar.make(
                         this.requireView(),
                         resources.getString(it.errorId),
                         Snackbar.LENGTH_LONG
                     ).show()
                 }
-                is MainStatesUI.Fail.NoConnection -> {}
+                is MainStatesUI.NoConnection -> {
+                    recyclerAdapter?.submitList(it.workers)
+                    // TODO Set red error
+                }
             }
         }
     }
