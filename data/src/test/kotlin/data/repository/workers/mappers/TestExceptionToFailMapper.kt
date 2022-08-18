@@ -22,16 +22,6 @@ class TestExceptionToFailMapper {
         Assert.assertEquals(expected, actual)
     }
 
-    @Test
-    fun `test NoConnection exception`() {
-        val expected = WorkersStateEntity.Fail(Exceptions.NoConnection)
-        val exception = NoConnectionException()
-
-        val actual = exceptionToFailEntityMapper.map(exception)
-
-        Assert.assertEquals(expected, actual)
-    }
-
     /*@Test
     fun `test BadRequest exception`() {
         val expected = WorkersStateEntity.Fail(Exceptions.BAD_REQUEST_EXCEPTION)
