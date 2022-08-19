@@ -8,8 +8,8 @@ import javax.inject.Inject
 
 class LRealmModelToWorkerInfoMapper @Inject constructor(
     private val mapper: Base.Mapper<RealmWorkerModel, WorkerInfoDataModel>
-) : Base.Mapper<List<RealmWorkerModel>, WorkersInfoStateDataModel> {
+) : Base.Mapper<MutableList<RealmWorkerModel>, WorkersInfoStateDataModel> {
 
-    override fun map(model: List<RealmWorkerModel>): WorkersInfoStateDataModel.Cache =
-        WorkersInfoStateDataModel.Cache(model.map { it.map(mapper) })
+    override fun map(model: MutableList<RealmWorkerModel>): WorkersInfoStateDataModel =
+        WorkersInfoStateDataModel.Cache(model.map { it.map(mapper) }.toMutableList())
 }

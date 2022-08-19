@@ -7,12 +7,11 @@ import io.realm.kotlin.executeTransactionAwait
 import kotlinx.coroutines.Dispatchers
 import javax.inject.Inject
 
-class RealmWorkersCacheDataSource<M : Any, RM : RealmObject> @Inject
-constructor(
+class RealmWorkersCacheDataSource<M : Any, RM : RealmObject> @Inject constructor(
     private val realm: Realm,
     private val realmModelClass: Class<RM>,
-    private val mapperToRealmModel: Base.Mapper<M, List<RM>>,
-    private val mapperFromRealmModel: Base.Mapper<List<RM>, M>
+    private val mapperToRealmModel: Base.Mapper<M, MutableList<RM>>,
+    private val mapperFromRealmModel: Base.Mapper<MutableList<RM>, M>
 ) : WorkersCacheDataSource<M> {
 
     override suspend fun get(): M =
