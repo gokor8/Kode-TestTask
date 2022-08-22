@@ -2,8 +2,9 @@ package com.example.kode.domain.entity.workers
 
 import com.example.kode.domain.core.Base
 import com.example.kode.domain.core.Exceptions
+import com.example.kode.domain.core.UseCaseModel
 
-sealed class WorkersStateEntity : Base.IgnorantMapper<WorkersStateEntity> {
+sealed class WorkersStateEntity : UseCaseModel<WorkersStateEntity> {
 
     override fun <I : Base.Mapper<WorkersStateEntity, R>, R> map(model: I): R = model.map(this)
 

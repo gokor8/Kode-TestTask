@@ -3,11 +3,12 @@ package com.example.kode.data.repository.workers
 import com.example.kode.data.datasource.workers.cache.WorkersCacheDataSource
 import com.example.kode.data.datasource.workers.cloud.WorkersCloudDataSource
 import com.example.kode.domain.core.Base
+import com.example.kode.domain.core.UseCaseModel
 import com.example.kode.domain.entity.custom_exceptions.NoConnectionException
 import com.example.kode.domain.repository.WorkersRepository
 import javax.inject.Inject
 
-class WorkersRepositoryImpl<R : Any, M : Base.IgnorantMapper<M>> @Inject constructor(
+class WorkersRepositoryImpl<R : UseCaseModel<R>, M : Base.IgnorantMapper<M>> @Inject constructor(
     private val cloudDataSource: WorkersCloudDataSource<M>,
     private val cacheDataSource: WorkersCacheDataSource<M>,
     private val mapper: Base.Mapper<M, R>
