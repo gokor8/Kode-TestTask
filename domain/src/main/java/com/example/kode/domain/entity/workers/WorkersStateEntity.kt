@@ -2,7 +2,7 @@ package com.example.kode.domain.entity.workers
 
 import com.example.kode.domain.core.Base
 import com.example.kode.domain.core.Exceptions
-import com.example.kode.domain.core.UseCaseModel
+import com.example.kode.domain.core.usecase.UseCaseModel
 
 sealed class WorkersStateEntity : UseCaseModel<WorkersStateEntity> {
 

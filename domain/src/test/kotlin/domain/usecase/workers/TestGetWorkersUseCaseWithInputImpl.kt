@@ -2,6 +2,7 @@ package domain.usecase.workers
 
 import com.example.kode.domain.core.Base
 import com.example.kode.domain.core.Exceptions
+import com.example.kode.domain.core.usecase.UseCaseModel
 import com.example.kode.domain.entity.workers.WorkersStateEntity
 import com.example.kode.domain.repository.WorkersRepository
 import com.example.kode.domain.usecase.workers.GetWorkersUseCaseImpl
@@ -13,7 +14,7 @@ import org.junit.Before
 import org.junit.Test
 import java.io.IOException
 
-class TestGetWorkersUseCaseImpl {
+class TestGetWorkersUseCaseWithInputImpl {
 
     // Для чего такие сложности?
     // Представим задачу.
@@ -39,11 +40,11 @@ class TestGetWorkersUseCaseImpl {
         val workersUseCase =
             GetWorkersUseCaseImpl(
                 this.coroutineContext,
-                testWorkersRepository,
-                exceptionToExceptionEntityMapper
+                exceptionToExceptionEntityMapper,
+                testWorkersRepository
             )
 
-        val actual = workersUseCase.getWorkers()
+        val actual = workersUseCase.get()
         val expected = TestDomainModel.Success(
             "test"
         )
@@ -58,11 +59,11 @@ class TestGetWorkersUseCaseImpl {
         val workersUseCase =
             GetWorkersUseCaseImpl(
                 this.coroutineContext,
-                testWorkersRepository,
-                exceptionToExceptionEntityMapper
+                exceptionToExceptionEntityMapper,
+                testWorkersRepository
             )
 
-        val actual = workersUseCase.getWorkers()
+        val actual = workersUseCase.get()
         val expected = TestDomainModel.Fail(Exceptions.GenericException)
 
         Assert.assertEquals(expected, actual)
@@ -71,7 +72,7 @@ class TestGetWorkersUseCaseImpl {
 
     // TEST REALIZATION
 
-    class TestWorkersRepository<R>(
+    class TestWorkersRepository<R : UseCaseModel<R>>(
         private val testReturnedState: TestDataState,
         private val testDataStateMapper: Base.Mapper<TestDataState, R>
     ) : WorkersRepository<R> {

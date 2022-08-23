@@ -2,7 +2,7 @@ package com.example.kode.test_task.ui.activities.single_activity_fragments.main
 
 import androidx.lifecycle.viewModelScope
 import com.example.kode.domain.core.Base
-import com.example.kode.domain.core.UseCaseModel
+import com.example.kode.domain.core.usecase.UseCaseModel
 import com.example.kode.domain.usecase.workers.GetWorkersUseCase
 import com.example.kode.test_task.ui.core.BaseCommunication
 import com.example.kode.test_task.ui.core.BaseViewModel
@@ -16,6 +16,6 @@ class MainViewModel<M : Any, EM : UseCaseModel<EM>> @Inject constructor(
 ) : BaseViewModel<M>(communication) {
 
     fun getWorkers() = viewModelScope.launch {
-        useCase.getWorkers().map(mapper).let(communication::save)
+        useCase.get().map(mapper).let(communication::save)
     }
 }

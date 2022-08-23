@@ -12,12 +12,12 @@ sealed interface Read {
         }
     }
 
-    sealed interface AbstractId<R> : Read {
-        interface BaseEqualable<I, R> : AbstractId<R> {
+    sealed interface AbstractInput<R> : Read {
+        interface BaseEqualable<I, R> : AbstractInput<R> {
             fun get(equalsAttribute: I): R
         }
 
-        interface SuspendEqualable<I, R> : AbstractId<R> {
+        interface SuspendEquable<I, R> : AbstractInput<R> {
             suspend fun get(equalsAttribute: I): R
         }
     }
