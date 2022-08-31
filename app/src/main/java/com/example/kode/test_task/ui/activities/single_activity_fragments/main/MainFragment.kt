@@ -26,7 +26,8 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel<MainStatesU
 
     private val diffUtils: BaseDiffUtilCallback<WorkerInfoUIModel> = BaseDiffUtilCallback()
 
-    private var recyclerAdapter: BaseRecyclerViewAdapter<WorkerInfoUIModel, ItemMainBinding, MainViewHolder>? = null
+    private var recyclerAdapter: BaseRecyclerViewAdapter<WorkerInfoUIModel, ItemMainBinding, MainViewHolder>? =
+        null
 
     override fun setObservers() {
         viewModel.observe(viewLifecycleOwner) {
@@ -43,7 +44,6 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel<MainStatesU
                 }
                 is MainStatesUI.NoConnection -> {
                     recyclerAdapter?.submitList(it.workers)
-                    // TODO Set red error
                 }
             }
         }

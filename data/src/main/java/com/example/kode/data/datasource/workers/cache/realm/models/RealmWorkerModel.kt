@@ -1,4 +1,4 @@
-package com.example.kode.data.datasource.workers.cache.models
+package com.example.kode.data.datasource.workers.cache.realm.models
 
 import com.example.kode.domain.core.Base
 import io.realm.RealmObject

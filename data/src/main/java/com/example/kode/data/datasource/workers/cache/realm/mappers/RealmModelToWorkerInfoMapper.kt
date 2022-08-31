@@ -1,9 +1,8 @@
-package com.example.kode.data.datasource.workers.cache.mappers
+package com.example.kode.data.datasource.workers.cache.realm.mappers
 
-import com.example.kode.data.datasource.workers.cache.models.RealmWorkerModel
+import com.example.kode.data.datasource.workers.cache.realm.models.RealmWorkerModel
 import com.example.kode.data.repository.workers.models.WorkerInfoDataModel
 import com.example.kode.domain.core.Base
-import com.example.kode.domain.entity.workers.WorkersStateEntity
 import javax.inject.Inject
 
 class RealmModelToWorkerInfoMapper @Inject constructor() : Base.Mapper<RealmWorkerModel, WorkerInfoDataModel> {

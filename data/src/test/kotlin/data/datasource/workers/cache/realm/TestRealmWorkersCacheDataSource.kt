@@ -1,8 +1,6 @@
-package data.datasource.workers.cache
+package data.datasource.workers.cache.realm
 
-import android.app.Application
-import android.content.Context
-import com.example.kode.data.datasource.workers.cache.RealmWorkersCacheDataSource
+import com.example.kode.data.datasource.workers.cache.realm.RealmWorkersCacheDataSource
 import com.example.kode.data.datasource.workers.cache.WorkersCacheDataSource
 import com.example.kode.domain.core.Base
 import data.core.TestModel
@@ -52,13 +50,13 @@ class TestRealmWorkersCacheDataSource {
         val name: String = ""
     ) : RealmObject()
 
-    class TestModelToRealmMapper : Base.Mapper<TestModel, List<TestRealmModel>> {
-        override fun map(model: TestModel): List<TestRealmModel> =
-            listOf(TestRealmModel(model.name))
+    class TestModelToRealmMapper : Base.Mapper<TestModel, MutableList<TestRealmModel>> {
+        override fun map(model: TestModel): MutableList<TestRealmModel> =
+            mutableListOf(TestRealmModel(model.name))
     }
 
-    class TestRealmToModelMapper : Base.Mapper<List<TestRealmModel>, TestModel> {
-        override fun map(model: List<TestRealmModel>): TestModel =
+    class TestRealmToModelMapper : Base.Mapper<MutableList<TestRealmModel>, TestModel> {
+        override fun map(model: MutableList<TestRealmModel>): TestModel =
             TestModel(model[0].name)
     }
 }

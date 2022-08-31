@@ -1,9 +1,11 @@
 package data.repository.workers
 
+import com.example.kode.data.datasource.core.DataSourceModel
 import com.example.kode.data.datasource.workers.cache.WorkersCacheDataSource
 import com.example.kode.data.datasource.workers.cloud.WorkersCloudDataSource
 import com.example.kode.data.repository.workers.WorkersRepositoryImpl
 import com.example.kode.domain.core.Base
+import com.example.kode.domain.core.usecase.UseCaseModel
 import com.example.kode.domain.entity.custom_exceptions.NoConnectionException
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert
@@ -89,11 +91,11 @@ class TestWorkersRepository {
 
     // TEST REALIZATIONS
 
-    data class TestRepositoryModel(val name: String) : Base.IgnorantMapper<TestRepositoryModel> {
+    data class TestRepositoryModel(val name: String) : DataSourceModel<TestRepositoryModel> {
         override fun <I : Base.Mapper<TestRepositoryModel, R>, R> map(model: I) = model.map(this)
     }
 
-    data class TestEntityModel(val name: String) : Base.IgnorantMapper<TestEntityModel> {
+    data class TestEntityModel(val name: String) : UseCaseModel<TestEntityModel> {
         override fun <I : Base.Mapper<TestEntityModel, R>, R> map(model: I) = model.map(this)
     }
 
