@@ -1,4 +1,4 @@
-package com.example.kode.data.datasource.workers.cache.room.workers.models
+package com.example.kode.data.datasource.workers.cache.room.models
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

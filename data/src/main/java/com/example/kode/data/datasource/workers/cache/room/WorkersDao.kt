@@ -1,10 +1,10 @@
-package com.example.kode.data.datasource.workers.cache.room.workers.models
+package com.example.kode.data.datasource.workers.cache.room
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.kode.data.datasource.workers.cache.room.workers.models.RoomWorkerModel
+import com.example.kode.data.datasource.workers.cache.room.models.RoomWorkerModel
 
 @Dao
 interface WorkersDao {
