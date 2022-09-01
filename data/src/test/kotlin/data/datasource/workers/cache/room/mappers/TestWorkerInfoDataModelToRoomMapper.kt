@@ -1,5 +1,6 @@
 package data.datasource.workers.cache.room.mappers
 
+import com.example.kode.data.datasource.workers.cache.room.mappers.`in`.WorkerInfoDataModelToRoomMapper
 import com.example.kode.data.datasource.workers.cache.room.models.RoomWorkerModel
 import com.example.kode.data.repository.workers.models.WorkerInfoDataModel
 import org.junit.Assert
@@ -9,7 +10,7 @@ class TestWorkerInfoDataModelToRoomMapper {
 
     @Test
     fun `test mapping`() {
-        val mapper = WorkerInfoDataModelToRoom()
+        val mapper = WorkerInfoDataModelToRoomMapper()
 
         val workerInfoDataModel = WorkerInfoDataModel(
             "id",

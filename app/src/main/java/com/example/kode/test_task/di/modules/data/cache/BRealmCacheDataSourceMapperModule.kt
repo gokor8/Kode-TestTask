@@ -12,7 +12,7 @@ import dagger.Binds
 import dagger.Module
 
 @Module
-interface BCacheDataSourceMapperModule {
+interface BRealmCacheDataSourceMapperModule {
 
     @Binds
     fun bindLWorkerInfoDataModelToRealmMapper(mapper: LWorkerInfoDataModelToRealmMapper)

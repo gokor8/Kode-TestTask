@@ -7,8 +7,8 @@ import com.example.kode.data.repository.workers.models.WorkersInfoStateDataModel
 import dagger.Binds
 import dagger.Module
 
-@Module(includes = [BCacheDataSourceMapperModule::class, PCacheModule::class])
-interface BCacheDataSourceModule {
+@Module(includes = [BRealmCacheDataSourceMapperModule::class, PCacheRoomModule::class])
+interface BRealmCacheDataSourceModule {
 
     @Binds
     fun bindRealmCacheDataSource(cache: RealmWorkersCacheDataSource<WorkersInfoStateDataModel, RealmWorkerModel>)

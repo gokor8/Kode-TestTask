@@ -8,7 +8,9 @@ import com.example.kode.test_task.di.modules.ui.BViewModelModule
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.MainFragment
 import dagger.BindsInstance
 import dagger.Component
+import javax.inject.Singleton
 
+@Singleton
 @Component(modules = [BViewModelModule::class, BRecyclerView::class])
 interface AppComponent {
 
