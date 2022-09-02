@@ -1,9 +1,9 @@
 #Kode-TestTask
 ------
-#Technologies used
+# Technologies used
 LiveData(State), Coroutines, Room(Deprecated Realm), Retrofit, Glide
 
-#About project
+# About project
 This app it was conceived super OOP, SOLID, DRY app.
 In this case it is overinjenering, but i wanted create this app if it will be expandable.
 
