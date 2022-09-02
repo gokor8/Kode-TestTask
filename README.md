@@ -6,6 +6,7 @@
 * Room(Deprecated Realm)
 * Retrofit
 * Glide
+* And more OOP + Abstractions
 
 # About project
 This app it was conceived super OOP, SOLID, DRY app.
