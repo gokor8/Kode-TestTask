@@ -11,9 +11,9 @@ import org.junit.Test
 class TestWorkersStateEntityToUIMapper {
 
     private val entityMapper = WorkerInfoEntityToUIMapper()
-    private val successMapper = WorkerStateEntitySuccessToUIMapper(entityMapper)
-    private val noConnectionMapper = WorkerStateEntityNoConnectionToUIMapper(entityMapper)
-    private val failMapper = WorkerStateEntityFailToUIMapper()
+    private val successMapper = WorkersCloudEntityToUIMapper(entityMapper)
+    private val noConnectionMapper = WorkersCacheEntityToUIMapper(entityMapper)
+    private val failMapper = WorkersFailEntityToUIMapper()
 
     @Test
     fun `test success mapping`() {

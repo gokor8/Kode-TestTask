@@ -7,37 +7,37 @@ import com.example.kode.test_task.ui.activities.single_activity_fragments.main.m
 import org.junit.Assert
 import org.junit.Test
 
-class TestWorkerStateEntityNoConnectionToUIMapper {
+class TestWorkersCloudEntityToUIMapper {
 
     @Test
     fun `test mapping`() {
         val workerInfoEntityToUIMapper = WorkerInfoEntityToUIMapper()
-        val mapper = WorkerStateEntityNoConnectionToUIMapper(workerInfoEntityToUIMapper)
+        val mapper = WorkersCloudEntityToUIMapper(workerInfoEntityToUIMapper)
 
-        val testDataModel = WorkersStateEntity.NoConnection(
+        val testDataModel = WorkersStateEntity.Success(
             listOf(
                 WorkerInfoEntity(
-                    "avatar",
-                    "name",
-                    "lastName",
-                    "userTag",
-                    "position"
+                    "test",
+                    "test",
+                    "test",
+                    "test",
+                    "test"
                 )
             )
         )
 
-        val expected = MainStatesUI.NoConnection(
+        val actual = mapper.map(testDataModel)
+        val expected = MainStatesUI.Success.Cloud(
             listOf(
                 WorkerInfoUIModel(
-                    "avatar",
-                    "name",
-                    "lastName",
-                    "userTag",
-                    "position"
+                    "test",
+                    "test",
+                    "test",
+                    "test",
+                    "test"
                 )
             )
         )
-        val actual = mapper.map(testDataModel)
 
         Assert.assertEquals(expected, actual)
     }

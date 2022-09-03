@@ -1,27 +1,31 @@
-package data.datasource.workers.cache.room
+package datasource.workers.cache.room
 
 import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.kode.data.datasource.core.cache.AppDatabase
+import com.example.kode.data.datasource.workers.cache.exceptions.NoCacheException
 import com.example.kode.data.datasource.workers.cache.room.RoomWorkersCacheDataSource
-import com.example.kode.data.datasource.workers.cache.room.WorkersDao
 import com.example.kode.data.datasource.workers.cache.room.models.RoomWorkerModel
 import com.example.kode.domain.core.Base
 import kotlinx.coroutines.runBlocking
+import org.junit.After
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.junit.runners.JUnit4
+import java.io.IOException
 
+@RunWith(AndroidJUnit4::class)
 class TestRoomWorkersCacheDataSource {
 
     private val testInMapper = TestInMapper()
     private val testOutMapper = TestOutMapper()
-    private val roomCacheDataSource =
-        RoomWorkersCacheDataSource(workersDao, testInMapper, testOutMapper)
+
+    private lateinit var database: AppDatabase
+    private lateinit var roomCacheDataSource: RoomWorkersCacheDataSource<TestModel>
+
     private val testModel = TestModel(List(2) {
         RoomWorkerModel(
             id = "id$it",
@@ -35,32 +39,33 @@ class TestRoomWorkersCacheDataSource {
             phone = "phone"
         )
     })
-    lateinit var workersDao: WorkersDao
 
     @Before
     fun setupBefore() {
-        // Может сделать тут даггер, и тествоый subModule?
         val context = ApplicationProvider.getApplicationContext<Context>()
-        val dataBase = Room.inMemoryDatabaseBuilder(context, AppDatabase::class.java).build()
-        workersDao = dataBase.workersDao()
+        database = Room.inMemoryDatabaseBuilder(context, AppDatabase::class.java).build()
+        roomCacheDataSource = RoomWorkersCacheDataSource(database.workersDao(), testInMapper, testOutMapper)
+    }
+
+    @After
+    @Throws(IOException::class)
+    fun closeDb() {
+        database.close()
     }
 
     @Test
-    suspend fun `test save and get list data`(): Unit = runBlocking {
+    fun test_save_and_get_list_data(): Unit = runBlocking {
         roomCacheDataSource.save(testModel)
         val expected = roomCacheDataSource.get()
 
         Assert.assertTrue(expected.workers.size == 2)
     }
 
-    @Test// Ожидать ошибку
-    suspend fun `test get empty list data`(): Unit = runBlocking {
-        // Пока непонятно, как оно работает, будет ли само выбрасывать ошибку?
-        // Если да, то ловим её в репозитории и выкидываем нашу NoCache
-        // Если нет, сразу нашу кидаем
+    @Test(expected = NoCacheException::class)
+    fun test_get_empty_list_data(): Unit = runBlocking {
         val expected = roomCacheDataSource.get()
 
-        Assert.assertTrue(expected.workers.size == 2)
+        Assert.assertTrue(expected.workers.isEmpty())
     }
 
 

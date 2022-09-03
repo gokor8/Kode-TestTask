@@ -1,11 +1,10 @@
 package com.example.kode.data.datasource.workers.cache.room
 
 import com.example.kode.data.datasource.workers.cache.WorkersCacheDataSource
-import com.example.kode.data.datasource.workers.cache.room.mappers.`in`.WorkersDataStateMapper
-import com.example.kode.data.datasource.workers.cache.room.mappers.out.LRoomToWorkersCacheDataStateMapper
+import com.example.kode.data.datasource.workers.cache.exceptions.NoCacheException
 import com.example.kode.data.datasource.workers.cache.room.models.RoomWorkerModel
-import com.example.kode.data.repository.workers.models.WorkersInfoStateDataModel
 import com.example.kode.domain.core.Base
+import java.io.IOException
 import javax.inject.Inject
 
 class RoomWorkersCacheDataSource<M : Base.IgnorantMapper<M>> @Inject constructor(
@@ -21,5 +20,9 @@ class RoomWorkersCacheDataSource<M : Base.IgnorantMapper<M>> @Inject constructor
     }
 
     override suspend fun get(): M =
-        workersDao.getWorkers().let(mapperOut::map)
+        workersDao.getWorkers().let {
+            if (it.isEmpty())
+                throw NoCacheException()
+            it
+        }.let(mapperOut::map)
 }

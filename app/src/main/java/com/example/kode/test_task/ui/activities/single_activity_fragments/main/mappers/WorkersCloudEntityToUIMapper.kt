@@ -7,12 +7,12 @@ import com.example.kode.test_task.ui.activities.single_activity_fragments.main.m
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.WorkerInfoUIModel
 import javax.inject.Inject
 
-class WorkerStateEntitySuccessToUIMapper @Inject constructor(
-    private val mapper : Base.Mapper<WorkerInfoEntity, WorkerInfoUIModel>
+class WorkersCloudEntityToUIMapper @Inject constructor(
+    private val mapper: Base.Mapper<WorkerInfoEntity, WorkerInfoUIModel>
 ) :
-    Base.Mapper<WorkersStateEntity.Success, MainStatesUI.Success> {
-    override fun map(model: WorkersStateEntity.Success): MainStatesUI.Success =
-        MainStatesUI.Success(
-            model.workers.map { it.map(mapper) }
-        )
+    Base.Mapper<WorkersStateEntity.Success, MainStatesUI.Success.Cloud> {
+
+    override fun map(model: WorkersStateEntity.Success) = MainStatesUI.Success.Cloud(
+        model.workers.map { it.map(mapper) }
+    )
 }

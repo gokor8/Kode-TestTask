@@ -7,37 +7,37 @@ import com.example.kode.test_task.ui.activities.single_activity_fragments.main.m
 import org.junit.Assert
 import org.junit.Test
 
-class TestWorkerStateEntitySuccessToUIMapper {
+class TestWorkersCacheEntityToUIMapper {
 
     @Test
     fun `test mapping`() {
         val workerInfoEntityToUIMapper = WorkerInfoEntityToUIMapper()
-        val mapper = WorkerStateEntitySuccessToUIMapper(workerInfoEntityToUIMapper)
+        val mapper = WorkersCacheEntityToUIMapper(workerInfoEntityToUIMapper)
 
-        val testDataModel = WorkersStateEntity.Success(
+        val testDataModel = WorkersStateEntity.NoConnection(
             listOf(
                 WorkerInfoEntity(
-                    "test",
-                    "test",
-                    "test",
-                    "test",
-                    "test"
+                    "avatar",
+                    "name",
+                    "lastName",
+                    "userTag",
+                    "position"
                 )
             )
         )
 
-        val actual = mapper.map(testDataModel)
-        val expected = MainStatesUI.Success(
+        val expected = MainStatesUI.Success.Cache(
             listOf(
                 WorkerInfoUIModel(
-                    "test",
-                    "test",
-                    "test",
-                    "test",
-                    "test"
+                    "avatar",
+                    "name",
+                    "lastName",
+                    "userTag",
+                    "position"
                 )
             )
         )
+        val actual = mapper.map(testDataModel)
 
         Assert.assertEquals(expected, actual)
     }

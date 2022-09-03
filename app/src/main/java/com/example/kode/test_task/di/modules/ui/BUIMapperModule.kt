@@ -17,16 +17,16 @@ interface BUIMapperModule {
             : Base.Mapper<WorkersStateEntity, MainStatesUI>
 
     @Binds
-    fun bindWorkerStateEntitySuccessToUIMapper(successToUIMapper: WorkerStateEntitySuccessToUIMapper)
-            : Base.Mapper<WorkersStateEntity.Success, MainStatesUI.Success>
+    fun bindWorkerStateEntitySuccessToUIMapper(successToUIMapper: WorkersCloudEntityToUIMapper)
+            : Base.Mapper<WorkersStateEntity.Success, MainStatesUI.Success.Cloud>
 
     @Binds
-    fun bindWorkerStateEntityNoConnectionToUIMapper(noConnectionMapper: WorkerStateEntityNoConnectionToUIMapper)
-            : Base.Mapper<WorkersStateEntity.NoConnection, MainStatesUI.NoConnection>
+    fun bindWorkersCacheEntityToUIMapper(noConnectionMapper: WorkersCacheEntityToUIMapper)
+            : Base.Mapper<WorkersStateEntity.NoConnection, MainStatesUI.Success.Cache>
 
     @Binds
-    fun bindWorkerStateEntityFailToUIMapper(failToUIMapper: WorkerStateEntityFailToUIMapper)
-            : Base.Mapper<WorkersStateEntity.Fail, MainStatesUI.Error>
+    fun bindWorkerStateEntityFailToUIMapper(failToUIMapper: WorkersFailEntityToUIMapper)
+            : Base.Mapper<WorkersStateEntity.Fail, MainStatesUI.Fail>
 
     @Binds
     fun bindWorkerInfoEntityToUIMapper(workerStateEntityFailToUIMapper: WorkerInfoEntityToUIMapper)

@@ -9,10 +9,8 @@ import com.example.kode.data.repository.workers.models.WorkersInfoStateDataModel
 import com.example.kode.domain.core.Base
 import com.example.kode.domain.entity.workers.WorkerInfoEntity
 import com.example.kode.domain.entity.workers.WorkersStateEntity
-import com.example.kode.test_task.ui.activities.single_activity_fragments.main.mappers.WorkerStateEntityNoConnectionToUIMapper
 import dagger.Binds
 import dagger.Module
-import dagger.Reusable
 
 @Module
 interface BMapperModule {

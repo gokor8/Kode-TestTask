@@ -7,13 +7,12 @@ import com.example.kode.test_task.ui.activities.single_activity_fragments.main.m
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.WorkerInfoUIModel
 import javax.inject.Inject
 
-class WorkerStateEntityNoConnectionToUIMapper @Inject constructor(
+class WorkersCacheEntityToUIMapper @Inject constructor(
     private val mapper: Base.Mapper<WorkerInfoEntity, WorkerInfoUIModel>
-) : Base.Mapper<WorkersStateEntity.NoConnection, MainStatesUI.NoConnection> {
+) : Base.Mapper<WorkersStateEntity.NoConnection, MainStatesUI.Success.Cache> {
 
-    override fun map(model: WorkersStateEntity.NoConnection): MainStatesUI.NoConnection =
-        MainStatesUI.NoConnection(
-            model.workers.map { it.map(mapper) }
-        )
+    override fun map(model: WorkersStateEntity.NoConnection) = MainStatesUI.Success.Cache(
+        model.workers.map { it.map(mapper) }
+    )
 
 }

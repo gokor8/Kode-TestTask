@@ -1,4 +1,4 @@
-package data.datasource.workers.cache.room
+package datasource.workers.cache.room
 
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert
