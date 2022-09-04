@@ -1,6 +1,7 @@
 package com.example.kode.test_task.ui.activities.single_activity_fragments.main.mappers
 
 import com.example.kode.domain.entity.workers.WorkerInfoEntity
+import com.example.kode.test_task.ui.activities.single_activity_fragments.main.mappers.entity_to_ui.WorkerInfoEntityToUIMapper
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.WorkerInfoUIModel
 import org.junit.Assert
 import org.junit.Test

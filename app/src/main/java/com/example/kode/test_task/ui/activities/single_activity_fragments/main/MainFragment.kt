@@ -4,17 +4,12 @@ import android.content.Context
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kode.domain.entity.workers.WorkersStateEntity
 import com.example.kode.test_task.App
-import com.example.kode.test_task.R
 import com.example.kode.test_task.databinding.FragmentMainBinding
 import com.example.kode.test_task.databinding.ItemMainBinding
-import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.MainStatesUI
-import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.WorkerInfoUIModel
+import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.*
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.recycler_view.MainViewHolder
 import com.example.kode.test_task.ui.core.BaseFragment
-import com.example.kode.test_task.ui.core.recycler_view.BaseDiffUtilCallback
 import com.example.kode.test_task.ui.core.recycler_view.BaseRecyclerViewAdapter
-import com.example.kode.test_task.ui.core.recycler_view.BaseViewHolderFactory
-import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
 
 class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel<MainStatesUI, *>>() {
@@ -40,28 +35,24 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel<MainStatesU
 
     override fun setObservers() {
         viewModel.observe(viewLifecycleOwner) {
-            // Надо придумать что делать с этим ужасом
             when (it) {
-                is MainStatesUI.Success -> {
-                    it.setWorkers(recyclerAdapter)
-
-                    if (it is MainStatesUI.Success.Cache)
-                        Snackbar.make(
-                            this.requireView(),
-                            resources.getString(R.string.no_connection),
-                            Snackbar.LENGTH_LONG
-                        ).show()
-                }
-                is MainStatesUI.Fail.UsualError -> {
-                    Snackbar.make(
-                        this.requireView(),
-                        resources.getString(it.errorId),
-                        Snackbar.LENGTH_LONG
-                    ).show()
-                }
-                is MainStatesUI.Fail.FatalError -> {
-                    binding.vfMain.showNext()
-                }
+                is MainStatesUI.Success.Cloud -> it.map(
+                    UISuccessModel(recyclerAdapter)
+                )
+                is MainStatesUI.Success.Cache -> it.map(
+                    UICacheSuccessModel(
+                        requireContext(),
+                        requireView(),
+                        recyclerAdapter
+                    )
+                )
+                is MainStatesUI.Fail.UsualError -> it.map(
+                    UIUsualErrorModel(
+                        requireContext(),
+                        requireView()
+                    )
+                )
+                is MainStatesUI.Fail.FatalError -> binding.vfMain.showNext()
             }
         }
     }
@@ -73,7 +64,11 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel<MainStatesU
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
-        (requireActivity().application as App).daggerAppComponent.inject(this)
+        (requireActivity().application as App)
+            .daggerAppComponent
+            .createMainFreagmentSubcomponent()
+            .create(context, binding)
+            .inject(this)
     }
 
     override fun onDetach() {

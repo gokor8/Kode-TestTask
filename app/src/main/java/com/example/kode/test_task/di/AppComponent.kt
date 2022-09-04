@@ -6,13 +6,14 @@ import com.example.kode.test_task.di.annotations.ApplicationContext
 import com.example.kode.test_task.di.modules.ui.recycler_views.BRecyclerViewModule
 import com.example.kode.test_task.di.modules.ui.recycler_views.UnitedRecyclerViewModule
 import com.example.kode.test_task.di.modules.ui.viewmodels.BViewModelModule
+import com.example.kode.test_task.di.subcomponents.MainFragmentSubcomponent
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.MainFragment
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [BViewModelModule::class, UnitedRecyclerViewModule::class])
+@Component(modules = [BViewModelModule::class])
 interface AppComponent {
 
     @Component.Factory
@@ -24,6 +25,5 @@ interface AppComponent {
         ): AppComponent
     }
 
-    fun inject(mainFragment: MainFragment)
-
+    fun createMainFreagmentSubcomponent(): MainFragmentSubcomponent.Factory
 }
