@@ -8,9 +8,8 @@ import com.example.kode.domain.core.Base
 
 @Entity(tableName = "workers")
 data class RoomWorkerModel(
-    @PrimaryKey(autoGenerate = true)
-    val roomId: Int = 0,
-    val id: String?,
+    @PrimaryKey
+    val id: String,
     val avatarUrl: String?,
     val name: String?,
     val lastName: String?,

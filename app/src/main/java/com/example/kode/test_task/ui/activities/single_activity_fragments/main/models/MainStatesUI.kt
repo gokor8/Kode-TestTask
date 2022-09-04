@@ -1,12 +1,11 @@
 package com.example.kode.test_task.ui.activities.single_activity_fragments.main.models
 
 import androidx.annotation.CallSuper
-import com.example.kode.domain.core.Save
 import com.example.kode.test_task.ui.core.recycler_view.BaseRecyclerViewAdapter
 
 sealed interface MainStatesUI {
 
-    sealed class Success(protected val workers: List<WorkerInfoUIModel>) : MainStatesUI, Save.Base<> {
+    sealed class Success(protected val workers: List<WorkerInfoUIModel>) : MainStatesUI{
 
         @CallSuper
         open fun setWorkers(adapter: BaseRecyclerViewAdapter<WorkerInfoUIModel, *, *>) {

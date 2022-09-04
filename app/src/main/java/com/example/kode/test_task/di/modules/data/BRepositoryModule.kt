@@ -4,8 +4,7 @@ import com.example.kode.data.repository.workers.WorkersRepositoryImpl
 import com.example.kode.data.repository.workers.models.WorkersInfoStateDataModel
 import com.example.kode.domain.entity.workers.WorkersStateEntity
 import com.example.kode.domain.repository.WorkersRepository
-import com.example.kode.test_task.di.modules.data.cache.BRealmCacheDataSourceModule
-import com.example.kode.test_task.di.modules.data.cache.BRoomCacheDataSourceModule
+import com.example.kode.test_task.di.modules.data.cache.room.BRoomCacheDataSourceModule
 import com.example.kode.test_task.di.modules.data.cloud.BCloudDataSourceModule
 import dagger.Binds
 import dagger.Module

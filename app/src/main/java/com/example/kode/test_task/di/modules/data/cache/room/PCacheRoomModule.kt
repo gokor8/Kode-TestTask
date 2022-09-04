@@ -1,4 +1,4 @@
-package com.example.kode.test_task.di.modules.data.cache
+package com.example.kode.test_task.di.modules.data.cache.room
 
 import android.content.Context
 import androidx.room.Room
@@ -18,7 +18,7 @@ class PCacheRoomModule {
         Room.databaseBuilder(
             context,
             AppDatabase::class.java, "kode"
-        ).build()
+        ).fallbackToDestructiveMigration().build()
 
     @Singleton
     @Provides

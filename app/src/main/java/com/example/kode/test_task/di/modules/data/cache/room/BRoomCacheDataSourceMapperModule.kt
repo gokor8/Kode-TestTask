@@ -1,4 +1,4 @@
-package com.example.kode.test_task.di.modules.data.cache
+package com.example.kode.test_task.di.modules.data.cache.room
 
 import com.example.kode.data.datasource.workers.cache.room.mappers.`in`.WorkerInfoDataModelToRoomMapper
 import com.example.kode.data.datasource.workers.cache.room.mappers.`in`.WorkersCloudDataModelToLRoomMapper

@@ -1,6 +1,7 @@
 package com.example.kode.test_task.di.annotations
 
-import javax.inject.Named
+import javax.inject.Qualifier
 
-@Named("ApplicationContext")
+@Qualifier
+@kotlin.annotation.Retention(AnnotationRetention.RUNTIME)
 annotation class ApplicationContext

@@ -1,4 +1,4 @@
-package com.example.kode.test_task.di.modules
+package com.example.kode.test_task.di.modules.domain
 
 import dagger.Module
 import dagger.Provides

@@ -1,4 +1,4 @@
-package com.example.kode.test_task.di.modules.ui
+package com.example.kode.test_task.di.modules.ui.mappers
 
 import com.example.kode.domain.core.Base
 import com.example.kode.domain.entity.workers.WorkerInfoEntity

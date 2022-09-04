@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 import com.example.kode.data.datasource.workers.cache.room.models.RoomWorkerModel
 import com.example.kode.data.datasource.workers.cache.room.WorkersDao
 
-@Database(entities = [RoomWorkerModel::class], version = 1)
+@Database(entities = [RoomWorkerModel::class], version = 2)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun workersDao(): WorkersDao
 }

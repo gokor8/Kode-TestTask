@@ -1,4 +1,4 @@
-package com.example.kode.test_task.di.modules.ui
+package com.example.kode.test_task.di.modules.ui.communications
 
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.communications.MainCommunication
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.MainStatesUI

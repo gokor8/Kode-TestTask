@@ -7,10 +7,9 @@ import javax.inject.Inject
 
 class RoomWorkersModelToDataMapper @Inject constructor() : Base.Mapper<RoomWorkerModel, WorkerInfoDataModel> {
 
-    // Можно тут сделать проверуу, если все null то выкидывать свою ошибку noCache
      override fun map(model: RoomWorkerModel): WorkerInfoDataModel = with(model) {
         WorkerInfoDataModel(
-            id ?: "",
+            id,
             avatarUrl ?: "",
             name ?: "",
             lastName ?: "",

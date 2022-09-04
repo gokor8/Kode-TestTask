@@ -23,20 +23,9 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel<MainStatesU
     lateinit var registrationViewModel: MainViewModel<MainStatesUI, WorkersStateEntity>
 
     @Inject
-    lateinit var holderFactory: BaseViewHolderFactory<ItemMainBinding, MainViewHolder>
-
-    private val diffUtils: BaseDiffUtilCallback<WorkerInfoUIModel> = BaseDiffUtilCallback()
-
-    private var recyclerAdapter: BaseRecyclerViewAdapter<WorkerInfoUIModel, ItemMainBinding, MainViewHolder>? =
-        null
+    lateinit var recyclerAdapter: BaseRecyclerViewAdapter<WorkerInfoUIModel, ItemMainBinding, MainViewHolder>
 
     override fun setUI() {
-
-        recyclerAdapter = BaseRecyclerViewAdapter(
-            holderFactory,
-            diffUtils
-        )
-
         binding.rvMain.adapter = recyclerAdapter
         binding.rvMain.layoutManager = LinearLayoutManager(context)
         viewModel.getWorkers()
@@ -51,9 +40,10 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel<MainStatesU
 
     override fun setObservers() {
         viewModel.observe(viewLifecycleOwner) {
+            // Надо придумать что делать с этим ужасом
             when (it) {
                 is MainStatesUI.Success -> {
-                    recyclerAdapter?.let(it::setWorkers)
+                    it.setWorkers(recyclerAdapter)
 
                     if (it is MainStatesUI.Success.Cache)
                         Snackbar.make(
@@ -86,9 +76,8 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel<MainStatesU
         (requireActivity().application as App).daggerAppComponent.inject(this)
     }
 
-    override fun onDestroy() {
-        recyclerAdapter = null
-        super.onDestroy()
+    override fun onDetach() {
+        super.onDetach()
     }
 
 }

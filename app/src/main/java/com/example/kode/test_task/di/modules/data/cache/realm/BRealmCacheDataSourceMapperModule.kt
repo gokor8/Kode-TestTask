@@ -1,4 +1,4 @@
-package com.example.kode.test_task.di.modules.data.cache
+package com.example.kode.test_task.di.modules.data.cache.realm
 
 import com.example.kode.data.datasource.workers.cache.realm.mappers.LRealmModelToWorkerInfoMapper
 import com.example.kode.data.datasource.workers.cache.realm.mappers.LWorkerInfoDataModelToRealmMapper
