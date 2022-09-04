@@ -17,7 +17,7 @@ class TestWorkersStateEntityToUIMapper {
     private val failMapper = WorkersFailEntityToUIMapper()
 
     @Test
-    fun `test success mapping`() {
+    fun `test success cloud mapping`() {
         val mapper = WorkersStateEntityToUIMapper(successMapper, noConnectionMapper, failMapper)
 
         val testData = WorkersStateEntity.Success(
@@ -32,7 +32,7 @@ class TestWorkersStateEntityToUIMapper {
             )
         )
 
-        val expected = MainStatesUI.Success(
+        val expected = MainStatesUI.Success.Cloud(
             listOf(
                 WorkerInfoUIModel(
                     "test",
@@ -64,7 +64,7 @@ class TestWorkersStateEntityToUIMapper {
             )
         )
 
-        val expected = MainStatesUI.NoConnection(
+        val expected = MainStatesUI.Success.Cache(
             listOf(
                 WorkerInfoUIModel(
                     "test",

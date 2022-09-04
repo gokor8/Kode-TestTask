@@ -2,11 +2,14 @@ package com.example.kode.test_task.ui.activities.single_activity_fragments.main
 
 import android.content.Context
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.kode.domain.core.Base
 import com.example.kode.domain.entity.workers.WorkersStateEntity
 import com.example.kode.test_task.App
 import com.example.kode.test_task.databinding.FragmentMainBinding
 import com.example.kode.test_task.databinding.ItemMainBinding
-import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.*
+import com.example.kode.test_task.ui.activities.single_activity_fragments.main.mappers.ui.UIStateMapper
+import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.MainStatesUI
+import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.WorkerInfoUIModel
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.recycler_view.MainViewHolder
 import com.example.kode.test_task.ui.core.BaseFragment
 import com.example.kode.test_task.ui.core.recycler_view.BaseRecyclerViewAdapter
@@ -14,11 +17,15 @@ import javax.inject.Inject
 
 class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel<MainStatesUI, *>>() {
 
+    // Сделать адекватное создание вью моделей через провайдер
     @Inject
     lateinit var registrationViewModel: MainViewModel<MainStatesUI, WorkersStateEntity>
 
     @Inject
     lateinit var recyclerAdapter: BaseRecyclerViewAdapter<WorkerInfoUIModel, ItemMainBinding, MainViewHolder>
+
+    @Inject
+    lateinit var uiStateMapper: Base.Mapper<MainStatesUI, Unit>
 
     override fun setUI() {
         binding.rvMain.adapter = recyclerAdapter
@@ -35,25 +42,7 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel<MainStatesU
 
     override fun setObservers() {
         viewModel.observe(viewLifecycleOwner) {
-            when (it) {
-                is MainStatesUI.Success.Cloud -> it.map(
-                    UISuccessModel(recyclerAdapter)
-                )
-                is MainStatesUI.Success.Cache -> it.map(
-                    UICacheSuccessModel(
-                        requireContext(),
-                        requireView(),
-                        recyclerAdapter
-                    )
-                )
-                is MainStatesUI.Fail.UsualError -> it.map(
-                    UIUsualErrorModel(
-                        requireContext(),
-                        requireView()
-                    )
-                )
-                is MainStatesUI.Fail.FatalError -> binding.vfMain.showNext()
-            }
+            uiStateMapper.map(it)
         }
     }
 
@@ -66,7 +55,7 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel<MainStatesU
 
         (requireActivity().application as App)
             .daggerAppComponent
-            .createMainFreagmentSubcomponent()
+            .createMainFragmentSubcomponent()
             .create(context, binding)
             .inject(this)
     }
