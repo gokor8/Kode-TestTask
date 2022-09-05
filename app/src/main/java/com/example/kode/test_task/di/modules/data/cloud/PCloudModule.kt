@@ -1,6 +1,9 @@
 package com.example.kode.test_task.di.modules.data.cloud
 
+import android.content.Context
+import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.example.kode.data.datasource.workers.cloud.api.WorkersApi
+import com.example.kode.test_task.di.annotations.ApplicationContext
 import dagger.Module
 import dagger.Provides
 import okhttp3.Interceptor
@@ -17,17 +20,25 @@ class PCloudModule {
         HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS)
 
     @Provides
+    fun provideChuckerInterceptor(@ApplicationContext context: Context): ChuckerInterceptor =
+        ChuckerInterceptor.Builder(context)
+            .build()
+
+    @Provides
     fun provideOkHttpClient(
-        interceptor: Interceptor
+        interceptor: Interceptor,
+        chuckerInterceptor: ChuckerInterceptor
     ): OkHttpClient = OkHttpClient.Builder()
         .addInterceptor(
             interceptor
+        ).addInterceptor(
+            chuckerInterceptor
         ).build()
 
     @Provides
     fun provideRetrofit(
         client: OkHttpClient,
-        converterFactory: GsonConverterFactory
+        converterFactory: GsonConverterFactory,
     ): Retrofit = Retrofit.Builder()
         .baseUrl("https://stoplight.io/mocks/kode-education/trainee-test/25143926/")
         .addConverterFactory(converterFactory)
