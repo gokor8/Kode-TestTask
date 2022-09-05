@@ -6,10 +6,9 @@ import com.example.kode.test_task.ui.activities.single_activity_fragments.main.m
 import javax.inject.Inject
 
 class WorkerInfoEntityToUIMapper @Inject constructor() : Base.Mapper<WorkerInfoEntity, WorkerInfoUIModel> {
-   var count = 0
     override fun map(model: WorkerInfoEntity): WorkerInfoUIModel = with(model) {
         WorkerInfoUIModel(
-            avatarUrl, name + ++count, lastName, userTag, position
+            avatarUrl, name, lastName, userTag, position
         )
     }
 }
