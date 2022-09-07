@@ -3,7 +3,7 @@ package com.example.kode.test_task.di.modules.data.cloud
 import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.example.kode.data.datasource.workers.cloud.api.WorkersApi
-import com.example.kode.test_task.BuildConfig
+import com.example.kode.data.BuildConfig
 import com.example.kode.test_task.di.annotations.ApplicationContext
 import dagger.Module
 import dagger.Provides
@@ -41,9 +41,7 @@ class PCloudModule {
         client: OkHttpClient,
         converterFactory: GsonConverterFactory,
     ): Retrofit = Retrofit.Builder()
-            //.baseUrl(com.example.kode.data.BuildConfig.)
-            // чуть позже уберу этот хардкод
-        .baseUrl("https://stoplight.io/mocks/kode-education/trainee-test/25143926/")
+        .baseUrl(BuildConfig.BASE_URL)
         .addConverterFactory(converterFactory)
         .client(client)
         .build()

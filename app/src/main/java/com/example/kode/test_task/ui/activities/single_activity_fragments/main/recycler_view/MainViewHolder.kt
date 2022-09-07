@@ -9,21 +9,27 @@ import com.example.kode.test_task.ui.core.recycler_view.BaseViewHolder
 class MainViewHolder(viewBinding: ItemMainBinding) :
     BaseViewHolder<WorkerInfoUIModel, ItemMainBinding>(viewBinding) {
 
-    override fun onBind(model: WorkerInfoUIModel) {
-        val context = viewBinding.root.context
+    override fun setUI(model: WorkerInfoUIModel) = with(viewBinding) {
+        val context = root.context
 
         Glide.with(context)
             .load(model.avatarUrl)
             .placeholder(R.drawable.ic_avatar_placeholder)
             .optionalCircleCrop()
-            .into(viewBinding.ivAvatar)
+            .into(ivAvatar)
 
-        viewBinding.tvCall.text = context.getString(
+        tvCall.text = context.getString(
             R.string.first_name_last_name,
             model.name,
             model.lastName
         )
-        viewBinding.tvJob.text = model.position
-        viewBinding.tvJobSymbols.text = model.userTag
+        tvJob.text = model.position
+        tvJobSymbols.text = model.userTag
+    }
+
+    override fun setListeners(model: WorkerInfoUIModel) {
+        viewBinding.clMain.setOnClickListener {
+
+        }
     }
 }

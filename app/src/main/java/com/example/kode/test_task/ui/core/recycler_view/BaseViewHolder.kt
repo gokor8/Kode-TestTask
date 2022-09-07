@@ -6,5 +6,12 @@ import androidx.viewbinding.ViewBinding
 abstract class BaseViewHolder<M : Any, VB : ViewBinding>(protected val viewBinding: VB) :
     RecyclerView.ViewHolder(viewBinding.root) {
 
-    abstract fun onBind(model: M)
+    open fun onBind(model: M) {
+        setUI(model)
+        setListeners(model)
+    }
+
+    protected abstract fun setUI(model: M)
+
+    protected abstract fun setListeners(model: M)
 }
