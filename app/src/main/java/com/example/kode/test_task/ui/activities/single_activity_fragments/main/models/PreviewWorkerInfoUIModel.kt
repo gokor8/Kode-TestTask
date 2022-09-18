@@ -2,7 +2,7 @@ package com.example.kode.test_task.ui.activities.single_activity_fragments.main.
 
 import com.example.kode.test_task.ui.core.recycler_view.BaseRecyclerViewModel
 
-data class WorkerInfoUIModel(
+data class PreviewWorkerInfoUIModel(
     val avatarUrl: String,
     val name: String,
     val lastName: String,

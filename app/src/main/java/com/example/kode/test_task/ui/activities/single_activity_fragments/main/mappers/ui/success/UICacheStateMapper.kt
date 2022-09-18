@@ -7,7 +7,7 @@ import com.example.kode.test_task.databinding.ItemMainBinding
 import com.example.kode.test_task.di.annotations.main_fragment.MainFragmentContext
 import com.example.kode.test_task.di.annotations.main_fragment.MainFragmentView
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.MainStatesUI
-import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.WorkerInfoUIModel
+import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.PreviewWorkerInfoUIModel
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.recycler_view.MainViewHolder
 import com.example.kode.test_task.ui.core.recycler_view.BaseRecyclerViewAdapter
 import com.google.android.material.snackbar.Snackbar
@@ -19,7 +19,7 @@ class UICacheStateMapper @Inject constructor(
     private val context: WeakReference<Context>,
     @MainFragmentView
     private val view: WeakReference<View>,
-    adapter: BaseRecyclerViewAdapter<WorkerInfoUIModel, ItemMainBinding, MainViewHolder>
+    adapter: BaseRecyclerViewAdapter<PreviewWorkerInfoUIModel, ItemMainBinding, MainViewHolder>
 ) : UISuccessMapper<MainStatesUI.Success.Cache>(adapter) {
 
     override fun map(model: MainStatesUI.Success.Cache) {

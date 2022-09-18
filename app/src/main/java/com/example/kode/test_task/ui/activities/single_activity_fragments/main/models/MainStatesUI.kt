@@ -4,15 +4,15 @@ import com.example.kode.domain.core.Base
 
 sealed interface MainStatesUI {
 
-    sealed class Success(val workers: List<WorkerInfoUIModel>) :
+    sealed class Success(val workers: List<PreviewWorkerInfoUIModel>) :
         MainStatesUI {
 
         class Cloud(
-            workers: List<WorkerInfoUIModel>,
+            workers: List<PreviewWorkerInfoUIModel>,
         ) : Success(workers)
 
         class Cache(
-            workers: List<WorkerInfoUIModel>,
+            workers: List<PreviewWorkerInfoUIModel>,
         ) : Success(workers)
     }
 

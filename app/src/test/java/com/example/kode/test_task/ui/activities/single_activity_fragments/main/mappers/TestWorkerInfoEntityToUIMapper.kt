@@ -2,7 +2,7 @@ package com.example.kode.test_task.ui.activities.single_activity_fragments.main.
 
 import com.example.kode.domain.entity.workers.WorkerInfoEntity
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.mappers.entity_to_ui.WorkerInfoEntityToUIMapper
-import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.WorkerInfoUIModel
+import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.PreviewWorkerInfoUIModel
 import org.junit.Assert
 import org.junit.Test
 
@@ -21,7 +21,7 @@ class TestWorkerInfoEntityToUIMapper {
         )
 
         val actual = mapper.map(testData)
-        val expected = WorkerInfoUIModel(
+        val expected = PreviewWorkerInfoUIModel(
             "test",
             "test",
             "test",

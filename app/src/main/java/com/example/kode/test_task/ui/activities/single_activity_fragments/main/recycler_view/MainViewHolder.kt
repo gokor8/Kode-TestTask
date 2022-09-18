@@ -3,13 +3,13 @@ package com.example.kode.test_task.ui.activities.single_activity_fragments.main.
 import com.bumptech.glide.Glide
 import com.example.kode.test_task.R
 import com.example.kode.test_task.databinding.ItemMainBinding
-import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.WorkerInfoUIModel
+import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.PreviewWorkerInfoUIModel
 import com.example.kode.test_task.ui.core.recycler_view.BaseViewHolder
 
 class MainViewHolder(viewBinding: ItemMainBinding) :
-    BaseViewHolder<WorkerInfoUIModel, ItemMainBinding>(viewBinding) {
+    BaseViewHolder<PreviewWorkerInfoUIModel, ItemMainBinding>(viewBinding) {
 
-    override fun setUI(model: WorkerInfoUIModel) = with(viewBinding) {
+    override fun setUI(model: PreviewWorkerInfoUIModel) = with(viewBinding) {
         val context = root.context
 
         Glide.with(context)
@@ -27,7 +27,7 @@ class MainViewHolder(viewBinding: ItemMainBinding) :
         tvJobSymbols.text = model.userTag
     }
 
-    override fun setListeners(model: WorkerInfoUIModel) {
+    override fun setListeners(model: PreviewWorkerInfoUIModel) {
         viewBinding.clMain.setOnClickListener {
 
         }

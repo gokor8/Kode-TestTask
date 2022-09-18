@@ -14,7 +14,6 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel<*>> : Fragment(
     BaseInterfaceView<VB, VM> {
 
     val binding: VB by lazy { setBind() }
-    val viewModel: VM by lazy { setViewModel() }
 
     @CallSuper
     override fun onCreateView(
@@ -30,5 +29,5 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel<*>> : Fragment(
         setListeners()
     }
 
-    fun getApp(): App = (requireActivity().applicationContext as App)
+    fun getApp() = (requireActivity().applicationContext as App)
 }

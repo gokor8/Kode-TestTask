@@ -5,7 +5,7 @@ import com.example.kode.domain.entity.workers.WorkerInfoEntity
 import com.example.kode.domain.entity.workers.WorkersStateEntity
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.mappers.entity_to_ui.*
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.MainStatesUI
-import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.WorkerInfoUIModel
+import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.PreviewWorkerInfoUIModel
 import org.junit.Assert
 import org.junit.Test
 
@@ -34,7 +34,7 @@ class TestWorkersStateEntityToUIMapper {
 
         val expected = MainStatesUI.Success.Cloud(
             listOf(
-                WorkerInfoUIModel(
+                PreviewWorkerInfoUIModel(
                     "test",
                     "test",
                     "test",
@@ -66,7 +66,7 @@ class TestWorkersStateEntityToUIMapper {
 
         val expected = MainStatesUI.Success.Cache(
             listOf(
-                WorkerInfoUIModel(
+                PreviewWorkerInfoUIModel(
                     "test",
                     "test",
                     "test",

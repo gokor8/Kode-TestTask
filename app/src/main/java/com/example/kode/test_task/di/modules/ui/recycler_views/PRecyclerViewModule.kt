@@ -2,7 +2,7 @@ package com.example.kode.test_task.di.modules.ui.recycler_views
 
 import com.example.kode.test_task.databinding.ItemMainBinding
 import com.example.kode.test_task.di.subcomponents.MainFragmentScope
-import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.WorkerInfoUIModel
+import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.PreviewWorkerInfoUIModel
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.recycler_view.MainViewHolder
 import com.example.kode.test_task.ui.core.recycler_view.BaseDiffUtilCallback
 import com.example.kode.test_task.ui.core.recycler_view.BaseRecyclerViewAdapter
@@ -17,8 +17,8 @@ class PRecyclerViewModule {
     @Provides
     fun provideBaseRecyclerViewAdapter(
         viewHolder: BaseViewHolderFactory<ItemMainBinding, MainViewHolder>,
-        diffUtils: BaseDiffUtilCallback<WorkerInfoUIModel>
-    ): BaseRecyclerViewAdapter<WorkerInfoUIModel, ItemMainBinding, MainViewHolder> =
+        diffUtils: BaseDiffUtilCallback<PreviewWorkerInfoUIModel>
+    ): BaseRecyclerViewAdapter<PreviewWorkerInfoUIModel, ItemMainBinding, MainViewHolder> =
         BaseRecyclerViewAdapter(
             viewHolder,
             diffUtils

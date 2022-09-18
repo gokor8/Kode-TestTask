@@ -4,6 +4,7 @@ import androidx.viewbinding.ViewBinding
 
 interface BaseInterfaceView<VB : ViewBinding, VM : BaseViewModel<*>> : BaseView {
 
+    val viewModel: VM
+
     fun setBind(): VB
-    fun setViewModel() : VM
 }

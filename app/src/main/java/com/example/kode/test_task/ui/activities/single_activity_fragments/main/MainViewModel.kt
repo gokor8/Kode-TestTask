@@ -16,6 +16,7 @@ class MainViewModel<M : Any, EM : UseCaseModel<EM>> @Inject constructor(
 ) : BaseViewModel<M>(communication) {
 
     fun getWorkers() = viewModelScope.launch {
-        useCase.get().map(mapper).let(communication::save)
+        if(!communication.hasState())
+            useCase.get().map(mapper).let(communication::save)
     }
 }

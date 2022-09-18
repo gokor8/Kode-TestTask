@@ -5,7 +5,7 @@ import com.example.kode.domain.entity.workers.WorkersStateEntity
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.mappers.entity_to_ui.WorkerInfoEntityToUIMapper
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.mappers.entity_to_ui.WorkersCacheEntityToUIMapper
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.MainStatesUI
-import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.WorkerInfoUIModel
+import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.PreviewWorkerInfoUIModel
 import org.junit.Assert
 import org.junit.Test
 
@@ -30,7 +30,7 @@ class TestWorkersCacheEntityToUIMapper {
 
         val expected = MainStatesUI.Success.Cache(
             listOf(
-                WorkerInfoUIModel(
+                PreviewWorkerInfoUIModel(
                     "avatar",
                     "name",
                     "lastName",

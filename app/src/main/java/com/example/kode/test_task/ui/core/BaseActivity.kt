@@ -13,7 +13,6 @@ abstract class BaseActivity<VB : ViewBinding, VM : BaseViewModel<*>> : AppCompat
     BaseInterfaceView<VB, VM> {
 
     val binding: VB by lazy { setBind() }
-    val viewModel: VM by lazy { setViewModel() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

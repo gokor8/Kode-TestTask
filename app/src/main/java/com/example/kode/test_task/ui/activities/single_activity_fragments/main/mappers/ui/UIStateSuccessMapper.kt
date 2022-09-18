@@ -3,7 +3,6 @@ package com.example.kode.test_task.ui.activities.single_activity_fragments.main.
 import com.example.kode.domain.core.Base
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.mappers.ui.success.UISuccessMapper
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.MainStatesUI
-import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.WorkerInfoUIModel
 import javax.inject.Inject
 
 class UIStateSuccessMapper @Inject constructor(
