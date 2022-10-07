@@ -10,7 +10,7 @@ interface BaseViewModelFactory<VM : BaseViewModel<*>> : ViewModelProvider.Factor
     fun createViewModel(): VM
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return if (modelClass.isAssignableFrom(modelClass)) {
+        return if (this.modelClass.isAssignableFrom(modelClass)) {
             createViewModel() as T
         } else {
             throw IllegalArgumentException("ViewModel Not Found")
