@@ -10,7 +10,7 @@ sealed class UseCaseSuspend<R : UseCaseModel<R>>(
     protected val failMapper: Base.Mapper<Exception, R>
 ) {
 
-    // Можно было бы юзануть coroutineExceptionHandler, но мне больше нравится использовать подходи с try{}catch
+    // Можно было бы юзануть coroutineExceptionHandler, но мне больше нравится использовать подход с try{}catch
 
     abstract class UseCaseWithInput<I : Any, R : UseCaseModel<R>>(
         coroutineContext: CoroutineContext,

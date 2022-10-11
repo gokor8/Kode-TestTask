@@ -9,5 +9,13 @@
         android:id="@+id/mainFragment"
         android:name="com.example.kode.test_task.ui.activities.single_activity_fragments.main.MainFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_main" />
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/actionOpenWorkerFragment"
+            app:destination="@id/workerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/workerFragment"
+        android:name="com.example.kode.test_task.ui.activities.single_activity_fragments.worker.WorkerFragment"
+        android:label="WorkerFragment" />
 </navigation>

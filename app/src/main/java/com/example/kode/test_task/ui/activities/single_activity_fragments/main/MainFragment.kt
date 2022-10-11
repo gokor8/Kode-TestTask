@@ -24,7 +24,7 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel<MainStatesU
     lateinit var uiStateMapper: Base.Mapper<MainStatesUI, Unit>
 
     @Inject
-    lateinit var viewModelFactory: MainViewModelFactory<MainStatesUI, WorkersStateEntity>
+    lateinit var viewModelFactory: MainViewModelFactory<MainStatesUI>
 
     override val viewModel: MainViewModel<MainStatesUI, *> by viewModels { viewModelFactory }
 

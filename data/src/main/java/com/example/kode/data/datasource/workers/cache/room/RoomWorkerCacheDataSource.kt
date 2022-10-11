@@ -12,6 +12,6 @@ class RoomWorkerCacheDataSource<M> @Inject constructor(
 
     override suspend fun get(equalsAttribute: String): M =
         workersDao.getWorker(equalsAttribute)?.map(mapperOut)
-            ?: throw IOException("there is'nt user")
+            ?: throw IOException("there isnt user")
         // Вынести в кастомный класс ошибки
 }

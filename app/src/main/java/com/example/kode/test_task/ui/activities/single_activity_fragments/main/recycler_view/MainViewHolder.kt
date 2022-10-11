@@ -1,5 +1,7 @@
 package com.example.kode.test_task.ui.activities.single_activity_fragments.main.recycler_view
 
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.example.kode.test_task.R
 import com.example.kode.test_task.databinding.ItemMainBinding
@@ -18,7 +20,7 @@ class MainViewHolder(viewBinding: ItemMainBinding) :
             .optionalCircleCrop()
             .into(ivAvatar)
 
-        tvCall.text = context.getString(
+        tvFullName.text = context.getString(
             R.string.first_name_last_name,
             model.name,
             model.lastName
@@ -29,7 +31,7 @@ class MainViewHolder(viewBinding: ItemMainBinding) :
 
     override fun setListeners(model: PreviewWorkerInfoUIModel) {
         viewBinding.clMain.setOnClickListener {
-
+            viewBinding.root.findNavController().navigate(R.id.actionOpenWorkerFragment)
         }
     }
 }
