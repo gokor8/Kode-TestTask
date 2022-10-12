@@ -18,6 +18,6 @@ class WorkerFragment : BaseFragment<ItemMainBinding, WorkerViewModel<WorkerState
     override fun setBind(): ItemMainBinding = ItemMainBinding.inflate(layoutInflater)
 
     override fun setUI() {
-        viewModel.getWorker()
+        viewModel.getWorker(arguments?.getString("userId") ?: "")
     }
 }
