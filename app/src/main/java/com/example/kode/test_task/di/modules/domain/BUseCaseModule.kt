@@ -1,5 +1,6 @@
 package com.example.kode.test_task.di.modules.domain
 
+import com.example.kode.domain.core.usecase.UseCaseSuspend
 import com.example.kode.domain.entity.worker.WorkerInputEntity
 import com.example.kode.domain.entity.workers.WorkerInfoEntity
 import com.example.kode.domain.entity.workers.WorkersStateEntity
@@ -18,4 +19,5 @@ interface BUseCaseModule {
 
     @Binds
     fun bindGetWorkerUseCase(useCase: GetWorkerUseCase<WorkerInputEntity, WorkerInfoEntity>)
+            : UseCaseSuspend.UseCaseWithInput<WorkerInputEntity, WorkerInfoEntity>
 }

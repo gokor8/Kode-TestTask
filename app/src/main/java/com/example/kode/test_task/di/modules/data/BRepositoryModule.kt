@@ -2,8 +2,10 @@ package com.example.kode.test_task.di.modules.data
 
 import com.example.kode.data.repository.worker.WorkerRepositoryImpl
 import com.example.kode.data.repository.workers.WorkersRepositoryImpl
+import com.example.kode.data.repository.workers.models.WorkerInfoDataModel
 import com.example.kode.data.repository.workers.models.WorkersInfoStateDataModel
 import com.example.kode.domain.entity.worker.WorkerInputEntity
+import com.example.kode.domain.entity.workers.WorkerInfoEntity
 import com.example.kode.domain.entity.workers.WorkersStateEntity
 import com.example.kode.domain.repository.WorkerRepository
 import com.example.kode.domain.repository.WorkersRepository
@@ -24,6 +26,6 @@ interface BRepositoryModule {
 
     @Binds
     fun bindWorkerRepository(
-        repositoryImpl: WorkerRepositoryImpl<WorkerInputEntity, WorkerInfodAta, WorkersStateEntity>
-    ): WorkerRepository<WorkerInputEntity, WorkersStateEntity>
+        repositoryImpl: WorkerRepositoryImpl<WorkerInputEntity, WorkerInfoDataModel, WorkerInfoEntity>
+    ): WorkerRepository<WorkerInputEntity, WorkerInfoEntity>
 }

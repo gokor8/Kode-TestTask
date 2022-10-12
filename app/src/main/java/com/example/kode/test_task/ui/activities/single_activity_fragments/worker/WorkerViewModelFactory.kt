@@ -2,8 +2,10 @@ package com.example.kode.test_task.ui.activities.single_activity_fragments.worke
 
 import com.example.kode.test_task.ui.core.BaseViewModelFactory
 import javax.inject.Inject
+import javax.inject.Named
 
 class WorkerViewModelFactory<M : Any> @Inject constructor(
+    @Named("Aboba")
     private val viewModel: WorkerViewModel<M, *, *>
 ) : BaseViewModelFactory<WorkerViewModel<*, *, *>> {
 
