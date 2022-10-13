@@ -10,7 +10,6 @@
         android:name="com.example.kode.test_task.ui.activities.single_activity_fragments.main.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" >
-        <argument android:name="userId" app:argType="string" />
         <action
             android:id="@+id/actionOpenWorkerFragment"
             app:destination="@id/workerFragment" />
@@ -18,5 +17,7 @@
     <fragment
         android:id="@+id/workerFragment"
         android:name="com.example.kode.test_task.ui.activities.single_activity_fragments.worker.WorkerFragment"
-        android:label="WorkerFragment" />
+        android:label="WorkerFragment" >
+    <argument android:name="userId" app:argType="string" />
+    </fragment>
 </navigation>

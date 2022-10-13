@@ -1,5 +1,6 @@
 package com.example.kode.test_task.ui.activities.single_activity_fragments.main.recycler_view
 
+import androidx.core.os.bundleOf
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
@@ -31,7 +32,7 @@ class MainViewHolder(viewBinding: ItemMainBinding) :
 
     override fun setListeners(model: PreviewWorkerInfoUIModel) {
         viewBinding.clMain.setOnClickListener {
-            viewBinding.root.findNavController().navigate(R.id.actionOpenWorkerFragment)
+            viewBinding.root.findNavController().navigate(R.id.actionOpenWorkerFragment, bundleOf("userId" to model.userTag))
         }
     }
 }
