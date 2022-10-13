@@ -5,7 +5,7 @@ import com.example.kode.domain.core.Base
 import com.example.kode.domain.entity.worker.WorkerInputEntity
 import javax.inject.Inject
 
-class WorkerUseCaseToDataSourceModelMapper @Inject constructor() :
+class WorkerInputEntityToInputDataModelMapper @Inject constructor() :
     Base.Mapper<WorkerInputEntity, WorkerInputDataModel> {
     override fun map(model: WorkerInputEntity) = WorkerInputDataModel(model.id)
 }

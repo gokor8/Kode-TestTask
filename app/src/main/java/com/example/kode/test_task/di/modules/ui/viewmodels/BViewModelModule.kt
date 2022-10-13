@@ -1,7 +1,7 @@
 package com.example.kode.test_task.di.modules.ui.viewmodels
 
+import com.example.kode.domain.entity.worker.WorkerFullStateEntity
 import com.example.kode.domain.entity.worker.WorkerInputEntity
-import com.example.kode.domain.entity.workers.WorkerInfoEntity
 import com.example.kode.domain.entity.workers.WorkersStateEntity
 import com.example.kode.test_task.di.modules.domain.BUseCaseModule
 import com.example.kode.test_task.di.modules.ui.communications.BCommunicationModule
@@ -21,6 +21,6 @@ interface BViewModelModule {
             : MainViewModel<MainStatesUI, *>
 
     @Binds
-    fun bindWorkerViewModel(workerViewModel: WorkerViewModel<WorkerStatesUI, WorkerInputEntity, WorkerInfoEntity>)
+    fun bindWorkerViewModel(workerViewModel: WorkerViewModel<WorkerStatesUI, WorkerInputEntity, WorkerFullStateEntity>)
             : WorkerViewModel<WorkerStatesUI, *, *>
 }

@@ -7,12 +7,11 @@ import com.example.kode.domain.entity.workers.WorkersStateEntity
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.mappers.entity_to_ui.*
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.MainStatesUI
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.PreviewWorkerInfoUIModel
-import com.example.kode.test_task.ui.activities.single_activity_fragments.worker.mappers.UIToDomainMapper
-import com.example.kode.test_task.ui.activities.single_activity_fragments.worker.mappers.WorkerInfoToWorkerUI
+import com.example.kode.test_task.ui.activities.single_activity_fragments.worker.mappers.WorkerUIToDomainMapper
+import com.example.kode.test_task.ui.activities.single_activity_fragments.worker.mappers.entity_to_ui.WorkerFullInfoStateTUIMapper
 import com.example.kode.test_task.ui.activities.single_activity_fragments.worker.models.WorkerStatesUI
 import dagger.Binds
 import dagger.Module
-import javax.inject.Named
 
 @Module
 interface BUIMapperModule {
@@ -38,9 +37,9 @@ interface BUIMapperModule {
             : Base.Mapper<WorkerInfoEntity, PreviewWorkerInfoUIModel>
 
     @Binds
-    fun bindUIToDomainMapper(UIToDomainMapper: UIToDomainMapper): Base.Mapper<WorkerInputEntity, WorkerInputEntity>
+    fun bindWorkerUIToDomainMapper(workerUIToDomainMapper: WorkerUIToDomainMapper) : Base.Mapper<String, WorkerInputEntity>
 
-    @Named("Aboba")
     @Binds
-    fun bindUIkasfjafj(workerInfoToWorkerUI: WorkerInfoToWorkerUI): Base.Mapper<WorkerInfoEntity, WorkerStatesUI>
+    fun bindWorkerFullInfoStateToUIMapper(workerFullInfoStateToUIMapper: WorkerFullInfoStateTUIMapper): Base.Mapper<WorkerInfoEntity, WorkerStatesUI>
+
 }

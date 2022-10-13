@@ -1,6 +1,7 @@
 package com.example.kode.test_task.di.modules.ui.mappers
 
 import com.example.kode.domain.core.Base
+import com.example.kode.domain.entity.worker.WorkerFullStateEntity
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.mappers.ui.UIStateFailMapper
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.mappers.ui.UIStateMapper
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.mappers.ui.UIStateSuccessMapper
@@ -10,11 +11,19 @@ import com.example.kode.test_task.ui.activities.single_activity_fragments.main.m
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.mappers.ui.success.UICloudStateMapper
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.mappers.ui.success.UISuccessMapper
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.MainStatesUI
+import com.example.kode.test_task.ui.activities.single_activity_fragments.worker.mappers.entity_to_ui.WorkerFailEntityToUIMapper
+import com.example.kode.test_task.ui.activities.single_activity_fragments.worker.mappers.entity_to_ui.WorkerFullInfoStateTUIMapper
+import com.example.kode.test_task.ui.activities.single_activity_fragments.worker.mappers.entity_to_ui.WorkerSuccessEntityToUIMapper
+import com.example.kode.test_task.ui.activities.single_activity_fragments.worker.models.WorkerStatesUI
 import dagger.Binds
 import dagger.Module
 
 @Module
 interface BUIStateMapperModule {
+
+    /**
+     * Workers
+     */
 
     @Binds
     fun bindUIStateMapper(
@@ -44,4 +53,20 @@ interface BUIStateMapperModule {
     @Binds
     fun bindUIUsualErrorStateMapper(uIUsualErrorStateMapper: UIUsualErrorStateMapper)
             : Base.Mapper<MainStatesUI.Fail.UsualError, Unit>
+
+    /**
+     * Worker
+     */
+
+    @Binds
+    fun bindWorkerUIStateMapper(workerFullInfoStateTUIMapper: WorkerFullInfoStateTUIMapper)
+            : Base.Mapper<WorkerFullStateEntity, WorkerStatesUI>
+
+    @Binds
+    fun bindWorkerSuccessEntityToUIMapper(workerSuccessEntityToUIMapper: WorkerSuccessEntityToUIMapper)
+            : Base.Mapper<WorkerFullStateEntity.Success, WorkerStatesUI.Success>
+
+    @Binds
+    fun bindWorkerFailEntityToUIMapper(workerFailEntityToUIMapper: WorkerFailEntityToUIMapper)
+            : Base.Mapper<WorkerFullStateEntity.Fail, WorkerStatesUI.Fail>
 }

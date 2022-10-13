@@ -2,7 +2,6 @@ package data.repository.workers.mappers
 
 import com.example.kode.data.repository.workers.mappers.WorkerInfoDataModelToDomainMapper
 import com.example.kode.data.repository.workers.mappers.WorkersStateDataCloudToEntityMapper
-import com.example.kode.data.repository.workers.mappers.WorkersStateDataToEntityMapper
 import com.example.kode.data.repository.workers.models.WorkerInfoDataModel
 import com.example.kode.data.repository.workers.models.WorkersInfoStateDataModel
 import com.example.kode.domain.entity.workers.WorkerInfoEntity

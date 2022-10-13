@@ -1,11 +1,14 @@
 package com.example.kode.test_task.di.modules.data.cache.room
 
 import com.example.kode.data.datasource.workers.cache.room.mappers.`in`.WorkerInfoDataModelToRoomMapper
+import com.example.kode.data.datasource.workers.cache.room.mappers.`in`.WorkerInputDataModelToRoomFindWorkerMapper
 import com.example.kode.data.datasource.workers.cache.room.mappers.`in`.WorkersCloudDataModelToLRoomMapper
 import com.example.kode.data.datasource.workers.cache.room.mappers.`in`.WorkersDataStateMapper
 import com.example.kode.data.datasource.workers.cache.room.mappers.out.LRoomToWorkersCacheDataStateMapper
 import com.example.kode.data.datasource.workers.cache.room.mappers.out.RoomWorkersModelToDataMapper
+import com.example.kode.data.datasource.workers.cache.room.models.RoomFindWorkerModel
 import com.example.kode.data.datasource.workers.cache.room.models.RoomWorkerModel
+import com.example.kode.data.repository.worker.models.WorkerInputDataModel
 import com.example.kode.data.repository.workers.models.WorkerInfoDataModel
 import com.example.kode.data.repository.workers.models.WorkersInfoStateDataModel
 import com.example.kode.domain.core.Base
@@ -34,4 +37,11 @@ interface BRoomCacheDataSourceMapperModule {
     @Binds
     fun bindRoomWorkersModelToDataMapper(roomWorkersModelToDataMapper: RoomWorkersModelToDataMapper)
             : Base.Mapper<RoomWorkerModel, WorkerInfoDataModel>
+
+    /**
+     * Worker
+     */
+    @Binds
+    fun bindWorkerInputDataModelToRoomFindWorkerMapper(mapper: WorkerInputDataModelToRoomFindWorkerMapper)
+            : Base.Mapper<WorkerInputDataModel, RoomFindWorkerModel>
 }

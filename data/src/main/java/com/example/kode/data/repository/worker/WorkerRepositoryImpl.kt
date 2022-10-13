@@ -7,11 +7,16 @@ import com.example.kode.domain.core.usecase.UseCaseModel
 import com.example.kode.domain.repository.WorkerRepository
 import javax.inject.Inject
 
-class WorkerRepositoryImpl<IM : UseCaseModel<IM>, MR : DataSourceModel<MR>, M : UseCaseModel<M>>
+class WorkerRepositoryImpl<
+        IUM : UseCaseModel<IUM>, IDM : DataSourceModel<IDM>,
+        RDM : DataSourceModel<RDM>, RUM : UseCaseModel<RUM>,
+        >
 @Inject constructor(
-    private val workerCacheDataSource: WorkerCacheDataSource<IM, MR>,
-    private val mapper: Base.Mapper<MR, M>,
-) : WorkerRepository<IM, M> {
+    private val workerCacheDataSource: WorkerCacheDataSource<IDM, RDM>,
+    private val mapperIn: Base.Mapper<IUM, IDM>,
+    private val mapper: Base.Mapper<RDM, RUM>,
+) : WorkerRepository<IUM, RUM> {
 
-    override suspend fun getWorker(model: IM): M = workerCacheDataSource.get(model).map(mapper)
+    override suspend fun getWorker(model: IUM): RUM =
+        workerCacheDataSource.get(model.map(mapperIn)).map(mapper)
 }
