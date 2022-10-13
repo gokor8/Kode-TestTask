@@ -44,4 +44,5 @@ interface BRoomCacheDataSourceMapperModule {
     @Binds
     fun bindWorkerInputDataModelToRoomFindWorkerMapper(mapper: WorkerInputDataModelToRoomFindWorkerMapper)
             : Base.Mapper<WorkerInputDataModel, RoomFindWorkerModel>
+
 }

@@ -37,6 +37,10 @@ interface BMapperModule {
             : Base.Mapper<WorkerInputEntity, WorkerInputDataModel>
 
     @Binds
+    fun bindWorkerInfoDataModelToDomainMapper(mapper: WorkerInfoDataModelToDomainMapper)
+            : Base.Mapper<WorkerInfoDataModel, WorkerInfoEntity>
+
+    @Binds
     fun bindWorkerInfoDataToFullDomainMapper(mapper: WorkerInfoDataToFullDomainMapper)
             : Base.Mapper<WorkerInfoDataModel, WorkerFullStateEntity>
 }

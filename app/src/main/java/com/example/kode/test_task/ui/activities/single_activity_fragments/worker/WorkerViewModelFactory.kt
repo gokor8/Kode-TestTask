@@ -5,7 +5,6 @@ import javax.inject.Inject
 import javax.inject.Named
 
 class WorkerViewModelFactory<M : Any> @Inject constructor(
-    @Named("Aboba")
     private val viewModel: WorkerViewModel<M, *, *>
 ) : BaseViewModelFactory<WorkerViewModel<*, *, *>> {
 

@@ -1,6 +1,7 @@
 package com.example.kode.test_task.di.modules.ui.mappers
 
 import com.example.kode.domain.core.Base
+import com.example.kode.domain.entity.worker.WorkerFullStateEntity
 import com.example.kode.domain.entity.worker.WorkerInputEntity
 import com.example.kode.domain.entity.workers.WorkerInfoEntity
 import com.example.kode.domain.entity.workers.WorkersStateEntity
@@ -37,9 +38,10 @@ interface BUIMapperModule {
             : Base.Mapper<WorkerInfoEntity, PreviewWorkerInfoUIModel>
 
     @Binds
-    fun bindWorkerUIToDomainMapper(workerUIToDomainMapper: WorkerUIToDomainMapper) : Base.Mapper<String, WorkerInputEntity>
+    fun bindWorkerUIToDomainMapper(workerUIToDomainMapper: WorkerUIToDomainMapper): Base.Mapper<String, WorkerInputEntity>
 
     @Binds
-    fun bindWorkerFullInfoStateToUIMapper(workerFullInfoStateToUIMapper: WorkerFullInfoStateTUIMapper): Base.Mapper<WorkerInfoEntity, WorkerStatesUI>
+    fun bindWorkerFullInfoStateToUIMapper(workerFullInfoStateToUIMapper: WorkerFullInfoStateTUIMapper)
+            : Base.Mapper<WorkerFullStateEntity, WorkerStatesUI>
 
 }
