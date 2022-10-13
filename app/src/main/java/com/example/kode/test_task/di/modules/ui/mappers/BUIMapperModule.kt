@@ -9,7 +9,9 @@ import com.example.kode.test_task.ui.activities.single_activity_fragments.main.m
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.MainStatesUI
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.PreviewWorkerInfoUIModel
 import com.example.kode.test_task.ui.activities.single_activity_fragments.worker.mappers.WorkerUIToDomainMapper
+import com.example.kode.test_task.ui.activities.single_activity_fragments.worker.mappers.entity_to_ui.WorkerFailEntityToUIMapper
 import com.example.kode.test_task.ui.activities.single_activity_fragments.worker.mappers.entity_to_ui.WorkerFullInfoStateTUIMapper
+import com.example.kode.test_task.ui.activities.single_activity_fragments.worker.mappers.entity_to_ui.WorkerSuccessEntityToUIMapper
 import com.example.kode.test_task.ui.activities.single_activity_fragments.worker.models.WorkerStatesUI
 import dagger.Binds
 import dagger.Module
@@ -44,4 +46,11 @@ interface BUIMapperModule {
     fun bindWorkerFullInfoStateToUIMapper(workerFullInfoStateToUIMapper: WorkerFullInfoStateTUIMapper)
             : Base.Mapper<WorkerFullStateEntity, WorkerStatesUI>
 
+    @Binds
+    fun bindWorkerFailEntityToUIMapper(workerFullInfoStateToUIMapper: WorkerFailEntityToUIMapper)
+            : Base.Mapper<WorkerFullStateEntity.Fail, WorkerStatesUI.Fail>
+
+    @Binds
+    fun bindWorkerSuccessEntityToUIMapper(workerFullInfoStateToUIMapper: WorkerSuccessEntityToUIMapper)
+            : Base.Mapper<WorkerFullStateEntity.Success, WorkerStatesUI.Success>
 }

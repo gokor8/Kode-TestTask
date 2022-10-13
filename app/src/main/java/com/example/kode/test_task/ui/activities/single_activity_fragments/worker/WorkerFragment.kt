@@ -1,5 +1,6 @@
 package com.example.kode.test_task.ui.activities.single_activity_fragments.worker
 
+import android.content.Context
 import android.util.Log
 import androidx.fragment.app.viewModels
 import com.example.kode.test_task.databinding.ItemMainBinding
@@ -24,5 +25,11 @@ class WorkerFragment : BaseFragment<ItemMainBinding, WorkerViewModel<WorkerState
         viewModel.observe(viewLifecycleOwner) {
             Log.d("Aboba", it.toString())
         }
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        getApp().daggerAppComponent.inject(this)
     }
 }
