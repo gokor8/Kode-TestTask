@@ -11,6 +11,7 @@ class WorkerInfoDataModelToDomainMapper @Inject constructor() :
     override fun map(model: WorkerInfoDataModel): WorkerInfoEntity =
         with(model) {
             WorkerInfoEntity(
+                id,
                 avatarUrl,
                 firstName,
                 lastName,

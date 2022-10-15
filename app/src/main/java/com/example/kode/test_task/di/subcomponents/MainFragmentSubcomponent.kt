@@ -6,7 +6,7 @@ import com.example.kode.test_task.databinding.FragmentMainBinding
 import com.example.kode.test_task.di.annotations.main_fragment.MainFragmentBinding
 import com.example.kode.test_task.di.annotations.main_fragment.MainFragmentContext
 import com.example.kode.test_task.di.annotations.main_fragment.MainFragmentView
-import com.example.kode.test_task.di.modules.ui.mappers.BUIStateMapperModule
+import com.example.kode.test_task.di.modules.ui.mappers.BUIWorkersStateMapperModule
 import com.example.kode.test_task.di.modules.ui.recycler_views.UnitedRecyclerViewModule
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.MainFragment
 import dagger.BindsInstance
@@ -14,7 +14,7 @@ import dagger.Subcomponent
 import java.lang.ref.WeakReference
 
 @MainFragmentScope
-@Subcomponent(modules = [UnitedRecyclerViewModule::class, BUIStateMapperModule::class])
+@Subcomponent(modules = [UnitedRecyclerViewModule::class, BUIWorkersStateMapperModule::class])
 interface MainFragmentSubcomponent {
 
     @Subcomponent.Factory

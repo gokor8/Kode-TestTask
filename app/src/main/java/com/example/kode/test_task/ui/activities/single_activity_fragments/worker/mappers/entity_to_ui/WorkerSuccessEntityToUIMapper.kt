@@ -16,6 +16,7 @@ class WorkerSuccessEntityToUIMapper @Inject constructor() :
             department,
             position,
             birthday,
+            "",
             phone
         )
     }

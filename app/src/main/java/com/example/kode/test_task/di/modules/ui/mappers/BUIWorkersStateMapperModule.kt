@@ -19,11 +19,7 @@ import dagger.Binds
 import dagger.Module
 
 @Module
-interface BUIStateMapperModule {
-
-    /**
-     * Workers
-     */
+interface BUIWorkersStateMapperModule {
 
     @Binds
     fun bindUIStateMapper(
@@ -53,20 +49,4 @@ interface BUIStateMapperModule {
     @Binds
     fun bindUIUsualErrorStateMapper(uIUsualErrorStateMapper: UIUsualErrorStateMapper)
             : Base.Mapper<MainStatesUI.Fail.UsualError, Unit>
-
-    /**
-     * Worker
-     */
-
-    @Binds
-    fun bindWorkerUIStateMapper(workerFullInfoStateTUIMapper: WorkerFullInfoStateTUIMapper)
-            : Base.Mapper<WorkerFullStateEntity, WorkerStatesUI>
-
-    @Binds
-    fun bindWorkerSuccessEntityToUIMapper(workerSuccessEntityToUIMapper: WorkerSuccessEntityToUIMapper)
-            : Base.Mapper<WorkerFullStateEntity.Success, WorkerStatesUI.Success>
-
-    @Binds
-    fun bindWorkerFailEntityToUIMapper(workerFailEntityToUIMapper: WorkerFailEntityToUIMapper)
-            : Base.Mapper<WorkerFullStateEntity.Fail, WorkerStatesUI.Fail>
 }

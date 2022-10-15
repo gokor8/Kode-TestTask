@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kode.domain.core.Base
-import com.example.kode.domain.entity.workers.WorkersStateEntity
 import com.example.kode.test_task.databinding.FragmentMainBinding
 import com.example.kode.test_task.databinding.ItemMainBinding
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.MainStatesUI
@@ -35,7 +34,7 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel<MainStatesU
     }
 
     override fun setListeners() {
-        binding.tvTryAgain.setOnClickListener {
+        binding.iError.tvTryAgain.setOnClickListener {
             binding.vfMain.showPrevious()
             viewModel.getWorkers()
         }

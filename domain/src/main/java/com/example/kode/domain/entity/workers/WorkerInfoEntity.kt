@@ -4,6 +4,7 @@ import com.example.kode.domain.core.Base
 import com.example.kode.domain.core.usecase.UseCaseModel
 
 data class WorkerInfoEntity(
+    val id: String,
     val avatarUrl: String,
     val name: String,
     val lastName: String,

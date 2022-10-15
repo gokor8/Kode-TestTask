@@ -5,6 +5,7 @@ import android.content.res.Resources
 import com.example.kode.test_task.di.annotations.ApplicationContext
 import com.example.kode.test_task.di.modules.ui.viewmodels.BViewModelModule
 import com.example.kode.test_task.di.subcomponents.MainFragmentSubcomponent
+import com.example.kode.test_task.di.subcomponents.WorkerFragmentSubcomponent
 import com.example.kode.test_task.ui.activities.single_activity_fragments.worker.WorkerFragment
 import dagger.BindsInstance
 import dagger.Component
@@ -26,6 +27,5 @@ interface AppComponent {
     }
 
     fun createMainFragmentSubcomponent(): MainFragmentSubcomponent.Factory
-
-    fun inject(workerFragment: WorkerFragment)
+    fun createWorkerFragmentSubcomponent(): WorkerFragmentSubcomponent.Factory
 }

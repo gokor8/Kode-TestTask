@@ -5,6 +5,7 @@ import com.example.kode.domain.entity.worker.WorkerFullStateEntity
 import com.example.kode.test_task.ui.activities.single_activity_fragments.worker.models.WorkerStatesUI
 import javax.inject.Inject
 
-class WorkerFailEntityToUIMapper @Inject constructor() : Base.Mapper<WorkerFullStateEntity.Fail, WorkerStatesUI.Fail> {
-    override fun map(model: WorkerFullStateEntity.Fail) = WorkerStatesUI.Fail.FatalError()
+class WorkerFailEntityToUIMapper @Inject constructor() :
+    Base.Mapper<WorkerFullStateEntity.Fail, WorkerStatesUI.FatalError> {
+    override fun map(model: WorkerFullStateEntity.Fail) = WorkerStatesUI.FatalError()
 }

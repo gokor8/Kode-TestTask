@@ -8,7 +8,7 @@ import javax.inject.Inject
 class WorkerInfoEntityToUIMapper @Inject constructor() : Base.Mapper<WorkerInfoEntity, PreviewWorkerInfoUIModel> {
     override fun map(model: WorkerInfoEntity): PreviewWorkerInfoUIModel = with(model) {
         PreviewWorkerInfoUIModel(
-            avatarUrl, name, lastName, userTag, position
+            id, avatarUrl, name, lastName, userTag, position
         )
     }
 }

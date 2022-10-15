@@ -6,7 +6,7 @@ import com.example.kode.test_task.ui.activities.single_activity_fragments.worker
 import javax.inject.Inject
 
 class WorkerFullInfoStateTUIMapper @Inject constructor(
-    private val failMapper: Base.Mapper<WorkerFullStateEntity.Fail, WorkerStatesUI.Fail>,
+    private val failMapper: Base.Mapper<WorkerFullStateEntity.Fail, WorkerStatesUI.FatalError>,
     private val successMapper: Base.Mapper<WorkerFullStateEntity.Success, WorkerStatesUI.Success>
 ) : Base.Mapper<WorkerFullStateEntity, WorkerStatesUI> {
     override fun map(model: WorkerFullStateEntity): WorkerStatesUI = when(model) {
