@@ -1,13 +1,11 @@
 package domain.usecase.workers
 
 import com.example.kode.domain.core.Base
-import com.example.kode.domain.core.Exceptions
+import com.example.kode.domain.core.exceptions.UseCaseExceptions
 import com.example.kode.domain.core.usecase.UseCaseModel
-import com.example.kode.domain.entity.workers.WorkersStateEntity
 import com.example.kode.domain.repository.WorkersRepository
 import com.example.kode.domain.usecase.workers.GetWorkersUseCaseImpl
 import domain.core.TestDomainModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert
 import org.junit.Before
@@ -64,7 +62,7 @@ class TestGetWorkersUseCaseWithInputImpl {
             )
 
         val actual = workersUseCase.get()
-        val expected = TestDomainModel.Fail(Exceptions.GenericException)
+        val expected = TestDomainModel.Fail(UseCaseExceptions.GenericException)
 
         Assert.assertEquals(expected, actual)
     }
@@ -93,7 +91,7 @@ class TestGetWorkersUseCaseWithInputImpl {
     }
 
     class TestExceptionToEntityMapper : Base.Mapper<Exception, TestDomainModel> {
-        override fun map(model: Exception) = TestDomainModel.Fail(Exceptions.GenericException)
+        override fun map(model: Exception) = TestDomainModel.Fail(UseCaseExceptions.GenericException)
     }
 
     sealed class TestDataState : Base.IgnorantMapper<TestDataState> {

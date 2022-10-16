@@ -1,6 +1,6 @@
 package com.example.kode.test_task.ui.activities.single_activity_fragments.main.mappers
 
-import com.example.kode.domain.core.Exceptions
+import com.example.kode.domain.core.exceptions.UseCaseExceptions
 import com.example.kode.domain.entity.workers.WorkerInfoEntity
 import com.example.kode.domain.entity.workers.WorkersStateEntity
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.mappers.entity_to_ui.*
@@ -23,11 +23,12 @@ class TestWorkersStateEntityToUIMapper {
         val testData = WorkersStateEntity.Success(
             listOf(
                 WorkerInfoEntity(
-                    "test",
-                    "test",
-                    "test",
-                    "test",
-                    "test"
+                    "id",
+                    "avatar",
+                    "name",
+                    "lastName",
+                    "userTag",
+                    "position"
                 )
             )
         )
@@ -35,11 +36,12 @@ class TestWorkersStateEntityToUIMapper {
         val expected = MainStatesUI.Success.Cloud(
             listOf(
                 PreviewWorkerInfoUIModel(
-                    "test",
-                    "test",
-                    "test",
-                    "test",
-                    "test"
+                    "id",
+                    "avatar",
+                    "name",
+                    "lastName",
+                    "userTag",
+                    "position"
                 )
             )
         )
@@ -55,11 +57,12 @@ class TestWorkersStateEntityToUIMapper {
         val testData = WorkersStateEntity.NoConnection(
             listOf(
                 WorkerInfoEntity(
-                    "test",
-                    "test",
-                    "test",
-                    "test",
-                    "test"
+                    "id",
+                    "avatar",
+                    "name",
+                    "lastName",
+                    "userTag",
+                    "position"
                 )
             )
         )
@@ -67,11 +70,12 @@ class TestWorkersStateEntityToUIMapper {
         val expected = MainStatesUI.Success.Cache(
             listOf(
                 PreviewWorkerInfoUIModel(
-                    "test",
-                    "test",
-                    "test",
-                    "test",
-                    "test"
+                    "id",
+                    "avatar",
+                    "name",
+                    "lastName",
+                    "userTag",
+                    "position"
                 )
             )
         )
@@ -85,7 +89,7 @@ class TestWorkersStateEntityToUIMapper {
         val mapper = WorkersStateEntityToUIMapper(successMapper, noConnectionMapper, failMapper)
 
         val testData = WorkersStateEntity.Fail(
-            Exceptions.GenericException
+            UseCaseExceptions.GenericException
         )
 
         val actual = mapper.map(testData)

@@ -1,7 +1,7 @@
 package com.example.kode.domain.entity.worker
 
 import com.example.kode.domain.core.Base
-import com.example.kode.domain.core.Exceptions
+import com.example.kode.domain.core.exceptions.UseCaseExceptions
 import com.example.kode.domain.core.usecase.UseCaseModel
 
 sealed class WorkerFullStateEntity : UseCaseModel<WorkerFullStateEntity> {
@@ -17,7 +17,7 @@ sealed class WorkerFullStateEntity : UseCaseModel<WorkerFullStateEntity> {
         val phone: String
     ) : WorkerFullStateEntity()
 
-    class Fail(val exception: Exceptions) : WorkerFullStateEntity()
+    class Fail(val exception: UseCaseExceptions) : WorkerFullStateEntity()
 
     override fun <I : Base.Mapper<WorkerFullStateEntity, R>, R> map(model: I): R = model.map(this)
 }

@@ -9,7 +9,7 @@ sealed interface WorkerStatesUI {
         val userTag: String,
         val department: String,
         val position: String,
-        val birthday: List<String>,
+        val birthday: String,
         val age: String,
         val phone: String,
     ) : WorkerStatesUI

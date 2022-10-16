@@ -19,6 +19,7 @@ class TestWorkersCacheEntityToUIMapper {
         val testDataModel = WorkersStateEntity.NoConnection(
             listOf(
                 WorkerInfoEntity(
+                    "id",
                     "avatar",
                     "name",
                     "lastName",
@@ -31,6 +32,7 @@ class TestWorkersCacheEntityToUIMapper {
         val expected = MainStatesUI.Success.Cache(
             listOf(
                 PreviewWorkerInfoUIModel(
+                    "id",
                     "avatar",
                     "name",
                     "lastName",

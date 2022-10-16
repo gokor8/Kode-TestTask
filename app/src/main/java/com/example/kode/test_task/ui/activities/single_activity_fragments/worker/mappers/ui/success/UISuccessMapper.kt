@@ -29,7 +29,8 @@ class UISuccessMapper @Inject constructor(
 
             tvJobSymbols.text = userTag
             tvPosition.text = position
-            tvDate.text = birthday[0]
+            tvDate.text = birthday
+            tvAge.text = context.getString(R.string.worker_age, age)
             tvPhone.text = phone
         }
     }.let {}

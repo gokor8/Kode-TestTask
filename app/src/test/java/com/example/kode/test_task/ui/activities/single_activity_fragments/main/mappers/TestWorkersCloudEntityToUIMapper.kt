@@ -19,11 +19,12 @@ class TestWorkersCloudEntityToUIMapper {
         val testDataModel = WorkersStateEntity.Success(
             listOf(
                 WorkerInfoEntity(
-                    "test",
-                    "test",
-                    "test",
-                    "test",
-                    "test"
+                    "id",
+                    "avatar",
+                    "name",
+                    "lastName",
+                    "userTag",
+                    "position"
                 )
             )
         )
@@ -32,11 +33,12 @@ class TestWorkersCloudEntityToUIMapper {
         val expected = MainStatesUI.Success.Cloud(
             listOf(
                 PreviewWorkerInfoUIModel(
-                    "test",
-                    "test",
-                    "test",
-                    "test",
-                    "test"
+                    "id",
+                    "avatar",
+                    "name",
+                    "lastName",
+                    "userTag",
+                    "position"
                 )
             )
         )

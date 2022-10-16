@@ -19,6 +19,6 @@ class WorkerViewModel<M : Any, IM : UseCaseModel<IM>, EM : UseCaseModel<EM>> @In
     fun getWorker(userId: String) = viewModelScope.launch {
         workerUseCase.get(
             UIToDomainMapper.map(userId)
-        ).map(domainToUIMapper)
+        ).map(domainToUIMapper).let(communication::save)
     }
 }

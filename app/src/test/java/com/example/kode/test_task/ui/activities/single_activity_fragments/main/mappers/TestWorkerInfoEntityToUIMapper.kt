@@ -13,20 +13,22 @@ class TestWorkerInfoEntityToUIMapper {
         val mapper = WorkerInfoEntityToUIMapper()
 
         val testData = WorkerInfoEntity(
-            "test",
-            "test",
-            "test",
-            "test",
-            "test"
+            "id",
+            "avatarUrl",
+            "name",
+            "lastName",
+            "userTag",
+            "position"
         )
 
         val actual = mapper.map(testData)
         val expected = PreviewWorkerInfoUIModel(
-            "test",
-            "test",
-            "test",
-            "test",
-            "test",
+            "id",
+            "avatarUrl",
+            "name",
+            "lastName",
+            "userTag",
+            "position"
         )
 
         Assert.assertEquals(expected, actual)

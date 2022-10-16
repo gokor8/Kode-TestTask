@@ -1,7 +1,7 @@
 package com.example.kode.domain.entity.workers
 
 import com.example.kode.domain.core.Base
-import com.example.kode.domain.core.Exceptions
+import com.example.kode.domain.core.exceptions.UseCaseExceptions
 import com.example.kode.domain.core.usecase.UseCaseModel
 
 sealed class WorkersStateEntity : UseCaseModel<WorkersStateEntity> {
@@ -18,5 +18,5 @@ sealed class WorkersStateEntity : UseCaseModel<WorkersStateEntity> {
         val workers: List<WorkerInfoEntity>
     ) : WorkersStateEntity()
 
-    data class Fail(val exception: Exceptions) : WorkersStateEntity()
+    data class Fail(val exception: UseCaseExceptions) : WorkersStateEntity()
 }

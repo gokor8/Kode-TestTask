@@ -1,7 +1,7 @@
 package domain.core
 
 import com.example.kode.domain.core.Base
-import com.example.kode.domain.core.Exceptions
+import com.example.kode.domain.core.exceptions.UseCaseExceptions
 import com.example.kode.domain.core.usecase.UseCaseModel
 
 sealed class TestDomainModel : UseCaseModel<TestDomainModel> {
@@ -9,5 +9,5 @@ sealed class TestDomainModel : UseCaseModel<TestDomainModel> {
 
     data class Success(val name: String) : TestDomainModel()
 
-    data class Fail(val exceptions: Exceptions) : TestDomainModel()
+    data class Fail(val useCaseExceptions: UseCaseExceptions) : TestDomainModel()
 }

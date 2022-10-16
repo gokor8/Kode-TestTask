@@ -132,7 +132,7 @@ class TestWorkersRepository {
         }
     }
 
-    // Custom Exceptions
+    // Custom UseCaseExceptions
     class TestNoCacheException : IOException()
     class GenericException : IOException()
 
