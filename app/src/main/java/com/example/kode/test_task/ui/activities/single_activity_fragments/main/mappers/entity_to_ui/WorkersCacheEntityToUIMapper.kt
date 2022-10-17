@@ -14,5 +14,4 @@ class WorkersCacheEntityToUIMapper @Inject constructor(
     override fun map(model: WorkersStateEntity.NoConnection) = MainStatesUI.Success.Cache(
         model.workers.map { it.map(mapper) }
     )
-
 }

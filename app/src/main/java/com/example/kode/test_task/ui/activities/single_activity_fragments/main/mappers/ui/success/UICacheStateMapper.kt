@@ -22,13 +22,13 @@ class UICacheStateMapper @Inject constructor(
     adapter: BaseRecyclerViewAdapter<PreviewWorkerInfoUIModel, ItemMainBinding, MainViewHolder>
 ) : UISuccessMapper<MainStatesUI.Success.Cache>(adapter) {
 
-    override fun map(model: MainStatesUI.Success.Cache) {
+    override fun map(model: MainStatesUI.Success.Cache) = view.get()?.also {
         super.map(model)
 
         Snackbar.make(
-            view.get() ?: return,
-            context.get()?.resources?.getString(R.string.no_connection) ?: return,
+            it,
+            context.get()?.resources?.getString(R.string.no_connection) ?: return@also,
             Snackbar.LENGTH_LONG
         ).show()
-    }
+    }.let {}
 }

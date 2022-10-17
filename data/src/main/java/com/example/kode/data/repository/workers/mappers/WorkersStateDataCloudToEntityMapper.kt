@@ -8,11 +8,10 @@ import com.example.kode.domain.entity.workers.WorkersStateEntity
 import javax.inject.Inject
 
 class WorkersStateDataCloudToEntityMapper @Inject constructor(
-    private val mapper: Base.Mapper<WorkerInfoDataModel, WorkerInfoEntity>
-) :
-    Base.Mapper<WorkersInfoStateDataModel.Cloud, WorkersStateEntity.Success> {
-    override fun map(model: WorkersInfoStateDataModel.Cloud): WorkersStateEntity.Success =
-        WorkersStateEntity.Success(
-            model.workers.map { it.map(mapper) }
-        )
+    private val mapper: Base.Mapper<WorkerInfoDataModel, WorkerInfoEntity>,
+) : Base.Mapper<WorkersInfoStateDataModel.Cloud, WorkersStateEntity.Success> {
+
+    override fun map(model: WorkersInfoStateDataModel.Cloud) = WorkersStateEntity.Success(
+        model.workers.map { it.map(mapper) }
+    )
 }
