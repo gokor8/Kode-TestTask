@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ViewFlipper xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/vfMain"
@@ -7,6 +7,7 @@
     android:layout_height="match_parent">
 
     <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/llMain"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -103,7 +104,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/tvAge"
                 app:layout_constraintStart_toEndOf="@id/ivStart"
                 app:layout_constraintTop_toTopOf="@+id/ivStart"
-                tools:text="5 июня 1996" />
+                tools:text="5 июня 2002" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvAge"
@@ -113,7 +114,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/tvDate"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/tvDate"
-                tools:text="24 года" />
+                tools:text="94 года" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivPhone"
@@ -141,9 +142,16 @@
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
+    <ProgressBar
+        android:id="@+id/pbLoad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:progressTint="?purple500"
+        android:layout_gravity="center"/>
+
     <include
         android:id="@+id/iError"
-        layout="@layout/view_fatal_error"
-        />
+        android:visibility="gone"
+        layout="@layout/view_fatal_error" />
 
-</ViewFlipper>
+</FrameLayout>

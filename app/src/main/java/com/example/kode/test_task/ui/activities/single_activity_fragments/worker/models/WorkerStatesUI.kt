@@ -14,5 +14,7 @@ sealed interface WorkerStatesUI {
         val phone: String,
     ) : WorkerStatesUI
 
+    class Load : WorkerStatesUI
+
     class FatalError : WorkerStatesUI
 }

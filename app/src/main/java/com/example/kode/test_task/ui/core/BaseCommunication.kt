@@ -17,6 +17,4 @@ abstract class BaseCommunication<M : Any> : BaseObserver<M>, Save.Base<M, Unit> 
     override fun save(model: M) {
         liveData.value = model
     }
-
-    fun hasState() = liveData.value != null
 }

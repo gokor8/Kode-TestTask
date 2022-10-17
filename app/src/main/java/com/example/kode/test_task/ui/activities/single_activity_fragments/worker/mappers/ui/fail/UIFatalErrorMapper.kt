@@ -1,5 +1,6 @@
 package com.example.kode.test_task.ui.activities.single_activity_fragments.worker.mappers.ui.fail
 
+import androidx.core.view.isVisible
 import com.example.kode.domain.core.Base
 import com.example.kode.test_task.databinding.FragmentWorkerBinding
 import com.example.kode.test_task.di.annotations.worker_fragment.WorkerFragmentBinding
@@ -9,10 +10,14 @@ import javax.inject.Inject
 
 class UIFatalErrorMapper @Inject constructor(
     @WorkerFragmentBinding
-    private val binding: WeakReference<FragmentWorkerBinding>
+    private val binding: WeakReference<FragmentWorkerBinding>,
 ) : Base.Mapper<WorkerStatesUI.FatalError, Unit> {
 
-    override fun map(model: WorkerStatesUI.FatalError) {
-        binding.get()?.vfMain?.showNext()
-    }
+    override fun map(model: WorkerStatesUI.FatalError) = binding.get()?.apply {
+        val successVisible = true
+
+        iError.llError.isVisible = successVisible
+        pbLoad.isVisible = !successVisible
+        llMain.isVisible = !successVisible
+    }.let {}
 }

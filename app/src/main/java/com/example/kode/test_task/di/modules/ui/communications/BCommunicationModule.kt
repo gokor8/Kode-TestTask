@@ -7,14 +7,15 @@ import com.example.kode.test_task.ui.core.BaseCommunication
 import dagger.Binds
 import dagger.Module
 import com.example.kode.test_task.ui.activities.single_activity_fragments.worker.models.WorkerStatesUI
+import com.example.kode.test_task.ui.core.NullableCommunication
 
 
 @Module
 interface BCommunicationModule {
 
     @Binds
-    fun bindMainCommunication(communication: MainCommunication): BaseCommunication<MainStatesUI>
+    fun bindMainCommunication(communication: MainCommunication): NullableCommunication<MainStatesUI>
 
     @Binds
-    fun bindWorkerCommunication(communication: WorkerCommunication): BaseCommunication<WorkerStatesUI>
+    fun bindWorkerCommunication(communication: WorkerCommunication): NullableCommunication<WorkerStatesUI>
 }

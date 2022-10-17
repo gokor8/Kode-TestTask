@@ -6,10 +6,12 @@ import javax.inject.Inject
 
 class UIStateMapper@Inject constructor(
     private val workerSuccessMapper: Base.Mapper<WorkerStatesUI.Success, Unit>,
-    private val workerFailMapper: Base.Mapper<WorkerStatesUI.FatalError, Unit>
+    private val workerFailMapper: Base.Mapper<WorkerStatesUI.FatalError, Unit>,
+    private val workerLoadMapper: Base.Mapper<WorkerStatesUI.Load, Unit>
 ) : Base.Mapper<WorkerStatesUI, Unit> {
 
     override fun map(model: WorkerStatesUI) = when(model) {
+        is WorkerStatesUI.Load -> workerLoadMapper.map(model)
         is WorkerStatesUI.Success -> workerSuccessMapper.map(model)
         is WorkerStatesUI.FatalError -> workerFailMapper.map(model)
     }

@@ -1,5 +1,6 @@
 package com.example.kode.test_task.ui.activities.single_activity_fragments.worker.mappers.ui.success
 
+import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.example.kode.domain.core.Base
 import com.example.kode.test_task.R
@@ -15,6 +16,12 @@ class UISuccessMapper @Inject constructor(
 ) : Base.Mapper<WorkerStatesUI.Success, Unit> {
 
     override fun map(model: WorkerStatesUI.Success) = binding.get()?.apply {
+        val successVisible = true
+
+        llMain.isVisible = successVisible
+        pbLoad.isVisible = !successVisible
+        iError.llError.isVisible = !successVisible
+
         with(model) {
             val context = root.context
 

@@ -3,7 +3,7 @@ package com.example.kode.test_task.ui.core
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
-interface BaseViewModelFactory<VM : BaseViewModel<*>> : ViewModelProvider.Factory {
+interface BaseViewModelFactory<VM : BaseViewModel<*,*>> : ViewModelProvider.Factory {
 
     val modelClass: Class<VM>
 

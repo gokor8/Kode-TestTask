@@ -6,9 +6,9 @@ import com.example.kode.test_task.databinding.ActivityMainBinding
 import com.example.kode.test_task.ui.core.BaseActivity
 import com.example.kode.test_task.ui.core.BaseViewModel
 
-class SingleActivity : BaseActivity<ActivityMainBinding, BaseViewModel<*>>() {
+class SingleActivity : BaseActivity<ActivityMainBinding, BaseViewModel<*, *>>() {
 
-    override val viewModel: BaseViewModel<*> by viewModels()
+    override val viewModel: BaseViewModel<*, *> by viewModels()
 
     override fun setBind(): ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
 

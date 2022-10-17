@@ -10,7 +10,7 @@ import androidx.viewbinding.ViewBinding
 import com.example.kode.test_task.App
 import javax.inject.Inject
 
-abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel<*>> : Fragment(),
+abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel<*,*>> : Fragment(),
     BaseInterfaceView<VB, VM> {
 
     val binding: VB by lazy { setBind() }
