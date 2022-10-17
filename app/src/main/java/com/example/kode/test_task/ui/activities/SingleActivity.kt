@@ -10,10 +10,14 @@ class SingleActivity : BaseActivity<ActivityMainBinding, BaseViewModel<*>>() {
 
     override val viewModel: BaseViewModel<*> by viewModels()
 
+    override fun setBind(): ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
     }
-    override fun setBind(): ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
 
+    override fun setUI() {
+        setSupportActionBar()
+    }
 }

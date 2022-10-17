@@ -6,6 +6,7 @@
     <string name="super_error_description">Постараемся быстро починить</string>
     <string name="try_again">Попробовать снова</string>
     <string name="first_name_last_name">%1$s %2$s</string>
+    <string name="cancel">Отмена</string>
 
     <!-- worker -->
     <string name="worker_birthday">%1$s %2$s %3$s</string>
