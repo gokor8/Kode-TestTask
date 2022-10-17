@@ -4,10 +4,12 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.kode.domain.core.Base
 import com.example.kode.test_task.databinding.FragmentWorkerBinding
+import com.example.kode.test_task.ui.activities.SingleActivity
 import com.example.kode.test_task.ui.activities.single_activity_fragments.worker.models.WorkerStatesUI
 import com.example.kode.test_task.ui.core.BaseFragment
 import java.lang.ref.WeakReference
@@ -28,6 +30,7 @@ class WorkerFragment :
     override fun setBind(): FragmentWorkerBinding = FragmentWorkerBinding.inflate(layoutInflater)
 
     override fun setUI() {
+        (requireActivity() as SingleActivity).binding.gToolbar.isVisible = false
         viewModel.getWorker(
             WorkerFragmentArgs.fromBundle(requireArguments()).userId
         )

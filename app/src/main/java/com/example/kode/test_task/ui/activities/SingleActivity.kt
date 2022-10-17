@@ -18,6 +18,6 @@ class SingleActivity : BaseActivity<ActivityMainBinding, BaseViewModel<*, *>>() 
     }
 
     override fun setUI() {
-        setSupportActionBar()
+        supportActionBar?.hide()
     }
 }
