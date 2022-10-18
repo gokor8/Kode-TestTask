@@ -30,7 +30,6 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel<MainStatesU
     override val viewModel: MainViewModel<MainStatesUI, *> by viewModels { viewModelFactory }
 
     override fun setUI(): Unit = with(binding) {
-        (requireActivity() as SingleActivity).binding.gToolbar.isVisible = true
         rvMain.adapter = recyclerAdapter
         rvMain.layoutManager = LinearLayoutManager(context)
 

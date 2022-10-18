@@ -1,23 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/cToolbar"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="6dp">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tiSearch"
-        style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        app:startIconDrawable="@drawable/ic_search"
+        app:expandedHintEnabled="true"
+        app:boxCornerRadiusTopStart="18dp"
+        app:boxCornerRadiusBottomEnd="18dp"
+        app:boxCornerRadiusBottomStart="18dp"
+        app:boxCornerRadiusTopEnd="18dp"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
+        app:boxBackgroundColor="@color/light_gray"
         app:layout_constraintEnd_toStartOf="@+id/appCompatTextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
         <EditText
             android:id="@+id/etSearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="@string/main_tool_bar_hint"
             android:autofillHints="Влад шоколад"
             android:inputType="textAutoComplete" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -26,7 +39,9 @@
         android:id="@+id/appCompatTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
         android:text="@string/cancel"
+        android:textStyle="bold"
         android:textColor="?purple500"
         app:layout_constraintBottom_toBottomOf="@+id/tiSearch"
         app:layout_constraintEnd_toEndOf="parent"

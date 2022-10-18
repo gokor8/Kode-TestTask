@@ -11,5 +11,6 @@
     <!-- worker -->
     <string name="worker_birthday">%1$s %2$s %3$s</string>
     <string name="worker_age">%1$s года</string>
+    <string name="main_tool_bar_hint">Введи имя, тег, почту...</string>
 
 </resources>

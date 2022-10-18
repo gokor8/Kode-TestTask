@@ -30,7 +30,7 @@ class WorkerFragment :
     override fun setBind(): FragmentWorkerBinding = FragmentWorkerBinding.inflate(layoutInflater)
 
     override fun setUI() {
-        (requireActivity() as SingleActivity).binding.gToolbar.isVisible = false
+        (requireActivity() as SingleActivity).binding.iSearch.cToolbar.isVisible = false
         viewModel.getWorker(
             WorkerFragmentArgs.fromBundle(requireArguments()).userId
         )

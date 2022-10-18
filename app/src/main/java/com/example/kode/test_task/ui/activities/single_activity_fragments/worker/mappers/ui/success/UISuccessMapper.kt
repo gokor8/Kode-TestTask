@@ -1,26 +1,24 @@
 package com.example.kode.test_task.ui.activities.single_activity_fragments.worker.mappers.ui.success
 
-import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.example.kode.domain.core.Base
 import com.example.kode.test_task.R
 import com.example.kode.test_task.databinding.FragmentWorkerBinding
 import com.example.kode.test_task.di.annotations.worker_fragment.WorkerFragmentBinding
 import com.example.kode.test_task.ui.activities.single_activity_fragments.worker.models.WorkerStatesUI
+import com.example.kode.test_task.ui.core.visibility_handler.VisibilityVGHandler
 import java.lang.ref.WeakReference
 import javax.inject.Inject
 
 class UISuccessMapper @Inject constructor(
     @WorkerFragmentBinding
     private val binding: WeakReference<FragmentWorkerBinding>,
+    private val visibilityVGHandler: VisibilityVGHandler
 ) : Base.Mapper<WorkerStatesUI.Success, Unit> {
 
     override fun map(model: WorkerStatesUI.Success) = binding.get()?.apply {
-        val successVisible = true
 
-        llMain.isVisible = successVisible
-        pbLoad.isVisible = !successVisible
-        iError.llError.isVisible = !successVisible
+        visibilityVGHandler.comboInverse(llMain, pbLoad, iError.llError)
 
         with(model) {
             val context = root.context

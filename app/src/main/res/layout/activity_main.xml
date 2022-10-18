@@ -6,35 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".ui.activities.SingleActivity">
 
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/gToolbar"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:constraint_referenced_ids="tiSearch, tvCancel"/>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tiSearch"
-        style="@style/ThemeOverlay.Material3.TextInputEditText.FilledBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toStartOf="@+id/tvCancel"
+    <include
+        android:id="@+id/iSearch"
+        layout="@layout/view_main_toolbar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <EditText android:id="@+id/etSearch"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:autofillHints="Влад шоколад"
-            android:inputType="textAutoComplete" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvCancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/cancel"
-        android:textColor="?purple500"
-        app:layout_constraintBottom_toBottomOf="@+id/tiSearch"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -47,7 +22,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tiSearch"
+        app:layout_constraintTop_toBottomOf="@id/iSearch"
         app:navGraph="@navigation/nav_graph" />
 
 
