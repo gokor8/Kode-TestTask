@@ -4,7 +4,7 @@ import com.example.kode.domain.core.exceptions.UseCaseExceptions
 import com.example.kode.domain.entity.workers.WorkerInfoEntity
 import com.example.kode.domain.entity.workers.WorkersStateEntity
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.mappers.entity_to_ui.*
-import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.MainStatesUI
+import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.MainResultStatesUI
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.PreviewWorkerInfoUIModel
 import org.junit.Assert
 import org.junit.Test
@@ -33,7 +33,7 @@ class TestWorkersStateEntityToUIMapper {
             )
         )
 
-        val expected = MainStatesUI.Success.Cloud(
+        val expected = MainResultStatesUI.Success.Cloud(
             listOf(
                 PreviewWorkerInfoUIModel(
                     "id",
@@ -67,7 +67,7 @@ class TestWorkersStateEntityToUIMapper {
             )
         )
 
-        val expected = MainStatesUI.Success.Cache(
+        val expected = MainResultStatesUI.Success.Cache(
             listOf(
                 PreviewWorkerInfoUIModel(
                     "id",
@@ -94,6 +94,6 @@ class TestWorkersStateEntityToUIMapper {
 
         val actual = mapper.map(testData)
 
-        Assert.assertTrue(actual is MainStatesUI.Fail)
+        Assert.assertTrue(actual is MainResultStatesUI.Fail)
     }
 }

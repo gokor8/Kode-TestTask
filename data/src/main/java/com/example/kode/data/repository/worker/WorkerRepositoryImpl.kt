@@ -8,8 +8,8 @@ import com.example.kode.domain.repository.WorkerRepository
 import javax.inject.Inject
 
 class WorkerRepositoryImpl<
-        IUM : UseCaseModel<IUM>, IDM : DataSourceModel<IDM>,
-        RDM : DataSourceModel<RDM>, RUM : UseCaseModel<RUM>,
+        IUM : UseCaseModel, IDM : DataSourceModel<IDM>,
+        RDM : DataSourceModel<RDM>, RUM : UseCaseModel,
         >
 @Inject constructor(
     private val workerCacheDataSource: WorkerCacheDataSource<IDM, RDM>,
@@ -18,5 +18,5 @@ class WorkerRepositoryImpl<
 ) : WorkerRepository<IUM, RUM> {
 
     override suspend fun getWorker(model: IUM): RUM =
-        workerCacheDataSource.get(model.map(mapperIn)).map(mapper)
+        workerCacheDataSource.get(model.let(mapperIn::map)).map(mapper)
 }

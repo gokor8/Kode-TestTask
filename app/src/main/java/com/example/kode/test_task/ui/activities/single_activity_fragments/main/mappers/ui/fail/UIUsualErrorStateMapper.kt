@@ -5,7 +5,7 @@ import android.view.View
 import com.example.kode.domain.core.Base
 import com.example.kode.test_task.di.annotations.main_fragment.MainFragmentContext
 import com.example.kode.test_task.di.annotations.main_fragment.MainFragmentView
-import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.MainStatesUI
+import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.MainResultStatesUI
 import com.google.android.material.snackbar.Snackbar
 import java.lang.ref.WeakReference
 import javax.inject.Inject
@@ -15,9 +15,9 @@ class UIUsualErrorStateMapper @Inject constructor(
     private val context: WeakReference<Context>,
     @MainFragmentView
     private val view: WeakReference<View>
-) : Base.Mapper<MainStatesUI.Fail.UsualError, Unit> {
+) : Base.Mapper<MainResultStatesUI.Fail.UsualError, Unit> {
 
-    override fun map(model: MainStatesUI.Fail.UsualError) {
+    override fun map(model: MainResultStatesUI.Fail.UsualError) {
         Snackbar.make(
             view.get() ?: return,
             context.get()?.resources?.getString(model.errorId) ?: return,

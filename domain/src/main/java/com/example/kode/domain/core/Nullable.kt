@@ -1,4 +1,4 @@
-package com.example.kode.test_task.ui.core
+package com.example.kode.domain.core
 
 interface Nullable {
 

@@ -17,7 +17,7 @@ sealed interface Read {
             fun get(equalsAttribute: I): R
         }
 
-        interface SuspendEquable<I, R> : AbstractInput<R> {
+        interface SuspendEquable<in I, R> : AbstractInput<R> {
             suspend fun get(equalsAttribute: I): R
         }
     }

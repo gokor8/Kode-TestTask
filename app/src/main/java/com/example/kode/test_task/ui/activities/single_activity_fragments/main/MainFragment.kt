@@ -5,29 +5,32 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kode.domain.core.Base
+import com.example.kode.test_task.App
 import com.example.kode.test_task.databinding.FragmentMainBinding
 import com.example.kode.test_task.databinding.ItemMainBinding
 import com.example.kode.test_task.ui.activities.SingleActivity
-import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.MainStatesUI
+import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.MainResultStatesUI
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.PreviewWorkerInfoUIModel
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.recycler_view.MainViewHolder
-import com.example.kode.test_task.ui.core.BaseFragment
+import com.example.kode.test_task.ui.activities.single_activity_fragments.searchable.SearchableFragment
+import com.example.kode.test_task.ui.activities.single_activity_fragments.searchable.models.UISearchInputState
 import com.example.kode.test_task.ui.core.recycler_view.BaseRecyclerViewAdapter
 import java.lang.ref.WeakReference
 import javax.inject.Inject
 
-class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel<MainStatesUI, *>>() {
+class MainFragment :
+    SearchableFragment<FragmentMainBinding, UISearchInputState, MainResultStatesUI>() {
 
     @Inject
     lateinit var recyclerAdapter: BaseRecyclerViewAdapter<PreviewWorkerInfoUIModel, ItemMainBinding, MainViewHolder>
 
     @Inject
-    lateinit var uiStateMapper: Base.Mapper<MainStatesUI, Unit>
+    lateinit var uiStateMapper: Base.Mapper<MainResultStatesUI, Unit>
 
     @Inject
-    lateinit var viewModelFactory: MainViewModelFactory<MainStatesUI>
+    lateinit var viewModelFactory: MainViewModelFactory<MainResultStatesUI>
 
-    override val viewModel: MainViewModel<MainStatesUI, *> by viewModels { viewModelFactory }
+    override val viewModel: MainViewModel by viewModels { viewModelFactory }
 
     override fun setUI(): Unit = with(binding) {
         (requireActivity() as SingleActivity).binding.iSearch.cToolbar.isVisible = true
@@ -56,7 +59,7 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel<MainStatesU
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
-        getApp().daggerAppComponent
+        provideApp<App>().daggerAppComponent
             .createMainFragmentSubcomponent()
             .create(
                 WeakReference(context),
