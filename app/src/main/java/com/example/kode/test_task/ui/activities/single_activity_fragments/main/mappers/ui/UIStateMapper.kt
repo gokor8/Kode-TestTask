@@ -12,5 +12,6 @@ class UIStateMapper @Inject constructor(
     override fun map(model: MainResultStatesUI) = when(model) {
         is MainResultStatesUI.Success -> successMapper.map(model)
         is MainResultStatesUI.Fail -> failMapper.map(model)
+        else -> {}
     }
 }

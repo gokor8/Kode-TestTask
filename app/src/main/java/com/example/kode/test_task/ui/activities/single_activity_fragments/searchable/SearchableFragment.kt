@@ -14,17 +14,17 @@ import javax.inject.Inject
 abstract class SearchableFragment<
         VB : ViewBinding, UIM : UISearchInputState,
         UOM : SearchResultStatesUI,
-        > : BaseFragment<VB, SearchableViewModel<UIM, UOM>>() {
+        > : BaseFragment<VB, SearchableViewModel<UISearchInputState, UOM>>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //setupSearch()
+        setupSearch()
     }
 
-   /* fun setupSearch() =
+    fun setupSearch() =
         provideActivity<SingleActivity>().binding.iSearch.etSearch.addTextChangedListener {
             viewModel.search(
-                stringToSearchInputMapper.map(it.toString())
+                UISearchInputState.Search(it.toString())
             )
-        }*/
+        }
 }

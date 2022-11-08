@@ -13,7 +13,7 @@ import kotlinx.coroutines.runBlocking
 class WorkerViewModelTest {
 
   /*  fun `test get workers first run`() = runBlocking {
-        val searchableCommunication = SearchableCommunication(
+        val searchableCommunication = SearchableCommunicationImpl(
             TestCommunication(),
             TestCommunication()
         )

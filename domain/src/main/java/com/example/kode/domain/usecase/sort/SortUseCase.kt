@@ -1,9 +1,12 @@
 package com.example.kode.domain.usecase.sort
 
 import com.example.kode.domain.core.Base
+import com.example.kode.domain.core.Read
 import com.example.kode.domain.core.sort.SortUseCaseModel
 import com.example.kode.domain.core.sort.SortableUseCaseModel
 import com.example.kode.domain.core.usecase.UseCaseSuspend
+import com.example.kode.domain.entity.workers.WorkerSortableEntity
+import com.example.kode.domain.entity.workers.WorkersStateEntity
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 

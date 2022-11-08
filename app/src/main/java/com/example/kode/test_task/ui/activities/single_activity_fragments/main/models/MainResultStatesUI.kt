@@ -1,5 +1,7 @@
 package com.example.kode.test_task.ui.activities.single_activity_fragments.main.models
 
+import android.view.View
+import androidx.core.view.isVisible
 import com.example.kode.domain.core.Base
 import com.example.kode.test_task.ui.activities.single_activity_fragments.searchable.models.SearchResultStatesUI
 
@@ -10,6 +12,13 @@ sealed interface MainResultStatesUI : SearchResultStatesUI {
     ) : MainResultStatesUI
 
     sealed class Success(val workers: List<PreviewWorkerInfoUIModel>) : MainResultStatesUI {
+
+        fun setupVisibility(rvMain: View, iError: View, searchError: View) {
+            rvMain.isVisible = true
+            iError.isVisible = false
+            searchError.isVisible = false
+        }
+
         class Cloud(
             workers: List<PreviewWorkerInfoUIModel>,
         ) : Success(workers)

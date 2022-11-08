@@ -12,7 +12,7 @@ sealed class UseCaseSuspend<R>(
 
     // Можно было бы юзануть coroutineExceptionHandler, но мне больше нравится использовать подход с try{}catch
 
-    abstract class UseCaseWithInput<in I : Any, R>(
+    abstract class UseCaseWithInput<I : Any, R>(
         coroutineContext: CoroutineContext,
         failMapper: Base.Mapper<Exception, R>
     ) : UseCaseSuspend<R>(coroutineContext, failMapper), Read.AbstractInput.SuspendEquable<I, R> {

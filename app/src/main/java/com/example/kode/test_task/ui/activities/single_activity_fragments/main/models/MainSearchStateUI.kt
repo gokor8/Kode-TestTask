@@ -8,15 +8,18 @@ import com.example.kode.test_task.ui.activities.single_activity_fragments.search
 
 sealed class MainSearchStateUI : SearchResultStatesUI{
 
-    sealed class SearchUI<SM : WorkerSortableEntity>(val text: String) : MainSearchStateUI() {
-        fun createFilterable(toSortList: List<PreviewWorkerInfoUIModel>) =
+    sealed class SearchUI<SM : WorkerSortableEntity>(val text: String) :
+        MainSearchStateUI(), FilterableCreator<PreviewWorkerInfoUIModel, SM> {
+
+        override fun createFilterable(toSortList: List<PreviewWorkerInfoUIModel>) =
             FilterableUseCaseModel(text, getSortableModels(toSortList))
 
         protected abstract fun getSortableModels(toSortList: List<PreviewWorkerInfoUIModel>): List<SM>
     }
 
-    class FullName(text: String) : SearchUI<WorkerSortableNameEntity>(text) {
+    open class FullName(text: String) : SearchUI<WorkerSortableNameEntity>(text) {
 
+        // Может маппер сюда кинуть?
         override fun getSortableModels(
             toSortList: List<PreviewWorkerInfoUIModel>,
         ): List<WorkerSortableNameEntity> =

@@ -41,15 +41,24 @@ class MainFragment :
         viewModel.getWorkers()
     }
 
-    override fun setListeners() {
+    override fun setListeners() = with(binding) {
         binding.iError.tvTryAgain.setOnClickListener {
-            binding.vfMain.showPrevious()
+            vfMain.isVisible = true
+            iError.llError.isVisible = false
+            iErrorSearch.llError.isVisible = false
             viewModel.getWorkers()
         }
     }
 
-    override fun setObservers() {
+    override fun setObservers() = with(binding) {
         viewModel.observe(viewLifecycleOwner) {
+            uiStateMapper.map(it)
+        }
+
+        viewModel.observeSearch(viewLifecycleOwner) {
+            if (it is MainResultStatesUI.Success) {
+                it.setupVisibility(rvMain, iError.llError, iErrorSearch.llError)
+            }
             uiStateMapper.map(it)
         }
     }
