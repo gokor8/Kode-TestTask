@@ -9,7 +9,7 @@ class UISearchInputToMainSearchMapper @Inject constructor() :
     Base.Mapper<UISearchInputState.Search, MainSearchStateUI.SearchUI<*>> {
 
     override fun map(model: UISearchInputState.Search) = with(model) {
-        if (text.length == 2 || (text.all { it.isUpperCase() } && text.length < 4))
+        if (text.all { it.isUpperCase() } && text.length <= 2)
             MainSearchStateUI.NickName(text)
         else
             MainSearchStateUI.FullName(text)
