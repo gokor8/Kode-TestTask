@@ -1,7 +1,6 @@
 package com.example.kode.domain.usecase.workers
 
 import com.example.kode.domain.core.Base
-import com.example.kode.domain.core.sort.EmptyFilterableUseCaseModel
 import com.example.kode.domain.core.sort.FilterableCreator
 import com.example.kode.domain.core.sort.SortableUseCaseModel
 import com.example.kode.domain.core.usecase.UseCaseModel
@@ -18,10 +17,12 @@ class GetWorkersUseCaseImpl<M : UseCaseModel, SM : SortableUseCaseModel<*>> @Inj
     private val toSortState: Base.Mapper<M, List<SM>>,
 ) : GetWorkersUseCase<M, SM>(coroutineContext, failMapper) {
 
-    override suspend fun withSafe(equalsAttribute: FilterableCreator<SortableUseCaseModel<*>, SM>): M {
+    override suspend fun withSafe(equalsAttribute: FilterableCreator<SortableUseCaseModel<*>, SM>?): M {
         val workersState = workersRepository.getWorkers()
 
-        val workersList = workersRepository.getWorkers().let(toSortState::map)
+        if(equalsAttribute == null) return workersState
+
+        val workersList = workersState.let(toSortState::map)
 
         if (workersList.isEmpty()) {
             return workersState

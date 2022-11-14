@@ -10,4 +10,4 @@ import kotlin.coroutines.CoroutineContext
 abstract class GetWorkersUseCase<M : UseCaseModel, SM : SortableUseCaseModel<*>>(
     coroutineContext: CoroutineContext,
     failMapper: Base.Mapper<Exception, M>
-) : UseCaseSuspend.UseCaseWithInput<FilterableCreator<SortableUseCaseModel<*>, SM>, M>(coroutineContext, failMapper)
+) : UseCaseSuspend.UseCaseWithInput<FilterableCreator<SortableUseCaseModel<*>, SM>?, M>(coroutineContext, failMapper)
