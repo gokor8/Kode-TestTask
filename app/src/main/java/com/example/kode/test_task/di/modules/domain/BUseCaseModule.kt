@@ -4,6 +4,7 @@ import com.example.kode.domain.core.Read
 import com.example.kode.domain.core.sort.SortUseCaseModel
 import com.example.kode.domain.entity.worker.WorkerFullStateEntity
 import com.example.kode.domain.entity.worker.WorkerInputEntity
+import com.example.kode.domain.entity.workers.WorkerInfoEntity
 import com.example.kode.domain.entity.workers.WorkerSortableEntity
 import com.example.kode.domain.entity.workers.WorkersStateEntity
 import com.example.kode.domain.usecase.sort.SortUseCase
@@ -20,8 +21,8 @@ import dagger.Provides
 interface BUseCaseModule {
 
     @Binds
-    fun bindGetWorkersUseCase(useCase: GetWorkersUseCaseImpl<WorkersStateEntity>)
-            : GetWorkersUseCase<WorkersStateEntity>
+    fun bindGetWorkersUseCase(useCase: GetWorkersUseCaseImpl<WorkersStateEntity, WorkerInfoEntity>)
+            : GetWorkersUseCase<WorkersStateEntity, WorkerInfoEntity>
 
     @Binds
     fun bindGetWorkerUseCase(useCase: GetWorkerUseCaseImpl<WorkerInputEntity, WorkerFullStateEntity>)
