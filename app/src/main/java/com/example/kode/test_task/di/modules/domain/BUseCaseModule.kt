@@ -21,8 +21,8 @@ import dagger.Provides
 interface BUseCaseModule {
 
     @Binds
-    fun bindGetWorkersUseCase(useCase: GetWorkersUseCaseImpl<WorkersStateEntity, WorkerInfoEntity>)
-            : GetWorkersUseCase<WorkersStateEntity, WorkerInfoEntity>
+    fun bindGetWorkersUseCase(useCase: GetWorkersUseCaseImpl<WorkersStateEntity>)
+            : GetWorkersUseCase<WorkersStateEntity, String>
 
     @Binds
     fun bindGetWorkerUseCase(useCase: GetWorkerUseCaseImpl<WorkerInputEntity, WorkerFullStateEntity>)

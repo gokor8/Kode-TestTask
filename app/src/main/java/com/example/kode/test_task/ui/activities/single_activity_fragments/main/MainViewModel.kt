@@ -5,7 +5,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.viewModelScope
 import com.example.kode.domain.core.Base
 import com.example.kode.domain.core.Read
+import com.example.kode.domain.core.sort.FilterableCreator
+import com.example.kode.domain.core.sort.FilterableUseCaseModel
 import com.example.kode.domain.core.sort.SortUseCaseModel
+import com.example.kode.domain.core.sort.SortableUseCaseModel
 import com.example.kode.domain.entity.workers.WorkerInfoEntity
 import com.example.kode.domain.entity.workers.WorkerSortableEntity
 import com.example.kode.domain.entity.workers.WorkersStateEntity
@@ -20,7 +23,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class MainViewModel @Inject constructor(
-    private val useCase: GetWorkersUseCase<WorkersStateEntity, WorkerInfoEntity>,
+    private val useCase: GetWorkersUseCase<WorkersStateEntity, String>,
     private val sortUseCase: Read.AbstractInput.SuspendEquable<SortUseCaseModel<WorkerSortableEntity>, WorkersStateEntity>,
     private val toUIMapper: Base.Mapper<WorkersStateEntity, MainResultStatesUI>,
     private val toMainSearchStateUI: Base.Mapper<UISearchInputState, MainSearchStateUI>,
@@ -30,6 +33,7 @@ class MainViewModel @Inject constructor(
 
     fun getWorkers(position: String?) = viewModelScope.launch {
         useCase.get(position).let(toUIMapper::map).let(communication::save)
+        //MainSearchStateUI.Position(position)
     }
 
     override fun observeSearch(

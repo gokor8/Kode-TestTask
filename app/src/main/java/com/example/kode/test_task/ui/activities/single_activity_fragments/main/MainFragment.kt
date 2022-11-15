@@ -38,7 +38,7 @@ class MainFragment :
         rvMain.adapter = recyclerAdapter
         rvMain.layoutManager = LinearLayoutManager(context)
 
-        viewModel.getWorkers(arguments.getString("position"))
+        viewModel.getWorkers(arguments?.getString("position"))
     }
 
     override fun setListeners() = with(binding) {
@@ -46,7 +46,7 @@ class MainFragment :
             vfMain.isVisible = true
             iError.llError.isVisible = false
             iErrorSearch.llError.isVisible = false
-            viewModel.getWorkers()
+            viewModel.getWorkers(null)
         }
     }
 
