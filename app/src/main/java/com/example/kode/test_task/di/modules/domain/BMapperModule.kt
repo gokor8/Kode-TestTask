@@ -7,6 +7,7 @@ import com.example.kode.domain.entity.worker.WorkerFullStateEntity
 import com.example.kode.domain.entity.workers.WorkerInfoEntity
 import com.example.kode.domain.entity.workers.WorkerSortableEntity
 import com.example.kode.domain.entity.workers.WorkersStateEntity
+import com.example.kode.domain.usecase.workers.mappers.WorkersInfoListToWorkersState
 import com.example.kode.domain.usecase.workers.mappers.WorkersSortableToWorkersMapper
 import com.example.kode.domain.usecase.workers.mappers.WorkersToSortableMapper
 import dagger.Binds
@@ -30,4 +31,8 @@ interface BMapperModule {
     @Binds
     fun bindWorkersToSortableMapper(mapper: WorkersToSortableMapper)
             : Base.Mapper<WorkersStateEntity, List<@JvmSuppressWildcards WorkerInfoEntity>>
+
+    @Binds
+    fun bindWorkersInfoListToWorkersState(mapper: WorkersInfoListToWorkersState)
+            : Base.Mapper<List<@JvmSuppressWildcards WorkerInfoEntity>, WorkersStateEntity>
 }

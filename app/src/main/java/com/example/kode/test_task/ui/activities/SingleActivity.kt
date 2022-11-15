@@ -9,27 +9,38 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.NavController
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.example.kode.test_task.App
 import com.example.kode.test_task.R
 import com.example.kode.test_task.databinding.ActivityMainBinding
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.MainFragment
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.MainFragmentArgs
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.MainFragmentDirections
+import com.example.kode.test_task.ui.activities.single_activity_fragments.main.MainViewModelFactory
+import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.MainResultStatesUI
 import com.example.kode.test_task.ui.core.BaseActivity
 import com.example.kode.test_task.ui.core.viewmodels.BaseViewModel
+import java.lang.ref.WeakReference
+import javax.inject.Inject
 
 class SingleActivity : BaseActivity<ActivityMainBinding, BaseViewModel<*, *>>() {
 
-    override val viewModel: SingleActivityViewModel by viewModels()
+    @Inject
+    lateinit var viewModelFactory: SingleActivityViewModelFactory
+
+    override val viewModel: SingleActivityViewModel by viewModels{ viewModelFactory }
 
     override fun setBind(): ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        (application as App).daggerAppComponent.inject(this)
     }
 
     override fun setUI() {
         supportActionBar?.hide()
+        viewModel.getPositions()
     }
 
     override fun setListeners() = with(binding.iSearch) {
