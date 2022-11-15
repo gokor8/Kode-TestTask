@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 class SingleActivityViewModel @Inject constructor(
     communication: SingleActivityCommunication,
-    private val getWorkersUseCase: GetWorkersUseCase<WorkersStateEntity, WorkerInfoEntity>,
+    private val getWorkersUseCase: GetWorkersUseCase<WorkersStateEntity, String>,
 ) : BaseViewModel<LiveDataCommunication<List<String>>, List<String>>(communication) {
 
     fun getPositions() {
