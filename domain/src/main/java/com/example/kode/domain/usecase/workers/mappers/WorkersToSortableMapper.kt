@@ -5,7 +5,7 @@ import com.example.kode.domain.entity.workers.WorkerInfoEntity
 import com.example.kode.domain.entity.workers.WorkersStateEntity
 import javax.inject.Inject
 
-class WorkersToSortableMapper @Inject constructor() : Base.Mapper<WorkersStateEntity, List<WorkerInfoEntity>> {
+class WorkersToSortableMapper @Inject constructor() : Base.Mapper<WorkersStateEntity, List<@JvmSuppressWildcards WorkerInfoEntity>> {
     override fun map(model: WorkersStateEntity): List<WorkerInfoEntity> = when(model) {
         is WorkersStateEntity.Success -> model.workers
         is WorkersStateEntity.NoConnection -> model.workers

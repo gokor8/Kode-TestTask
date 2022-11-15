@@ -7,10 +7,13 @@ import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.navigation.NavController
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.kode.test_task.R
 import com.example.kode.test_task.databinding.ActivityMainBinding
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.MainFragment
+import com.example.kode.test_task.ui.activities.single_activity_fragments.main.MainFragmentArgs
+import com.example.kode.test_task.ui.activities.single_activity_fragments.main.MainFragmentDirections
 import com.example.kode.test_task.ui.core.BaseActivity
 import com.example.kode.test_task.ui.core.viewmodels.BaseViewModel
 
@@ -52,19 +55,19 @@ class SingleActivity : BaseActivity<ActivityMainBinding, BaseViewModel<*, *>>() 
 
     override fun setObservers() = with(binding) {
         viewModel.observe(this@SingleActivity) {
-            vpPositions.adapter = ScreenSlidePagerAdapter(this)
+            vpPositions.adapter = ScreenSlidePagerAdapter(this@SingleActivity, it)
         }
     }
 
     private inner class ScreenSlidePagerAdapter(
         fa: FragmentActivity,
-        private val listPositions: String,
+        private val listPositions: List<String>,
     ) : FragmentStateAdapter(fa) {
 
-        override fun getItemCount(): Int = listPositions.length
+        override fun getItemCount(): Int = listPositions.size
 
         override fun createFragment(position: Int): Fragment = MainFragment().apply {
-            bundleOf(listPositions[position] to listPositions[position])
+            arguments = bundleOf("position" to listPositions[position])
         }
     }
 }

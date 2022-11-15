@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.kode.domain.core.Base
 import com.example.kode.domain.core.Read
 import com.example.kode.domain.core.sort.SortUseCaseModel
+import com.example.kode.domain.entity.workers.WorkerInfoEntity
 import com.example.kode.domain.entity.workers.WorkerSortableEntity
 import com.example.kode.domain.entity.workers.WorkersStateEntity
 import com.example.kode.domain.usecase.workers.GetWorkersUseCase
@@ -19,7 +20,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class MainViewModel @Inject constructor(
-    private val useCase: GetWorkersUseCase<WorkersStateEntity>,
+    private val useCase: GetWorkersUseCase<WorkersStateEntity, WorkerInfoEntity>,
     private val sortUseCase: Read.AbstractInput.SuspendEquable<SortUseCaseModel<WorkerSortableEntity>, WorkersStateEntity>,
     private val toUIMapper: Base.Mapper<WorkersStateEntity, MainResultStatesUI>,
     private val toMainSearchStateUI: Base.Mapper<UISearchInputState, MainSearchStateUI>,
@@ -27,8 +28,8 @@ class MainViewModel @Inject constructor(
 ) : BaseViewModel<SearchableCommunication<MainResultStatesUI>, MainResultStatesUI>(communication),
     SearchableViewModel<UISearchInputState, MainResultStatesUI> {
 
-    fun getWorkers() = viewModelScope.launch {
-        useCase.get().let(toUIMapper::map).let(communication::save)
+    fun getWorkers(position: String?) = viewModelScope.launch {
+        useCase.get(position).let(toUIMapper::map).let(communication::save)
     }
 
     override fun observeSearch(

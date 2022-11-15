@@ -38,7 +38,7 @@ class MainFragment :
         rvMain.adapter = recyclerAdapter
         rvMain.layoutManager = LinearLayoutManager(context)
 
-        viewModel.getWorkers()
+        viewModel.getWorkers(arguments.getString("position"))
     }
 
     override fun setListeners() = with(binding) {

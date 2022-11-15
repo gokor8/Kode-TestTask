@@ -29,5 +29,5 @@ interface BMapperModule {
 
     @Binds
     fun bindWorkersToSortableMapper(mapper: WorkersToSortableMapper)
-            : Base.Mapper<WorkersStateEntity, List<WorkerInfoEntity>>
+            : Base.Mapper<WorkersStateEntity, List<@JvmSuppressWildcards WorkerInfoEntity>>
 }
