@@ -31,14 +31,8 @@ class SingleActivity : BaseActivity<ActivityMainBinding, BaseViewModel<*, *>>() 
 
     override fun setBind(): ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(binding.root)
-
-        (application as App).daggerAppComponent.inject(this)
-    }
-
     override fun setUI() {
+        (application as App).daggerAppComponent.inject(this)
         supportActionBar?.hide()
         viewModel.getPositions()
     }
