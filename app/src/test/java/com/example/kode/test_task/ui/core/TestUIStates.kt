@@ -1,4 +1,4 @@
-package com.example.kode.test_task.ui
+package com.example.kode.test_task.ui.core
 
 sealed class TestUIStates {
 

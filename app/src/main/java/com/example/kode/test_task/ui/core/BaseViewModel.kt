@@ -3,7 +3,7 @@ package com.example.kode.test_task.ui.core
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
 
-abstract class BaseViewModel<C : BaseCommunication<M>, M : Any>(
+abstract class BaseViewModel<C : LiveDataCommunication<M>, M : Any>(
     protected val communication: C
 ) : ViewModel() {
 

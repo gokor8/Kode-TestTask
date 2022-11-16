@@ -1,4 +1,4 @@
-package com.example.kode.test_task.ui
+package com.example.kode.test_task.ui.core
 
 import com.example.kode.domain.core.Base
 
