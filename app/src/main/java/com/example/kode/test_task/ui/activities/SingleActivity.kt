@@ -19,6 +19,7 @@ import com.example.kode.test_task.ui.activities.single_activity_fragments.main.M
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.MainResultStatesUI
 import com.example.kode.test_task.ui.core.BaseActivity
 import com.example.kode.test_task.ui.core.viewmodels.BaseViewModel
+import com.google.android.material.tabs.TabLayoutMediator
 import java.lang.ref.WeakReference
 import javax.inject.Inject
 
@@ -60,7 +61,11 @@ class SingleActivity : BaseActivity<ActivityMainBinding, BaseViewModel<*, *>>() 
 
     override fun setObservers() = with(binding) {
         viewModel.observe(this@SingleActivity) {
-            vpPositions.adapter = ScreenSlidePagerAdapter(this@SingleActivity, it)
+            val bullshitList: List<String> = it.toMutableList().apply { add(0, "Все") }
+            vpPositions.adapter = ScreenSlidePagerAdapter(this@SingleActivity, bullshitList)
+            TabLayoutMediator(tlTabs, vpPositions) { tab, position ->
+                tab.text = bullshitList[position]
+            }.attach()
         }
     }
 
@@ -72,7 +77,9 @@ class SingleActivity : BaseActivity<ActivityMainBinding, BaseViewModel<*, *>>() 
         override fun getItemCount(): Int = listPositions.size
 
         override fun createFragment(position: Int): Fragment = MainFragment().apply {
-            arguments = bundleOf("position" to listPositions[position])
+            if(listPositions[position] != "Все") {
+                arguments = bundleOf("position" to listPositions[position])
+            }
         }
     }
 }
