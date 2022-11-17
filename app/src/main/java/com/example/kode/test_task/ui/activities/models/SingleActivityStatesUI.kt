@@ -1,8 +1,8 @@
 package com.example.kode.test_task.ui.activities.models
 
-sealed class SingleActivityStatesUI {
+sealed interface SingleActivityStatesUI {
 
-    class Search(val searchText: String)
+    class Search(val searchText: String) : SingleActivityStatesUI
 
-    class Cancel()
+    class Cancel() : SingleActivityStatesUI
 }
