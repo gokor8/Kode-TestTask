@@ -8,9 +8,9 @@ import androidx.annotation.CallSuper
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import com.example.kode.test_task.App
-import javax.inject.Inject
+import com.example.kode.test_task.ui.core.view_model.BaseViewModel
 
-abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel<*,*>> : Fragment(),
+abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel<*, *>> : Fragment(),
     BaseInterfaceView<VB, VM> {
 
     val binding: VB by lazy { setBind() }

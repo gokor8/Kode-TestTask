@@ -1,5 +1,7 @@
 package com.example.kode.test_task.ui.activities.single_activity_fragments
 
+import com.example.kode.domain.core.Base
+import com.example.kode.test_task.ui.activities.SingleActivityViewModel
 import com.example.kode.test_task.ui.core.TestCommunication
 import junit.framework.TestCase.*
 import org.junit.Before
@@ -21,7 +23,7 @@ class TestSingleActivityViewModel {
 
         val testValue = "KM"
 
-        viewModel.search(testValue)
+        viewModel.setSearchText(testValue)
 
         val expected = SearchUIState.Search(testValue)
 
@@ -35,7 +37,7 @@ class TestSingleActivityViewModel {
 
         val testValue = "Dee"
 
-        viewModel.search(testValue)
+        viewModel.setSearchText(testValue)
 
         val expected = SearchUIState.Search(testValue)
 
@@ -49,18 +51,24 @@ class TestSingleActivityViewModel {
 
         val testValue = ""
 
-        viewModel.search(testValue)
+        viewModel.setSearchText(testValue)
 
         val expected = SearchUIState.Cancel()
 
         assertEquals(1, communicationListHistory.size)
         assertEquals(expected, communicationListHistory[0])
     }
-}
 
-sealed interface SearchUIState {
+    sealed interface SearchUIState {
 
-    class Search(val text: String) : SearchUIState
+        class Search(val text: String) : SearchUIState
 
-    class Cancel() : SearchUIState
+        class Cancel : SearchUIState
+    }
+
+    class TestMapper : Base.Mapper<String, SearchUIState> {
+        override fun map(model: String): SearchUIState {
+
+        }
+    }
 }

@@ -1,9 +1,9 @@
-package com.example.kode.test_task.ui.core
+package com.example.kode.test_task.ui.core.view_model
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
-interface BaseViewModelFactory<VM : BaseViewModel<*,*>> : ViewModelProvider.Factory {
+interface BaseViewModelFactory<VM : BaseViewModel<*, *>> : ViewModelProvider.Factory {
 
     val modelClass: Class<VM>
 

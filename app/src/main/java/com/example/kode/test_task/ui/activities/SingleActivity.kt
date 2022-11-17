@@ -6,7 +6,7 @@ import androidx.core.view.isVisible
 import com.example.kode.test_task.R
 import com.example.kode.test_task.databinding.ActivityMainBinding
 import com.example.kode.test_task.ui.core.BaseActivity
-import com.example.kode.test_task.ui.core.BaseViewModel
+import com.example.kode.test_task.ui.core.view_model.BaseViewModel
 
 class SingleActivity : BaseActivity<ActivityMainBinding, BaseViewModel<*, *>>() {
 
