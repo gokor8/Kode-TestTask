@@ -1,3 +1,4 @@
+/*
 package com.example.kode.test_task.ui.activities.single_activity_fragments.main
 
 import androidx.lifecycle.LifecycleOwner
@@ -148,4 +149,4 @@ class TestGetWorkerUseCase(coroutineContext: CoroutineContext) :
 class TestFailMapper : Base.Mapper<Exception, WorkersStateEntity> {
 
     override fun map(model: Exception) = WorkersStateEntity.Fail(NotFoundSearchException())
-}
+}*/

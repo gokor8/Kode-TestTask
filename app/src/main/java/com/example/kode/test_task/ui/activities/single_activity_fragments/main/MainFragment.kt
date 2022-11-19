@@ -3,6 +3,7 @@ package com.example.kode.test_task.ui.activities.single_activity_fragments.main
 import android.content.Context
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kode.domain.core.Base
 import com.example.kode.test_task.App
@@ -10,6 +11,7 @@ import com.example.kode.test_task.databinding.FragmentMainBinding
 import com.example.kode.test_task.databinding.ItemMainBinding
 import com.example.kode.test_task.ui.activities.SingleActivity
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.MainResultStatesUI
+import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.PreviewRecyclerViewModel
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.PreviewWorkerInfoUIModel
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.recycler_view.MainViewHolder
 import com.example.kode.test_task.ui.activities.single_activity_fragments.searchable.SearchableFragment
@@ -22,7 +24,7 @@ class MainFragment :
     SearchableFragment<FragmentMainBinding, UISearchInputState, MainResultStatesUI>() {
 
     @Inject
-    lateinit var recyclerAdapter: BaseRecyclerViewAdapter<PreviewWorkerInfoUIModel, ItemMainBinding, MainViewHolder>
+    lateinit var recyclerAdapter: BaseRecyclerViewAdapter<PreviewRecyclerViewModel, ItemMainBinding, MainViewHolder>
 
     @Inject
     lateinit var uiStateMapper: Base.Mapper<MainResultStatesUI, Unit>
@@ -48,7 +50,9 @@ class MainFragment :
             iErrorSearch.llError.isVisible = false
             viewModel.getWorkers(null)
         }
-    }
+        val navHostFragment = childFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navController = navHostFragment.navController
+    }.let{}
 
     override fun setObservers() = with(binding) {
         viewModel.observe(viewLifecycleOwner) {
@@ -73,7 +77,8 @@ class MainFragment :
             .create(
                 WeakReference(context),
                 WeakReference(binding),
-                WeakReference(binding.root)
+                WeakReference(binding.root),
+                WeakReference(this)
             )
             .inject(this)
     }

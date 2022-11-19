@@ -4,16 +4,18 @@ import androidx.annotation.CallSuper
 import com.example.kode.domain.core.Base
 import com.example.kode.test_task.databinding.ItemMainBinding
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.MainResultStatesUI
+import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.PreviewRecyclerViewModel
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.PreviewWorkerInfoUIModel
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.recycler_view.MainViewHolder
 import com.example.kode.test_task.ui.core.recycler_view.BaseRecyclerViewAdapter
 
 abstract class UISuccessMapper<M : MainResultStatesUI.Success>(
-    protected val adapter: BaseRecyclerViewAdapter<PreviewWorkerInfoUIModel, ItemMainBinding, MainViewHolder>
+    protected val adapter: BaseRecyclerViewAdapter<PreviewRecyclerViewModel, ItemMainBinding, MainViewHolder>,
+    protected val mapper: Base.Mapper<MainResultStatesUI.Success, List<PreviewRecyclerViewModel>>
 ) : Base.Mapper<M, Unit> {
 
     @CallSuper
     override fun map(model: M) {
-        adapter.submitList(model.workers)
+        adapter.submitList(mapper.map(model))
     }
 }

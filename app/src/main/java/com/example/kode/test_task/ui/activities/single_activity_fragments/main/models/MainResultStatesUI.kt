@@ -30,6 +30,7 @@ sealed interface MainResultStatesUI : SearchResultStatesUI {
         class Search(
             workers: List<PreviewWorkerInfoUIModel>,
         ) : Success(workers)
+
     }
 
     sealed class Fail : MainResultStatesUI {

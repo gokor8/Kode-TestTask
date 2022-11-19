@@ -13,9 +13,6 @@
         <action
             android:id="@+id/actionOpenWorkerFragment"
             app:destination="@id/workerFragment" />
-        <action
-            android:id="@+id/actionOpenYourself"
-            app:destination="@id/mainFragment" />
         <argument
             android:name="position"
             app:argType="string"

@@ -2,11 +2,13 @@ package com.example.kode.test_task.ui.activities.single_activity_fragments.main.
 
 import android.content.Context
 import android.view.View
+import com.example.kode.domain.core.Base
 import com.example.kode.test_task.R
 import com.example.kode.test_task.databinding.ItemMainBinding
 import com.example.kode.test_task.di.annotations.main_fragment.MainFragmentContext
 import com.example.kode.test_task.di.annotations.main_fragment.MainFragmentView
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.MainResultStatesUI
+import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.PreviewRecyclerViewModel
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.PreviewWorkerInfoUIModel
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.recycler_view.MainViewHolder
 import com.example.kode.test_task.ui.core.recycler_view.BaseRecyclerViewAdapter
@@ -19,8 +21,9 @@ class UICacheStateMapper @Inject constructor(
     private val context: WeakReference<Context>,
     @MainFragmentView
     private val view: WeakReference<View>,
-    adapter: BaseRecyclerViewAdapter<PreviewWorkerInfoUIModel, ItemMainBinding, MainViewHolder>
-) : UISuccessMapper<MainResultStatesUI.Success.Cache>(adapter) {
+    adapter: BaseRecyclerViewAdapter<PreviewRecyclerViewModel, ItemMainBinding, MainViewHolder>,
+    mapper: Base.Mapper<MainResultStatesUI.Success, List<PreviewRecyclerViewModel>>
+) : UISuccessMapper<MainResultStatesUI.Success.Cache>(adapter, mapper) {
 
     override fun map(model: MainResultStatesUI.Success.Cache) = view.get()?.also {
         super.map(model)

@@ -2,6 +2,7 @@ package com.example.kode.test_task.di.subcomponents
 
 import android.content.Context
 import android.view.View
+import androidx.navigation.NavController
 import com.example.kode.test_task.databinding.FragmentMainBinding
 import com.example.kode.test_task.di.annotations.main_fragment.MainFragmentBinding
 import com.example.kode.test_task.di.annotations.main_fragment.MainFragmentContext
@@ -28,7 +29,9 @@ interface MainFragmentSubcomponent {
             binding: WeakReference<FragmentMainBinding>,
             @BindsInstance
             @MainFragmentView
-            view: WeakReference<View>
+            view: WeakReference<View>,
+            @BindsInstance
+            navController: WeakReference<MainFragment>
         ): MainFragmentSubcomponent
     }
 
