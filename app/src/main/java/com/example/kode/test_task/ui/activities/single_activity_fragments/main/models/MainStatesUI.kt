@@ -1,6 +1,7 @@
 package com.example.kode.test_task.ui.activities.single_activity_fragments.main.models
 
 import com.example.kode.domain.core.Base
+import com.example.kode.test_task.ui.activities.single_activity_fragments.main.communications.temp_searchable.UISearchState
 
 sealed interface MainStatesUI {
 
@@ -14,6 +15,9 @@ sealed interface MainStatesUI {
         class Cache(
             workers: List<PreviewWorkerInfoUIModel>,
         ) : Success(workers)
+
+        class SearchSuccess(workers: List<PreviewWorkerInfoUIModel>) : Success(workers),
+            UISearchState.Success
     }
 
     sealed class Fail : MainStatesUI {
@@ -22,5 +26,7 @@ sealed interface MainStatesUI {
         }
 
         class FatalError : Fail()
+
+        class NotFound : Fail(), UISearchState.Fail
     }
 }
