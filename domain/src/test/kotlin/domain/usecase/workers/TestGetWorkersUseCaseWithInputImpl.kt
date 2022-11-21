@@ -5,12 +5,11 @@ import com.example.kode.domain.core.exceptions.UseCaseExceptions
 import com.example.kode.domain.core.usecase.UseCaseModel
 import com.example.kode.domain.repository.WorkersRepository
 import com.example.kode.domain.usecase.workers.GetWorkersUseCaseImpl
-import domain.core.TestDomainModel
+import domain.core.TestDomainState
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
-import java.io.IOException
 
 class TestGetWorkersUseCaseWithInputImpl {
 
@@ -21,7 +20,7 @@ class TestGetWorkersUseCaseWithInputImpl {
     // Второй сложные(TestRepository<DifficultEntity> + DataToDifficultDomainMapper<TestDataModel, DifficultEntity)
     // И теперь все просто. Когда надо получить один тип данных, даем его, когда другой, то другой
 
-    private lateinit var returnedStateMapper: Base.Mapper<TestDataState, TestDomainModel> // из di
+    private lateinit var returnedStateMapper: Base.Mapper<TestDataState, TestDomainState> // из di
     private lateinit var exceptionToExceptionEntityMapper: TestExceptionToEntityMapper // из di
 
     // di
@@ -43,7 +42,7 @@ class TestGetWorkersUseCaseWithInputImpl {
             )
 
         val actual = workersUseCase.get()
-        val expected = TestDomainModel.Success(
+        val expected = TestDomainState.Success(
             "test"
         )
 
@@ -62,7 +61,7 @@ class TestGetWorkersUseCaseWithInputImpl {
             )
 
         val actual = workersUseCase.get()
-        val expected = TestDomainModel.Fail(UseCaseExceptions.GenericException)
+        val expected = TestDomainState.Fail(UseCaseExceptions.GenericException)
 
         Assert.assertEquals(expected, actual)
     }
@@ -80,18 +79,18 @@ class TestGetWorkersUseCaseWithInputImpl {
         }
     }
 
-    class TestDataStateToEntityMapper : Base.Mapper<TestDataState, TestDomainModel> {
+    class TestDataStateToEntityMapper : Base.Mapper<TestDataState, TestDomainState> {
         override fun map(model: TestDataState) = when (model) {
             is TestDataState.Success ->
-                TestDomainModel.Success(
+                TestDomainState.Success(
                     "test"
                 )
             is TestDataState.Exception -> throw IOException()
         }
     }
 
-    class TestExceptionToEntityMapper : Base.Mapper<Exception, TestDomainModel> {
-        override fun map(model: Exception) = TestDomainModel.Fail(UseCaseExceptions.GenericException)
+    class TestExceptionToEntityMapper : Base.Mapper<Exception, TestDomainState> {
+        override fun map(model: Exception) = TestDomainState.Fail(UseCaseExceptions.GenericException)
     }
 
     sealed class TestDataState : Base.IgnorantMapper<TestDataState> {

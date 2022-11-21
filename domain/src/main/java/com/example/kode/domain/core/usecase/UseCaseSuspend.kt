@@ -15,7 +15,7 @@ sealed class UseCaseSuspend<R : UseCaseModel<R>>(
     abstract class UseCaseWithInput<I : Any, R : UseCaseModel<R>>(
         coroutineContext: CoroutineContext,
         failMapper: Base.Mapper<Exception, R>
-    ) : UseCaseSuspend<R>(coroutineContext, failMapper), Read.AbstractInput.SuspendEquable<I, R> {
+    ) : UseCaseSuspend<R>(coroutineContext, failMapper), UseCaseInput<I, R> {
 
         override suspend fun get(equalsAttribute: I): R = withContext(coroutineContext) {
             try {
