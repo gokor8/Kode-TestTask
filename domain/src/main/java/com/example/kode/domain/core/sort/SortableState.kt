@@ -1,6 +1,9 @@
 package com.example.kode.domain.core.sort
 
-interface SortableState<C : Collection<M>, M : SortableModel<*>> {
+import com.example.kode.domain.core.Copy
 
-    fun getSortableList(): C
+interface SortableState<SS : SortableState<SS, SM, M>, SM : SortableModel<M>, M : Any>
+    : UseCaseSortableModel, Copy<List<SM>, SS> {
+
+    fun getSortableList(): List<SM>
 }

@@ -9,9 +9,9 @@ import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 
-class TestSortByString {
+class TestSortByStringState {
 
-    val testSortState = TestDomainSortStateSuccess<String>(
+    val testSortState = TestDomainSortStateSuccess(
         listOf(
             TestSortableModel("test2"),
             TestSortableModel("test1"),

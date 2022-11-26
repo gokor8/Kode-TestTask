@@ -1,6 +1,7 @@
 package domain.usecase.sort
 
 import com.example.kode.domain.core.Save
+import com.example.kode.domain.entity.custom_exceptions.GenericException
 import domain.core.TestDomainState
 import domain.core.sort.TestDomainSortStateFail
 import domain.core.sort.TestDomainSortStateSuccess
@@ -50,7 +51,7 @@ class TestSortDomainSortState {
         //assertTrue(actual is TestDomainSortStateFail)
     }
 
-    @Test(expected = Throwable::class)
+    @Test(expected = GenericException::class)
     fun `test sort with something Exception`(): Unit = runBlocking {
         val sortModel = testSortState
         val sortUseCase = SortBySortState(this.coroutineContext, TestFailMapper())

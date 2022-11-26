@@ -5,7 +5,7 @@ import com.example.kode.domain.core.usecase.UseCaseModel
 import com.example.kode.domain.core.usecase.UseCaseSuspend
 import kotlin.coroutines.CoroutineContext
 
-abstract class AbstractSortUseCase<I : SortModel, R : UseCaseModel<R>>(
+abstract class AbstractSortUseCase<I : UseCaseSortableModel, R : UseCaseModel>(
     coroutineContext: CoroutineContext,
     failMapper: Base.Mapper<Exception, R>
 ) : UseCaseSuspend.UseCaseWithInput<I, R>(coroutineContext, failMapper), SortUseCase<I, R>

@@ -5,14 +5,14 @@ import com.example.kode.domain.core.Read
 import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext
 
-sealed class UseCaseSuspend<R : UseCaseModel<R>>(
+sealed class UseCaseSuspend<R : UseCaseModel>(
     protected val coroutineContext: CoroutineContext,
     protected val failMapper: Base.Mapper<Exception, R>
 ) {
 
     // Можно было бы юзануть coroutineExceptionHandler, но мне больше нравится использовать подход с try{}catch
 
-    abstract class UseCaseWithInput<I : Any, R : UseCaseModel<R>>(
+    abstract class UseCaseWithInput<I : Any, R : UseCaseModel>(
         coroutineContext: CoroutineContext,
         failMapper: Base.Mapper<Exception, R>
     ) : UseCaseSuspend<R>(coroutineContext, failMapper), UseCaseInput<I, R> {
@@ -30,7 +30,7 @@ sealed class UseCaseSuspend<R : UseCaseModel<R>>(
 
     }
 
-    abstract class UseCaseWithoutInput<R : UseCaseModel<R>>(
+    abstract class UseCaseWithoutInput<R : UseCaseModel>(
         coroutineContext: CoroutineContext,
         failMapper: Base.Mapper<Exception, R>
     ) : UseCaseSuspend<R>(coroutineContext, failMapper), Read.Abstract.Suspend<R> {
