@@ -1,3 +1,4 @@
+/*
 package domain.usecase.sort
 
 import com.example.kode.domain.core.Save
@@ -12,7 +13,7 @@ import org.junit.Test
 
 class TestSortDomainSortState {
 
-    val testSortState = TestDomainSortStateSuccess<String>(
+    val testSortState = TestDomainSortStateSuccess(
         listOf(
             TestSortableModel("test2"),
             TestSortableModel("test1"),
@@ -65,4 +66,4 @@ class TestSortDomainSortState {
     }
 
     class TestFailSortException : IOException()
-}
+}*/

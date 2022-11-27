@@ -8,7 +8,7 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
-class GetWorkersUseCaseImpl<M : UseCaseModel<M>> @Inject constructor(
+class GetWorkersUseCaseImpl<M : UseCaseModel> @Inject constructor(
     coroutineContext: CoroutineContext,
     failMapper: Base.Mapper<Exception, M>,
     private val workersRepository: WorkersRepository<M>

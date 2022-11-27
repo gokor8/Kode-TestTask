@@ -10,7 +10,4 @@ data class WorkerInfoEntity(
     val lastName: String,
     val userTag: String,
     val position: String
-) : UseCaseModel<WorkerInfoEntity> {
-
-    override fun <I : Base.Mapper<WorkerInfoEntity, R>, R> map(model: I): R = model.map(this)
-}
+) : UseCaseModel

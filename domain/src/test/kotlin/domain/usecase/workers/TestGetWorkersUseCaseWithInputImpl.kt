@@ -10,6 +10,7 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
+import java.io.IOException
 
 class TestGetWorkersUseCaseWithInputImpl {
 
@@ -69,7 +70,7 @@ class TestGetWorkersUseCaseWithInputImpl {
 
     // TEST REALIZATION
 
-    class TestWorkersRepository<R : UseCaseModel<R>>(
+    class TestWorkersRepository<R : UseCaseModel>(
         private val testReturnedState: TestDataState,
         private val testDataStateMapper: Base.Mapper<TestDataState, R>
     ) : WorkersRepository<R> {

@@ -1,4 +1,4 @@
-package com.example.kode.domain.usecase.sort.by_string
+package com.example.kode.domain.entity.sort.by_string
 
 import com.example.kode.domain.core.sort.SortableState
 

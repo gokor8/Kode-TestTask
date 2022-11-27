@@ -4,8 +4,10 @@ import com.example.kode.domain.core.sort.SortModel
 import com.example.kode.domain.core.sort.SortableState
 import domain.core.TestDomainState
 
-class TestDomainSortStateSuccess<SV : Any>(private val sortableList: List<TestSortableModel<SV>>) :
-    TestDomainState(), SortModel, SortableState<List<TestSortableModel<SV>>, TestSortableModel<SV>> {
+class TestDomainSortStateSuccess<SM : TestSortableModel<SV>, SV : Any>(
+    private val sortableList: List<SM>,
+) : TestDomainState(), SortModel, SortableState<TestDomainSortStateSuccess<SM, SV>, SM, SV> {
 
-    override fun getSortableList(): List<TestSortableModel<SV>> = sortableList
+    override fun getSortableList(): List<SM> = sortableList
+    override fun copy(model: List<SM>) = TestDomainSortStateSuccess(model)
 }

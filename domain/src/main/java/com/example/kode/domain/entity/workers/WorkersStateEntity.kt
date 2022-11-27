@@ -4,9 +4,7 @@ import com.example.kode.domain.core.Base
 import com.example.kode.domain.core.exceptions.UseCaseExceptions
 import com.example.kode.domain.core.usecase.UseCaseModel
 
-sealed class WorkersStateEntity : UseCaseModel<WorkersStateEntity> {
-
-    override fun <I : Base.Mapper<WorkersStateEntity, R>, R> map(model: I): R = model.map(this)
+sealed class WorkersStateEntity : UseCaseModel {
 
     data class Success(
         val workers: List<WorkerInfoEntity>

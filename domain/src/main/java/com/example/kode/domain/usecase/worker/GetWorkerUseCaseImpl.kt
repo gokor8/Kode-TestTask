@@ -6,7 +6,7 @@ import com.example.kode.domain.repository.WorkerRepository
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
-class GetWorkerUseCaseImpl<IM : UseCaseModel<IM>, M : UseCaseModel<M>> @Inject constructor(
+class GetWorkerUseCaseImpl<IM : UseCaseModel, M : UseCaseModel> @Inject constructor(
     coroutineContext: CoroutineContext,
     failMapper: Base.Mapper<Exception, M>,
     private val getWorkerRepository: WorkerRepository<IM, M>,
