@@ -63,11 +63,9 @@ class TestSortByStringState {
 
         val actual = sortUseCase.get(sortModel)
 
-        val expected = TestDomainState.Fail(TestFailSortException())
+        val expected = TestDomainSortStateFail()
 
-        assertTrue(actual is TestDomainState.Fail)
-        val castedActual = actual as TestDomainState.Fail
-        assertEquals(expected.useCaseExceptions, castedActual.useCaseExceptions)
+        assertTrue(actual is TestDomainSortStateFail)
     }
 
     @Test(expected = Throwable::class)
