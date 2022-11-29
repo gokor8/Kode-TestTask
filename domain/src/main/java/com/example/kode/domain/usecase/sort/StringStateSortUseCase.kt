@@ -8,13 +8,17 @@ import com.example.kode.domain.entity.sort.by_string.StringSortableModel
 import com.example.kode.domain.entity.sort.by_string.StringSortableState
 import kotlin.coroutines.CoroutineContext
 
-class StringStateSortUseCase<RSM : StringSortableState<RSM, SM>, SM : StringSortableModel, RM : UseCaseModel>(
+class StringStateSortUseCase<SS : StringSortableState<SS, SM>, SM : StringSortableModel, RM : UseCaseModel>(
     coroutineContext: CoroutineContext,
     failMapper: Base.Mapper<Exception, RM>,
-    private val toStateMapper: Base.Mapper<RSM, RM>,
-) : AbstractSortUseCase<StringSortEntity<RSM, SM>, RM>(coroutineContext, failMapper) {
+    private val toStateMapper: Base.Mapper<SS, RM>,
+) : StateSortUseCase<StringSortEntity<SS, SM>, SS, RM>(
+    coroutineContext,
+    failMapper,
+    toStateMapper
+) {
 
-    override suspend fun withSafe(equalsAttribute: StringSortEntity<RSM, SM>): RM =
+    override suspend fun withSafe(equalsAttribute: StringSortEntity<SS, SM>): RM =
         with(equalsAttribute) {
             sortableModel.getSortableList()
                 .filter { it.sortValue().contains(sortableValue) }
@@ -22,4 +26,3 @@ class StringStateSortUseCase<RSM : StringSortableState<RSM, SM>, SM : StringSort
                 .let(toStateMapper::map)
         }
 }
-

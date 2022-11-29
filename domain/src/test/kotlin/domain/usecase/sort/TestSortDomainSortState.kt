@@ -1,3 +1,4 @@
+/*
 package domain.usecase.sort
 
 import com.example.kode.domain.core.Save
@@ -66,3 +67,4 @@ class TestSortDomainSortState {
 
     class TestFailSortException : IOException()
 }
+*/
