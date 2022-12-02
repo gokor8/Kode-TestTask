@@ -1,6 +1,6 @@
 package com.example.kode.domain.core.sort
 
-interface SortableModel<SV> : Comparable<SV> {
+interface SortableModel<SV> {
 
     fun sortValue(): SV
 

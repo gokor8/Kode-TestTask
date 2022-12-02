@@ -8,6 +8,7 @@ import com.example.kode.domain.core.usecase.UseCaseModel
 import java.lang.Exception
 import kotlin.coroutines.CoroutineContext
 
+/*
 class SortableStateSortUseCase<SS : SortableState<SS, SM>, SM : SortableModel<*>, RM : UseCaseModel>(
     coroutineContext: CoroutineContext,
     failMapper: Base.Mapper<Exception, RM>,
@@ -19,4 +20,4 @@ class SortableStateSortUseCase<SS : SortableState<SS, SM>, SM : SortableModel<*>
             .let(equalsAttribute::copy)
             .let(toStateMapper::map)
     }
-}
+}*/

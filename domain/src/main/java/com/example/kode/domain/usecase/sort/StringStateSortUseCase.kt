@@ -11,18 +11,12 @@ import kotlin.coroutines.CoroutineContext
 class StringStateSortUseCase<SS : StringSortableState<SS, SM>, SM : StringSortableModel, RM : UseCaseModel>(
     coroutineContext: CoroutineContext,
     failMapper: Base.Mapper<Exception, RM>,
-    private val toStateMapper: Base.Mapper<SS, RM>,
-) : StateSortUseCase<StringSortEntity<SS, SM>, SS, RM>(
-    coroutineContext,
-    failMapper,
-    toStateMapper
-) {
-
-    override suspend fun withSafe(equalsAttribute: StringSortEntity<SS, SM>): RM =
-        with(equalsAttribute) {
-            sortableModel.getSortableList()
-                .filter { it.sortValue().contains(sortableValue) }
-                .let(sortableModel::copy)
-                .let(toStateMapper::map)
-        }
+    toStateMapper: Base.Mapper<SS, RM>,
+) : AbstractSortUseCase<SS, RM>(coroutineContext, failMapper) {
+// Подумать, а нужно ли это состояние маппить в другое, после сортировки
+    override fun sort(equalsAttribute: StringSortEntity<SS, SM>): SS =  with(equalsAttribute) {
+        sortableModel.getSortableList()
+            .filter { it.sortValue().contains(sortableValue) }
+            .let(sortableModel::copy)
+    }
 }

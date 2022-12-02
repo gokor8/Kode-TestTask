@@ -93,7 +93,7 @@ class TestSortByStringState {
     class TestToNormalStateMapper : Base.Mapper<TestDomainStringSortStateSuccess, TestDomainState> {
         override fun map(model: TestDomainStringSortStateSuccess): TestDomainState {
             if (model is TestExceptionDomainStringSortStateSuccess) {
-                throw IOException("Was give exception model")
+                throw IOException("Was gave exception model")
             }
 
             return if (model.getSortableList().isNotEmpty()) {
