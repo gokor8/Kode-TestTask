@@ -9,5 +9,5 @@ class TestDomainSortStateSuccess<SM : TestSortableModel<*>>(
 ) : TestDomainState(), SortModel, SortableState<TestDomainSortStateSuccess<SM>, SM> {
 
     override fun getSortableList(): List<SM> = sortableList
-    override fun copy(model: List<SM>) = TestDomainSortStateSuccess(model)
+    override fun copyByModel(model: List<SM>) = TestDomainSortStateSuccess(model)
 }

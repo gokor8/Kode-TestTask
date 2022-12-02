@@ -17,7 +17,7 @@ class SortableStateSortUseCase<SS : SortableState<SS, SM>, SM : SortableModel<*>
 
     override suspend fun withSafe(equalsAttribute: SS): RM {
         return equalsAttribute.getSortableList().sortedBy { it.sortValue() }
-            .let(equalsAttribute::copy)
+            .let(equalsAttribute::copyByModel)
             .let(toStateMapper::map)
     }
 }*/

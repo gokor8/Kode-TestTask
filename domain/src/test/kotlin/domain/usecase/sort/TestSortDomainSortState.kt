@@ -1,70 +1,83 @@
-/*
 package domain.usecase.sort
 
-import com.example.kode.domain.core.Save
-import com.example.kode.domain.entity.custom_exceptions.GenericException
+import com.example.kode.domain.usecase.sort.StringStateSortUseCase
 import domain.core.TestDomainState
 import domain.core.sort.TestDomainSortStateFail
 import domain.core.sort.TestDomainSortStateSuccess
-import domain.core.sort.TestSortableModel
+import domain.core.sort.string.TestDomainStringSortStateSuccess
+import domain.core.sort.string.TestExceptionDomainStringSortStateSuccess
+import domain.core.sort.string.TestStringSortableModel
+import domain.usecase.sort.mappers.TestFailMapper
+import domain.usecase.sort.mappers.TestToNormalStateMapper
 import junit.framework.TestCase
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 
 class TestSortDomainSortState {
 
-    val testSortState = TestDomainSortStateSuccess(
+    private val testSortState = TestDomainStringSortStateSuccess(
         listOf(
-            TestSortableModel("test2"),
-            TestSortableModel("test1"),
-            TestSortableModel("bad2est"),
+            TestStringSortableModel("test2"),
+            TestStringSortableModel("test1"),
+            TestStringSortableModel("bad2est"),
         )
     )
 
     @Test
-    fun `test sort with Success sort`(): Unit = runBlocking {
+    fun `test sort with full list return Success`(): Unit = runBlocking {
         val sortModel = testSortState
-        val sortUseCase = SortBySortState(this.coroutineContext, TestFailMapper())
+        val sortUseCase = StringStateSortUseCase(
+            this.coroutineContext,
+            TestFailMapper(),
+            TestToNormalStateMapper()
+        )
 
         val actual = sortUseCase.get(sortModel)
 
-        val expected = TestDomainSortStateSuccess<String>(
+        val expected = TestDomainSortStateSuccess(
             listOf(
-                TestSortableModel("test1"),
-                TestSortableModel("test2"),
+                TestStringSortableModel("bad2est"),
+                TestStringSortableModel("test1"),
+                TestStringSortableModel("test2"),
             )
         )
 
+        TestCase.assertTrue(actual is TestDomainStringSortStateSuccess)
+        actual as TestDomainStringSortStateSuccess
         TestCase.assertEquals(expected.getSortableList().size, actual.getSortableList().size)
-        TestCase.assertEquals(actual, expected)
+        TestCase.assertEquals(expected.getSortableList(), actual.getSortableList())
     }
 
     @Test
-    fun `test sort with FailSort`(): Unit = runBlocking {
-        val sortModel = testSortState
-        val sortUseCase = SortBySortState(this.coroutineContext, TestFailMapper())
+    fun `test sort with return empty list return FailSort`(): Unit = runBlocking {
+        val sortModel = TestDomainStringSortStateSuccess(listOf())
+        val sortUseCase = StringStateSortUseCase(
+            this.coroutineContext,
+            TestFailMapper(),
+            TestToNormalStateMapper()
+        )
 
         val actual = sortUseCase.get(sortModel)
 
-        val expected = TestDomainSortStateFail()
-
-        TestCase.assertEquals(actual, expected)
-        //assertTrue(actual is TestDomainSortStateFail)
+        TestCase.assertTrue(actual is TestDomainSortStateFail)
     }
 
-    @Test(expected = GenericException::class)
+    @Test()
     fun `test sort with something Exception`(): Unit = runBlocking {
-        val sortModel = testSortState
-        val sortUseCase = SortBySortState(this.coroutineContext, TestFailMapper())
+        val sortModel = TestExceptionDomainStringSortStateSuccess(
+            testSortState.getSortableList()
+        )
+        val sortUseCase = StringStateSortUseCase(
+            this.coroutineContext,
+            TestFailMapper(),
+            TestToNormalStateMapper()
+        )
 
         val actual = sortUseCase.get(sortModel)
-    }
 
-    class TestFailMapper() : Save.Base<Exception, TestDomainState> {
-        override fun save(model: Exception): TestDomainState =
-            if (model is TestFailSortException) TestDomainState.Fail()
-    }
+        TestCase.assertTrue(actual is TestDomainState.Fail)
 
-    class TestFailSortException : IOException()
+        actual as TestDomainState.Fail
+        TestCase.assertTrue(actual.useCaseExceptions is TestFailSortException)
+    }
 }
-*/

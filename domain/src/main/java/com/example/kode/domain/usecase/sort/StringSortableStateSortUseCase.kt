@@ -15,7 +15,7 @@ class StringSortableStateSortUseCase<SS : StringSortableState<SS, SM>, SM : Stri
 ) : StateSortUseCase<StringSortEntity<SS, SM>, SS, RM>(coroutineContext, failMapper, toStateMapper) {
 
     override fun sort(equalsAttribute: StringSortEntity<SS, SM>): SS = with(equalsAttribute) {
-        sortableModel.getSortableList().sortedBy { it.sortValue() }
-            .let(sortableModel::copy)
+        sortableModel.getSortableList().filter { it.sortValue().contains(sortableValue) }
+            .let(sortableModel::copyByModel)
     }
 }

@@ -6,7 +6,7 @@ import domain.core.TestDomainState
 open class TestDomainStringSortStateSuccess(private val sortableList: List<TestStringSortableModel>) :
     TestDomainState(), StringSortableState<TestDomainStringSortStateSuccess, TestStringSortableModel> {
 
-    override fun copy(model: List<TestStringSortableModel>): TestDomainStringSortStateSuccess {
+    override fun copyByModel(model: List<TestStringSortableModel>): TestDomainStringSortStateSuccess {
         return TestDomainStringSortStateSuccess(model)
     }
 
