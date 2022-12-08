@@ -1,8 +1,7 @@
 package domain.usecase.sort
 
-import com.example.kode.domain.core.exceptions.UseCaseExceptions
 import com.example.kode.domain.entity.sort.by_string.StringSortEntity
-import com.example.kode.domain.usecase.sort.StringSortableStateSortUseCase
+import com.example.kode.domain.usecase.sort.StringStateSortUseCase
 import domain.core.TestDomainState
 import domain.core.sort.TestDomainSortStateFail
 import domain.core.sort.string.TestDomainStringSortStateSuccess
@@ -15,7 +14,7 @@ import junit.framework.TestCase.assertTrue
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 
-class TestSortByStringState {
+class TestStringStateSortUseCase {
 
     private val testSortState = TestDomainStringSortStateSuccess(
         listOf(
@@ -28,7 +27,7 @@ class TestSortByStringState {
     @Test
     fun `test sort with Success sort`(): Unit = runBlocking {
         val sortModel = StringSortEntity("test", testSortState)
-        val sortUseCase = StringSortableStateSortUseCase(
+        val sortUseCase = StringStateSortUseCase(
             this.coroutineContext,
             TestFailMapper(),
             TestToNormalStateMapper()
@@ -45,15 +44,16 @@ class TestSortByStringState {
 
         assertTrue(actual is TestDomainStringSortStateSuccess)
 
-        val castedActual = actual as TestDomainStringSortStateSuccess
-        assertEquals(castedActual.getSortableList().size, expected.getSortableList().size)
-        assertEquals(castedActual.getSortableList(), expected.getSortableList())
+        actual as TestDomainStringSortStateSuccess
+
+        assertEquals(actual.getSortableList().size, expected.getSortableList().size)
+        assertEquals(actual.getSortableList(), expected.getSortableList())
     }
 
     @Test
     fun `test sort with FailSort`(): Unit = runBlocking {
         val sortModel = StringSortEntity("aboba", testSortState)
-        val sortUseCase = StringSortableStateSortUseCase(
+        val sortUseCase = StringStateSortUseCase(
             this.coroutineContext,
             TestFailMapper(),
             TestToNormalStateMapper()
@@ -71,7 +71,7 @@ class TestSortByStringState {
         )
 
         val sortModel = StringSortEntity("aboba", testData)
-        val sortUseCase = StringSortableStateSortUseCase(
+        val sortUseCase = StringStateSortUseCase(
             this.coroutineContext,
             TestFailMapper(),
             TestToNormalStateMapper()
@@ -82,6 +82,7 @@ class TestSortByStringState {
         assertTrue(actual is TestDomainState.Fail)
 
         actual as TestDomainState.Fail
+
         assertTrue(actual.useCaseExceptions is TestFailSortException)
     }
 }

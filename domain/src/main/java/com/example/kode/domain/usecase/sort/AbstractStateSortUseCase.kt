@@ -7,7 +7,7 @@ import com.example.kode.domain.core.usecase.UseCaseModel
 import com.example.kode.domain.entity.sort.BaseSortEntity
 import kotlin.coroutines.CoroutineContext
 
-abstract class StateSortUseCase<SE : BaseSortEntity<SS, *, *>, SS : SortableState<SS, *>, RM : UseCaseModel>(
+abstract class AbstractStateSortUseCase<SE : BaseSortEntity<SS, *, *>, SS : SortableState<SS, *>, RM : UseCaseModel>(
     coroutineContext: CoroutineContext,
     failMapper: Base.Mapper<Exception, RM>,
     private val toStateMapper: Base.Mapper<SS, RM>,

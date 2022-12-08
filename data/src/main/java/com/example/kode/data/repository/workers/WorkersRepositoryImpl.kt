@@ -6,10 +6,12 @@ import com.example.kode.data.datasource.workers.cloud.WorkersCloudDataSource
 import com.example.kode.domain.core.Base
 import com.example.kode.domain.core.usecase.UseCaseModel
 import com.example.kode.domain.entity.custom_exceptions.NoConnectionException
+import com.example.kode.domain.entity.sort.by_string.StringSortableModel
+import com.example.kode.domain.entity.sort.by_string.StringSortableState
 import com.example.kode.domain.repository.WorkersRepository
 import javax.inject.Inject
 
-class WorkersRepositoryImpl<R : UseCaseModel<R>, M : DataSourceModel<M>> @Inject constructor(
+class WorkersRepositoryImpl<R : UseCaseModel, M : DataSourceModel<M>> @Inject constructor(
     private val cloudDataSource: WorkersCloudDataSource<M>,
     private val cacheDataSource: WorkersCacheDataSource<M>,
     private val mapper: Base.Mapper<M, R>

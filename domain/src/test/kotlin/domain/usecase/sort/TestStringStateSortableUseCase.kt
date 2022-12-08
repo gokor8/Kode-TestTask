@@ -1,6 +1,6 @@
 package domain.usecase.sort
 
-import com.example.kode.domain.usecase.sort.StringStateSortUseCase
+import com.example.kode.domain.usecase.sort.StringStateSortableUseCase
 import domain.core.TestDomainState
 import domain.core.sort.TestDomainSortStateFail
 import domain.core.sort.TestDomainSortStateSuccess
@@ -13,7 +13,7 @@ import junit.framework.TestCase
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 
-class TestSortDomainSortState {
+class TestStringStateSortableUseCase {
 
     private val testSortState = TestDomainStringSortStateSuccess(
         listOf(
@@ -26,7 +26,7 @@ class TestSortDomainSortState {
     @Test
     fun `test sort with full list return Success`(): Unit = runBlocking {
         val sortModel = testSortState
-        val sortUseCase = StringStateSortUseCase(
+        val sortUseCase = StringStateSortableUseCase(
             this.coroutineContext,
             TestFailMapper(),
             TestToNormalStateMapper()
@@ -49,9 +49,9 @@ class TestSortDomainSortState {
     }
 
     @Test
-    fun `test sort with return empty list return FailSort`(): Unit = runBlocking {
+    fun `test sort with empty list return FailSort`(): Unit = runBlocking {
         val sortModel = TestDomainStringSortStateSuccess(listOf())
-        val sortUseCase = StringStateSortUseCase(
+        val sortUseCase = StringStateSortableUseCase(
             this.coroutineContext,
             TestFailMapper(),
             TestToNormalStateMapper()
@@ -63,11 +63,11 @@ class TestSortDomainSortState {
     }
 
     @Test()
-    fun `test sort with something Exception`(): Unit = runBlocking {
+    fun `test sort with something Exception return Domain Fail`(): Unit = runBlocking {
         val sortModel = TestExceptionDomainStringSortStateSuccess(
             testSortState.getSortableList()
         )
-        val sortUseCase = StringStateSortUseCase(
+        val sortUseCase = StringStateSortableUseCase(
             this.coroutineContext,
             TestFailMapper(),
             TestToNormalStateMapper()
