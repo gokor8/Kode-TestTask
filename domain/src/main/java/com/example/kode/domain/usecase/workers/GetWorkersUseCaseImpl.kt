@@ -11,18 +11,22 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
-class GetWorkersUseCaseImpl<SM : UseCaseSortableModel, M : UseCaseModel> @Inject constructor(
+class GetWorkersUseCaseImpl<SM : UseCaseSortableModel, TSM : ToSortModel<SM>, M : UseCaseModel> @Inject constructor(
     coroutineContext: CoroutineContext,
     failMapper: Base.Mapper<Exception, M>,
     private val workersRepository: WorkersRepository<M>,
-    private val toSortModelMapper: Base.Mapper<M, SM>,
+    private val toSortModelMapper: Base.Mapper<TSM, SM>,
     private val stateSortableUseCase: AbstractStateSortableUseCase<SM, M>,
 ) : GetWorkersUseCase<M>(coroutineContext, failMapper) {
 
     override suspend fun getSafely(): M {
         val workersState = workersRepository.getWorkers()
 
-        return if (workersState is ToSortModel<SM>)
+        val sortableState = (workersState as? TSM)?.let { canSortedWorkersState ->
+            toSortModelMapper.map(canSortedWorkersState)
+        }
+
+        return if (sortableState != null)
             stateSortableUseCase.get(workersState.let(toSortModelMapper::map))
         else
             workersState

@@ -2,6 +2,7 @@ package com.example.kode.test_task.di.modules.domain
 
 import com.example.kode.domain.entity.worker.WorkerFullStateEntity
 import com.example.kode.domain.entity.worker.WorkerInputEntity
+import com.example.kode.domain.entity.workers.WorkersNameSortableStateEntity
 import com.example.kode.domain.entity.workers.WorkersStateEntity
 import com.example.kode.domain.usecase.worker.GetWorkerUseCase
 import com.example.kode.domain.usecase.worker.GetWorkerUseCaseImpl
@@ -15,8 +16,9 @@ import dagger.Module
 interface BUseCaseModule {
 
     @Binds
-    fun bindGetWorkersUseCase(useCase: GetWorkersUseCaseImpl<WorkersStateEntity>)
-            : GetWorkersUseCase<WorkersStateEntity>
+    fun bindGetWorkersUseCase(
+        useCase: GetWorkersUseCaseImpl<WorkersNameSortableStateEntity, WorkersStateEntity.Success, WorkersStateEntity>,
+    ): GetWorkersUseCase<WorkersStateEntity>
 
     @Binds
     fun bindGetWorkerUseCase(useCase: GetWorkerUseCaseImpl<WorkerInputEntity, WorkerFullStateEntity>)

@@ -1,3 +1,3 @@
 package com.example.kode.domain.core.sort
 
-interface ToSortModel<out M>
+interface ToSortModel<in M : SortModel>
