@@ -9,7 +9,7 @@ sealed class WorkersStateEntity : UseCaseModel {
 
     data class Success(
         val workers: List<WorkerInfoEntity>
-    ) : WorkersStateEntity(), ToSortModel<WorkersSortableStateEntity<*>>
+    ) : WorkersStateEntity(), ToSortModel<WorkersSortableStateEntity<*, *>>
 
     // Делаю NoConnection потому что логика отличается от обычной ошибки
     // Надо во первых список поставить из кеша, во вторых ошибку интернета у туллбара сделать
