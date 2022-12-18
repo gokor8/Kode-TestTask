@@ -27,6 +27,6 @@ sealed interface MainStatesUI {
 
         class FatalError : Fail()
 
-        class NotFound : Fail(), UISearchState.Fail
+        class SearchNotFound : Fail(), UISearchState.Fail
     }
 }

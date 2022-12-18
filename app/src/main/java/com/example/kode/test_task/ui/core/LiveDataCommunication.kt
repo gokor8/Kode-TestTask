@@ -7,7 +7,7 @@ import com.example.kode.domain.core.Read
 import com.example.kode.domain.core.Save
 
 // Will be good if we needing postValue realization and value
-open class LiveDataCommunication<M : Any> : BaseObserver<M>, Save.Base<M, Unit>,
+open class LiveDataCommunication<M : Any> : BaseCommunication<M>,
     Read.Abstract.Base<M?> {
 
     protected val liveData = MutableLiveData<M>()

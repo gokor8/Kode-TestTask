@@ -16,7 +16,7 @@ class TestWorkersCloudEntityToUIMapper {
         val workerInfoEntityToUIMapper = WorkerInfoEntityToUIMapper()
         val mapper = WorkersCloudEntityToUIMapper(workerInfoEntityToUIMapper)
 
-        val testDataModel = WorkersStateEntity.Success(
+        val testDataModel = WorkersStateEntity.WithConnection(
             listOf(
                 WorkerInfoEntity(
                     "id",

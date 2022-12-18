@@ -9,9 +9,9 @@ import javax.inject.Inject
 
 class WorkersStateDataCloudToEntityMapper @Inject constructor(
     private val mapper: Base.Mapper<WorkerInfoDataModel, WorkerInfoEntity>,
-) : Base.Mapper<WorkersInfoStateDataModel.Cloud, WorkersStateEntity.Success> {
+) : Base.Mapper<WorkersInfoStateDataModel.Cloud, WorkersStateEntity.WithConnection> {
 
-    override fun map(model: WorkersInfoStateDataModel.Cloud) = WorkersStateEntity.Success(
+    override fun map(model: WorkersInfoStateDataModel.Cloud) = WorkersStateEntity.WithConnection(
         model.workers.map { it.map(mapper) }
     )
 }

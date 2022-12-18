@@ -13,5 +13,6 @@ class WorkersFailEntityToUIMapper @Inject constructor() :
     override fun map(model: WorkersStateEntity.Fail): MainStatesUI.Fail = when (model.exception) {
         is UseCaseExceptions.NoCacheException -> MainStatesUI.Fail.FatalError()
         is UseCaseExceptions.GenericException -> MainStatesUI.Fail.UsualError(R.string.generic_error)
+        else -> MainStatesUI.Fail.UsualError(R.string.generic_error)
     }
 }

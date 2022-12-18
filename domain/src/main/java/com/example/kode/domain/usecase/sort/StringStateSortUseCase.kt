@@ -5,7 +5,6 @@ import com.example.kode.domain.core.usecase.UseCaseModel
 import com.example.kode.domain.entity.sort.by_string.StringSortEntity
 import com.example.kode.domain.entity.sort.by_string.StringSortableModel
 import com.example.kode.domain.entity.sort.by_string.StringSortableState
-import java.lang.Exception
 import kotlin.coroutines.CoroutineContext
 
 class StringStateSortUseCase<SS : StringSortableState<SS, SM>, SM : StringSortableModel, RM : UseCaseModel>(

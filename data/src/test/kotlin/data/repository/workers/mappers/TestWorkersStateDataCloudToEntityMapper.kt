@@ -33,7 +33,7 @@ class TestWorkersStateDataCloudToEntityMapper {
         )
 
         val actual = testData.let(mapper::map)
-        val expected = WorkersStateEntity.Success(
+        val expected = WorkersStateEntity.WithConnection(
             listOf(
                 WorkerInfoEntity(
                     "avatar",

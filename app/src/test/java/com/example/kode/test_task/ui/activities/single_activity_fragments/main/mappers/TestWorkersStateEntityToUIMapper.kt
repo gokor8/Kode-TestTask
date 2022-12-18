@@ -20,7 +20,7 @@ class TestWorkersStateEntityToUIMapper {
     fun `test success cloud mapping`() {
         val mapper = WorkersStateEntityToUIMapper(successMapper, noConnectionMapper, failMapper)
 
-        val testData = WorkersStateEntity.Success(
+        val testData = WorkersStateEntity.WithConnection(
             listOf(
                 WorkerInfoEntity(
                     "id",

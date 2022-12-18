@@ -12,7 +12,7 @@ class WorkersNameSortableStateToWorkersState @Inject constructor(
 ) : Base.Mapper<WorkersNameSortableStateEntity, WorkersStateEntity> {
 
     override fun map(model: WorkersNameSortableStateEntity) =
-        WorkersStateEntity.Success(
+        WorkersStateEntity.WithConnection(
             mapper.map(model.getSortableList())
         )
 }

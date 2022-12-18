@@ -13,5 +13,6 @@ class UIStateSuccessMapper @Inject constructor(
     override fun map(model: MainStatesUI.Success) = when(model) {
         is MainStatesUI.Success.Cloud -> uiStateCloudMapper.map(model)
         is MainStatesUI.Success.Cache -> uiStateCacheMapper.map(model)
+        else -> {}
     }
 }

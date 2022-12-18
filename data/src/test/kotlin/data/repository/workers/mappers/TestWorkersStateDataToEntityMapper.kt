@@ -45,7 +45,7 @@ class TestWorkersStateDataToEntityMapper {
             )
         )
 
-        val expected = WorkersStateEntity.Success(
+        val expected = WorkersStateEntity.WithConnection(
             listOf(
                 WorkerInfoEntity(
                     "avatar",

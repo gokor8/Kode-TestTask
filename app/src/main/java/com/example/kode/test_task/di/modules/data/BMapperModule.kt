@@ -26,7 +26,7 @@ interface BMapperModule {
 
     @Binds
     fun bindWorkersStateDataSuccessToEntityMapper(mapper: WorkersStateDataCloudToEntityMapper)
-            : Base.Mapper<WorkersInfoStateDataModel.Cloud, WorkersStateEntity.Success>
+            : Base.Mapper<WorkersInfoStateDataModel.Cloud, WorkersStateEntity.WithConnection>
 
     @Binds
     fun bindWorkersStateDataNoConnectionToEntityMapper(mapper: WorkersStateDataCacheToEntityMapper)

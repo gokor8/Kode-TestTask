@@ -11,5 +11,6 @@ class UIStateFailMapper @Inject constructor(
     override fun map(model: MainStatesUI.Fail) = when(model) {
         is MainStatesUI.Fail.UsualError -> usualErrorMapper.map(model)
         is MainStatesUI.Fail.FatalError -> fatalErrorMapper.map(model)
+        else -> {}
     }
 }

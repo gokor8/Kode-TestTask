@@ -18,7 +18,7 @@ interface BUIWorkersMapperModule {
 
     @Binds
     fun bindWorkerStateEntitySuccessToUIMapper(successToUIMapper: WorkersCloudEntityToUIMapper)
-            : Base.Mapper<WorkersStateEntity.Success, MainStatesUI.Success.Cloud>
+            : Base.Mapper<WorkersStateEntity.WithConnection, MainStatesUI.Success.Cloud>
 
     @Binds
     fun bindWorkersCacheEntityToUIMapper(noConnectionMapper: WorkersCacheEntityToUIMapper)

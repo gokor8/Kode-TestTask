@@ -8,7 +8,7 @@ import org.junit.Test
 class TestMainViewModel {
 
     val communicationStartList: BaseCommunication<TestMainViewModelState>
-    lateinit var viewModel: MainViewModel
+    lateinit var viewModel: MainViewModel = MainViewModel<>()
 
     @Test
     fun `test search give good Search return Success`() {
@@ -67,8 +67,6 @@ class TestMainViewModel {
     }
 
     sealed interface TestMainViewModelState {
-
-        data class SkipSearchSuccess(override val list: List<TestSuccessModel>) : Success()
 
         data class BaseSuccess(override val list: List<TestSuccessModel>) : Success()
 

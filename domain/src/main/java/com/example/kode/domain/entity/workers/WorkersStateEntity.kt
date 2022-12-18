@@ -7,7 +7,10 @@ import com.example.kode.domain.entity.workers.sort.WorkersSortableStateEntity
 
 sealed class WorkersStateEntity : UseCaseModel {
 
-    data class Success(
+    /*abstract class Success : ToSortModel<WorkersSortableStateEntity<*, *>> {
+        abstract val workers: List<WorkerInfoEntity>
+    }*/
+    data class WithConnection(
         val workers: List<WorkerInfoEntity>
     ) : WorkersStateEntity(), ToSortModel<WorkersSortableStateEntity<*, *>>
 

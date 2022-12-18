@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 // Если появится другое состояние, то будет легко добавить его сюда и написать к нему маппер
 class WorkersStateDataToEntityMapper @Inject constructor(
-    private val cloudMapper: Base.Mapper<WorkersInfoStateDataModel.Cloud, WorkersStateEntity.Success>,
+    private val cloudMapper: Base.Mapper<WorkersInfoStateDataModel.Cloud, WorkersStateEntity.WithConnection>,
     private val cacheMapper: Base.Mapper<WorkersInfoStateDataModel.Cache, WorkersStateEntity.NoConnection>
 ) :
     Base.Mapper<WorkersInfoStateDataModel, WorkersStateEntity> {

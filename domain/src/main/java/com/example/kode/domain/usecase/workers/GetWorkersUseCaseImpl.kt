@@ -11,7 +11,8 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
-class GetWorkersUseCaseImpl<SM : UseCaseSortableModel, TSM : ToSortModel<SM>, M : UseCaseModel> @Inject constructor(
+class GetWorkersUseCaseImpl<SM : UseCaseSortableModel, TSM : ToSortModel<SM>, M : UseCaseModel>
+@Inject constructor(
     coroutineContext: CoroutineContext,
     failMapper: Base.Mapper<Exception, M>,
     private val workersRepository: WorkersRepository<M>,
@@ -27,7 +28,7 @@ class GetWorkersUseCaseImpl<SM : UseCaseSortableModel, TSM : ToSortModel<SM>, M 
         }
 
         return if (sortableState != null)
-            stateSortableUseCase.get(workersState.let(toSortModelMapper::map))
+            stateSortableUseCase.get(sortableState)
         else
             workersState
     }
