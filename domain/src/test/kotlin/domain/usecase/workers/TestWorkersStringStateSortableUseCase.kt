@@ -29,7 +29,7 @@ class TestWorkersStringStateSortableUseCase {
     }
 
     @Test
-    fun `test sort full list to Success`() = runBlocking {
+    fun `test sort with full list return sorted Success`() = runBlocking {
         val testData = WorkersNameSortableStateEntity(
             listOf(
                 WorkerNameSortableEntity(

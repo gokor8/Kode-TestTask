@@ -27,17 +27,16 @@ class TestGetWorkersUseCaseWithInputImpl {
 
     private lateinit var returnedStateMapper: Base.Mapper<TestDataState, TestDomainState> // из di
     private lateinit var exceptionToExceptionEntityMapper: TestExceptionToEntityMapper // из di
-    private lateinit var returnedRepositoryState: TestDataState
-    private lateinit var workersUseCase: GetWorkersUseCaseImpl<
-            SortableSuccessTestDomainState, SortableSuccessTestDomainState, TestDomainState>
 
     // di
     @Before
     fun before() = runBlocking {
         returnedStateMapper = TestDataStateToEntityMapper()
         exceptionToExceptionEntityMapper = TestExceptionToEntityMapper()
+    }
 
-        workersUseCase = GetWorkersUseCaseImpl(
+    fun setupRepository(returnedRepositoryState: TestDataState) = runBlocking {
+        GetWorkersUseCaseImpl(
             this.coroutineContext,
             exceptionToExceptionEntityMapper,
             TestWorkersRepository(returnedRepositoryState, returnedStateMapper),
@@ -48,7 +47,7 @@ class TestGetWorkersUseCaseWithInputImpl {
 
     @Test
     fun `get success workers list`(): Unit = runBlocking {
-        returnedRepositoryState = TestDataState.Success()
+        val workersUseCase = setupRepository(TestDataState.Success())
 
         val actual = workersUseCase.get()
         val expected = TestDomainState.Success(
@@ -60,7 +59,7 @@ class TestGetWorkersUseCaseWithInputImpl {
 
     @Test
     fun `get exception workers list`(): Unit = runBlocking {
-        returnedRepositoryState= TestDataState.Exception()
+        val workersUseCase = setupRepository(TestDataState.Exception())
 
         val actual = workersUseCase.get()
         val expected = TestDomainState.Fail(UseCaseExceptions.GenericException)
@@ -88,7 +87,7 @@ class TestGetWorkersUseCaseWithInputImpl {
                     "test"
                 )
 
-            is TestDataState.Exception -> throw IOException()
+            is TestDataState.Exception -> throw Throwable()
         }
     }
 
@@ -105,7 +104,8 @@ class TestGetWorkersUseCaseWithInputImpl {
         failMapper: Base.Mapper<Exception, TestDomainState>,
     ) : AbstractStateSortableUseCase<SortableSuccessTestDomainState, TestDomainState>(
         coroutineContext,
-        failMapper
+        failMapper,
+        EmptyTestMapper()
     ) {
         override fun sort(equalsAttribute: SortableSuccessTestDomainState): SortableSuccessTestDomainState {
             return equalsAttribute
