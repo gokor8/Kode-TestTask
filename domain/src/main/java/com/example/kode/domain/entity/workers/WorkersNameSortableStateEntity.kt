@@ -8,8 +8,7 @@ class WorkersNameSortableStateEntity(
 ) : WorkersSortableStateEntity<WorkersNameSortableStateEntity, WorkerNameSortableEntity>(
     listSortable
 ) {
-
     override fun copyByModel(model: List<WorkerNameSortableEntity>): WorkersNameSortableStateEntity {
-        return WorkersNameSortableStateEntity(listSortable)
+        return WorkersNameSortableStateEntity(model)
     }
 }

@@ -1,4 +1,4 @@
-package com.example.kode.test_task.ui.activities.single_activity_fragments.main.mappers.entity_to_ui
+package com.example.kode.test_task.ui.activities.single_activity_fragments.main.mappers.entity_to_ui.success
 
 import com.example.kode.domain.core.Base
 import com.example.kode.domain.entity.workers.WorkerInfoEntity

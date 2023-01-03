@@ -10,43 +10,51 @@ import com.example.kode.domain.usecase.workers.mappers.ListWorkerNameSortableToL
 import com.example.kode.domain.usecase.workers.mappers.WorkersNameSortableStateToWorkersState
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertTrue
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
 
 class TestWorkersStringStateSortableUseCase {
 
+    private val sortableWorkersToWorkersInfo = ListWorkerNameSortableToListWorkerInfo()
+
     lateinit var sortableUseCase: StringStateSortableUseCase<WorkersNameSortableStateEntity,
             WorkerNameSortableEntity, WorkersStateEntity>
 
-    @Before
-    fun before() = runBlocking {
+    @Test
+    fun `test with full list return sorted Success`(): Unit = runBlocking {
         sortableUseCase = StringStateSortableUseCase(
             this.coroutineContext,
             TestFailMapper(),
-            WorkersNameSortableStateToWorkersState(ListWorkerNameSortableToListWorkerInfo())
+            WorkersNameSortableStateToWorkersState(sortableWorkersToWorkersInfo)
         )
-    }
 
-    @Test
-    fun `test sort with full list return sorted Success`() = runBlocking {
         val testData = WorkersNameSortableStateEntity(
             listOf(
                 WorkerNameSortableEntity(
-                    "id1",
-                    "avatarUrl1",
-                    "name1",
-                    "lastName1",
-                    "userTag1",
-                    "position1",
+                    "id",
+                    "avatarUrl",
+                    "c",
+                    "c",
+                    "userTag",
+                    "position",
                 ),
                 WorkerNameSortableEntity(
                     "id",
                     "avatarUrl",
-                    "name",
-                    "lastName",
+                    "b",
+                    "b",
                     "userTag",
                     "position",
+                ),
+                WorkerNameSortableEntity(
+                    "id1",
+                    "avatarUrl1",
+                    "a",
+                    "a",
+                    "userTag1",
+                    "position1",
                 )
             )
         )
@@ -58,9 +66,47 @@ class TestWorkersStringStateSortableUseCase {
         assertTrue(state is WorkersStateEntity.WithConnection)
         state as WorkersStateEntity.WithConnection
 
-        assertEquals(expectedList, state.workers)
+        assertEquals(sortableWorkersToWorkersInfo.map(expectedList), state.workers)
     }
 
+    @Test
+    fun `test with sorted list return list without changes`(): Unit = runBlocking {
+        sortableUseCase = StringStateSortableUseCase(
+            this.coroutineContext,
+            TestFailMapper(),
+            WorkersNameSortableStateToWorkersState(sortableWorkersToWorkersInfo)
+        )
+
+        val testData = WorkersNameSortableStateEntity(
+            listOf(
+                WorkerNameSortableEntity(
+                    "id1",
+                    "avatarUrl1",
+                    "a",
+                    "a",
+                    "userTag1",
+                    "position1",
+                ),
+                WorkerNameSortableEntity(
+                    "id",
+                    "avatarUrl",
+                    "b",
+                    "b",
+                    "userTag",
+                    "position",
+                )
+            )
+        )
+
+        val state = sortableUseCase.get(testData)
+
+        val expectedList = testData.getSortableList()
+
+        assertTrue(state is WorkersStateEntity.WithConnection)
+        state as WorkersStateEntity.WithConnection
+
+        assertEquals(sortableWorkersToWorkersInfo.map(expectedList), state.workers)
+    }
 
     // TEST REALIZATIONS
 

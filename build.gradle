@@ -5,7 +5,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.5.2"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.5.3"
         classpath "io.realm:realm-gradle-plugin:10.9.0"
     }
 }
@@ -22,26 +22,26 @@ task clean(type: Delete) {
 }
 
 ext {
-    navigationVersion = "2.5.2"
+    navigationVersion = '2.5.3'
     lifecycleVersion = "2.5.1"
     androidXVersion = "1.9.0"
     appcomaptVersion = "1.5.1"
-    materialVersion = "1.6.1"
+    materialVersion = '1.7.0'
     constraintlayoutVersion = "2.1.4"
-    fragmentVersion = "1.5.2"
+    fragmentVersion = '1.5.5'
 
     jUnitVersion = "4.13.2"
-    androidJunitVersion = "1.1.3"
-    androidxTestCoreVersion = "1.4.0"
-    espressoVersion = "3.4.0"
+    androidJunitVersion = '1.1.4'
+    androidxTestCoreVersion = '1.5.0'
+    espressoVersion = '3.5.0'
 
-    daggerVersion = "2.42"
+    daggerVersion = '2.44.2'
 
     retrofitVersion = "2.9.0"
     okhttpVersion = "4.10.0"
     okhttpLoginInterceptorVersion = "4.9.3"
 
-    glideVersion = "4.13.2"
+    glideVersion = '4.14.2'
 
     chuckerVersion = "3.5.2"
 

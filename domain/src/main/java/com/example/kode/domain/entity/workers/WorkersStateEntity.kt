@@ -7,18 +7,18 @@ import com.example.kode.domain.entity.workers.sort.WorkersSortableStateEntity
 
 sealed class WorkersStateEntity : UseCaseModel {
 
-    /*abstract class Success : ToSortModel<WorkersSortableStateEntity<*, *>> {
+    sealed class Success : WorkersStateEntity(), ToSortModel<WorkersSortableStateEntity<*, *>> {
         abstract val workers: List<WorkerInfoEntity>
-    }*/
+    }
     data class WithConnection(
-        val workers: List<WorkerInfoEntity>
-    ) : WorkersStateEntity(), ToSortModel<WorkersSortableStateEntity<*, *>>
+        override val workers: List<WorkerInfoEntity>
+    ) : Success()
 
     // Делаю NoConnection потому что логика отличается от обычной ошибки
     // Надо во первых список поставить из кеша, во вторых ошибку интернета у туллбара сделать
     data class NoConnection(
-        val workers: List<WorkerInfoEntity>
-    ) : WorkersStateEntity()
+        override val workers: List<WorkerInfoEntity>
+    ) : Success()
 
     data class Fail(val exception: UseCaseExceptions) : WorkersStateEntity()
 }

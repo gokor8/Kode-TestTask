@@ -12,4 +12,8 @@ class WorkerNameSortableEntity(
 ) : WorkerStringSortableEntity(id, avatarUrl, name, lastName, userTag, position) {
 
     override fun sortValue(): String = name + lastName
+
+    override fun toString(): String {
+        return "$name $lastName"
+    }
 }

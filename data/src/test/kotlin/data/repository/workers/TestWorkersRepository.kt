@@ -95,9 +95,7 @@ class TestWorkersRepository {
         override fun <I : Base.Mapper<TestRepositoryModel, R>, R> map(model: I) = model.map(this)
     }
 
-    data class TestEntityModel(val name: String) : UseCaseModel<TestEntityModel> {
-        override fun <I : Base.Mapper<TestEntityModel, R>, R> map(model: I) = model.map(this)
-    }
+    data class TestEntityModel(val name: String) : UseCaseModel
 
     sealed class TestCommands {
         class Success : TestCommands()
@@ -120,8 +118,7 @@ class TestWorkersRepository {
 
     class TestWorkersCacheDataSource(
         cacheDataModel: TestRepositoryModel? = null
-    ) :
-        WorkersCacheDataSource<TestRepositoryModel> {
+    ) : WorkersCacheDataSource<TestRepositoryModel> {
 
         private var listDataModels: TestRepositoryModel? = cacheDataModel
 

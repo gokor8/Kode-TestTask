@@ -10,10 +10,12 @@ import com.example.kode.domain.usecase.sort.AbstractStateSortableUseCase
 import com.example.kode.domain.usecase.workers.GetWorkersUseCaseImpl
 import domain.core.EmptyTestMapper
 import domain.core.TestDomainState
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
+import java.io.IOException
 import kotlin.coroutines.CoroutineContext
 
 class TestGetWorkersUseCaseWithInputImpl {
@@ -35,7 +37,7 @@ class TestGetWorkersUseCaseWithInputImpl {
         exceptionToExceptionEntityMapper = TestExceptionToEntityMapper()
     }
 
-    fun setupRepository(returnedRepositoryState: TestDataState) = runBlocking {
+    private fun CoroutineScope.setupRepository(returnedRepositoryState: TestDataState) =
         GetWorkersUseCaseImpl(
             this.coroutineContext,
             exceptionToExceptionEntityMapper,
@@ -43,7 +45,6 @@ class TestGetWorkersUseCaseWithInputImpl {
             EmptyTestMapper(),
             TestStateSortableUseCase(this.coroutineContext, exceptionToExceptionEntityMapper)
         )
-    }
 
     @Test
     fun `get success workers list`(): Unit = runBlocking {
@@ -53,6 +54,16 @@ class TestGetWorkersUseCaseWithInputImpl {
         val expected = TestDomainState.Success(
             "test"
         )
+
+        Assert.assertEquals(expected, actual)
+    }
+
+    @Test
+    fun `get success workers list with passed sort`(): Unit = runBlocking {
+        val workersUseCase = setupRepository(TestDataState.SortSuccess())
+
+        val actual = workersUseCase.get()
+        val expected = PassedSortableTestDomainState()
 
         Assert.assertEquals(expected, actual)
     }
@@ -82,12 +93,9 @@ class TestGetWorkersUseCaseWithInputImpl {
 
     class TestDataStateToEntityMapper : Base.Mapper<TestDataState, TestDomainState> {
         override fun map(model: TestDataState) = when (model) {
-            is TestDataState.Success ->
-                TestDomainState.Success(
-                    "test"
-                )
-
-            is TestDataState.Exception -> throw Throwable()
+            is TestDataState.Success -> TestDomainState.Success("test")
+            is TestDataState.SortSuccess -> SortableTestDomainState()
+            is TestDataState.Exception -> throw IOException()
         }
     }
 
@@ -96,19 +104,27 @@ class TestGetWorkersUseCaseWithInputImpl {
             TestDomainState.Fail(UseCaseExceptions.GenericException)
     }
 
-    class SortableSuccessTestDomainState : TestDomainState(), UseCaseSortableModel,
-        ToSortModel<SortableSuccessTestDomainState>
+    open class SortableTestDomainState : TestDomainState(), UseCaseSortableModel,
+        ToSortModel<SortableTestDomainState>
+
+    class PassedSortableTestDomainState : SortableTestDomainState() {
+
+        override fun equals(other: Any?): Boolean =
+            other != null && (this === other || other is PassedSortableTestDomainState)
+
+        override fun hashCode() = javaClass.hashCode()
+    }
 
     class TestStateSortableUseCase(
         coroutineContext: CoroutineContext,
         failMapper: Base.Mapper<Exception, TestDomainState>,
-    ) : AbstractStateSortableUseCase<SortableSuccessTestDomainState, TestDomainState>(
+    ) : AbstractStateSortableUseCase<SortableTestDomainState, TestDomainState>(
         coroutineContext,
         failMapper,
         EmptyTestMapper()
     ) {
-        override fun sort(equalsAttribute: SortableSuccessTestDomainState): SortableSuccessTestDomainState {
-            return equalsAttribute
+        override fun sort(equalsAttribute: SortableTestDomainState): SortableTestDomainState {
+            return PassedSortableTestDomainState()
         }
     }
 
@@ -117,6 +133,8 @@ class TestGetWorkersUseCaseWithInputImpl {
             model.map(this)
 
         class Success() : TestDataState()
+
+        class SortSuccess() : TestDataState()
 
         class Exception() : TestDataState()
     }
