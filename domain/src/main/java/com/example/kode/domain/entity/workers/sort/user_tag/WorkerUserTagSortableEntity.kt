@@ -1,8 +1,8 @@
-package com.example.kode.domain.entity.workers
+package com.example.kode.domain.entity.workers.sort.user_tag
 
 import com.example.kode.domain.entity.workers.sort.WorkerStringSortableEntity
 
-class WorkerNameSortableEntity(
+class WorkerUserTagSortableEntity(
     id: String,
     avatarUrl: String,
     name: String,
@@ -11,9 +11,5 @@ class WorkerNameSortableEntity(
     position: String
 ) : WorkerStringSortableEntity(id, avatarUrl, name, lastName, userTag, position) {
 
-    override fun sortValue(): String = name + lastName
-
-    override fun toString(): String {
-        return "$name $lastName"
-    }
+    override fun sortValue(): String = userTag
 }

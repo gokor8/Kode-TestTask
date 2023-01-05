@@ -54,7 +54,7 @@ class WorkerFragment :
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
-        getApp().daggerAppComponent
+        provideApp().daggerAppComponent
             .createWorkerFragmentSubcomponent()
             .create(WeakReference(binding))
             .inject(this)

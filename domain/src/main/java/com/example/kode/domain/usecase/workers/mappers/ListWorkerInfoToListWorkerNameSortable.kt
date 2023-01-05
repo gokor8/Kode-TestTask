@@ -2,7 +2,7 @@ package com.example.kode.domain.usecase.workers.mappers
 
 import com.example.kode.domain.core.Base
 import com.example.kode.domain.entity.workers.WorkerInfoEntity
-import com.example.kode.domain.entity.workers.WorkerNameSortableEntity
+import com.example.kode.domain.entity.workers.sort.name.WorkerNameSortableEntity
 import javax.inject.Inject
 
 class ListWorkerInfoToListWorkerNameSortable @Inject constructor():

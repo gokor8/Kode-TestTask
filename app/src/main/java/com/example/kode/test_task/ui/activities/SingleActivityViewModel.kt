@@ -8,9 +8,9 @@ import javax.inject.Inject
 // @params M : SingleActivityStatesUI
 
 class SingleActivityViewModel<M : Any> @Inject constructor(
-    communication: BaseCommunication<M>,
+    override val communication: BaseCommunication<M>,
     private val toCommunicationMapper: Base.Mapper<String, M>,
-) : BaseViewModel<BaseCommunication<M>, M>(communication) {
+) : BaseViewModel<BaseCommunication<M>, M>() {
 
     fun setSearchText(searchText: String) {
         communication.save(

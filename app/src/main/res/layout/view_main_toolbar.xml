@@ -9,7 +9,7 @@
     android:paddingVertical="6dp">
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tiSearch"
+        android:id="@+id/tilSearch"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
         android:text="@string/cancel"
         android:textStyle="bold"
         android:textColor="?purple500"
-        app:layout_constraintBottom_toBottomOf="@+id/tiSearch"
+        app:layout_constraintBottom_toBottomOf="@+id/tilSearch"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

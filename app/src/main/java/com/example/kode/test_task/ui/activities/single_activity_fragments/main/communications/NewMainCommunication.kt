@@ -7,7 +7,7 @@ import com.example.kode.test_task.ui.activities.single_activity_fragments.main.m
 import com.example.kode.test_task.ui.core.LiveDataCommunication
 import javax.inject.Inject
 
-class NewMainCommunication @Inject constructor() : MainCommunication<MainStatesUI> {
+class NewMainCommunication @Inject constructor() : MixSearchCommunication<MainStatesUI> {
 
     private val baseCommunication = LiveDataCommunication<MainStatesUI>()
     private val searchCommunication = LiveDataCommunication<UISearchState>()

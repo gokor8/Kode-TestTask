@@ -5,8 +5,7 @@ import com.example.kode.test_task.ui.activities.single_activity_fragments.main.c
 
 sealed interface MainStatesUI {
 
-    sealed class Success(val workers: List<PreviewWorkerInfoUIModel>) :
-        MainStatesUI {
+    sealed class Success(val workers: List<PreviewWorkerInfoUIModel>) : MainStatesUI {
 
         class Cloud(
             workers: List<PreviewWorkerInfoUIModel>,

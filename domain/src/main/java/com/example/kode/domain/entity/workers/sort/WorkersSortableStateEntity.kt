@@ -2,9 +2,13 @@ package com.example.kode.domain.entity.workers.sort
 
 import com.example.kode.domain.entity.sort.by_string.StringSortableState
 
-abstract class WorkersSortableStateEntity<SS : WorkersSortableStateEntity<SS, SM>, SM : WorkerStringSortableEntity>(
-    protected val listSortable: List<SM>,
-) : StringSortableState<SS, SM> {
+class WorkersSortableStateEntity(
+    protected val listSortable: List<WorkerStringSortableEntity>,
+) : StringSortableState<WorkersSortableStateEntity, WorkerStringSortableEntity> {
 
-    override fun getSortableList(): List<SM> = listSortable
+    override fun getSortableList(): List<WorkerStringSortableEntity> = listSortable
+
+    override fun copyByModel(model: List<WorkerStringSortableEntity>): WorkersSortableStateEntity {
+        return WorkersSortableStateEntity(model)
+    }
 }

@@ -16,5 +16,5 @@ abstract class AbstractStateSortUseCase<SE : BaseSortEntity<SS, *, *>, SS : Sort
     override suspend fun withSafe(equalsAttribute: SE): RM = sort(equalsAttribute)
         .let(toStateMapper::map)
 
-    abstract fun sort(equalsAttribute: SE): SS
+    protected abstract fun sort(equalsAttribute: SE): SS
 }

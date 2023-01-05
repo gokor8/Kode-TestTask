@@ -11,11 +11,11 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class WorkerViewModel<M : Any, IM : UseCaseModel, EM : UseCaseModel> @Inject constructor(
-    communication: BaseCommunication<M>,
+    override val communication: BaseCommunication<M>,
     private val workerUseCase: GetWorkerUseCase<IM, EM>,
     private val domainToUIMapper: Base.Mapper<EM, M>,
     private val UIToDomainMapper: Base.Mapper<String, IM>,
-) : BaseViewModel<BaseCommunication<M>, M>(communication) {
+) : BaseViewModel<BaseCommunication<M>, M>() {
 
     fun getWorker(userId: String) = viewModelScope.launch {
         workerUseCase.get(

@@ -8,34 +8,39 @@ import com.example.kode.domain.core.Base
 import com.example.kode.test_task.databinding.FragmentMainBinding
 import com.example.kode.test_task.databinding.ItemMainBinding
 import com.example.kode.test_task.ui.activities.SingleActivity
+import com.example.kode.test_task.ui.activities.models.SingleActivityStatesUI
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.MainStatesUI
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.PreviewWorkerInfoUIModel
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.recycler_view.MainViewHolder
-import com.example.kode.test_task.ui.core.BaseFragment
 import com.example.kode.test_task.ui.core.recycler_view.BaseRecyclerViewAdapter
+import com.example.kode.test_task.ui.core.search.SearchFragment
 import java.lang.ref.WeakReference
 import javax.inject.Inject
 
-class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel<MainStatesUI, *>>() {
+class MainFragment :
+    SearchFragment<FragmentMainBinding, MainViewModel<SingleActivityStatesUI, MainStatesUI, *>,
+            SingleActivityStatesUI>() {
 
     @Inject
-    lateinit var recyclerAdapter: BaseRecyclerViewAdapter<PreviewWorkerInfoUIModel, ItemMainBinding, MainViewHolder>
+    lateinit var recyclerAdapter
+            : BaseRecyclerViewAdapter<PreviewWorkerInfoUIModel, ItemMainBinding, MainViewHolder>
 
     @Inject
     lateinit var uiStateMapper: Base.Mapper<MainStatesUI, Unit>
 
     @Inject
-    lateinit var viewModelFactory: MainViewModelFactory<MainStatesUI>
+    lateinit var viewModelFactory: MainViewModelFactory<SingleActivityStatesUI, MainStatesUI>
 
-    override val viewModel: MainViewModel<MainStatesUI, *> by viewModels { viewModelFactory }
+    override val viewModel
+            : MainViewModel<SingleActivityStatesUI, MainStatesUI, *> by viewModels { viewModelFactory }
 
     override fun setUI(): Unit = with(binding) {
-        (requireActivity() as SingleActivity).binding.iSearch.cToolbar.isVisible = true
+        provide<SingleActivity>().binding.iSearch.cToolbar.isVisible = true
 
         rvMain.adapter = recyclerAdapter
         rvMain.layoutManager = LinearLayoutManager(context)
 
-        viewModel.getWorkers()
+        viewModel.initialization()
     }
 
     override fun setListeners() {
@@ -56,7 +61,7 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel<MainStatesU
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
-        getApp().daggerAppComponent
+        provideApp().daggerAppComponent
             .createMainFragmentSubcomponent()
             .create(
                 WeakReference(context),

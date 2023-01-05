@@ -3,10 +3,11 @@ package com.example.kode.test_task.ui.core
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
+import com.example.kode.test_task.ui.core.provides.ProvideApp
 import com.example.kode.test_task.ui.core.view_model.BaseViewModel
 
 abstract class BaseActivity<VB : ViewBinding, VM : BaseViewModel<*, *>> : AppCompatActivity(),
-    BaseInterfaceView<VB, VM> {
+    BaseInterfaceView<VB, VM>, ProvideApp {
 
     val binding: VB by lazy { setBind() }
 
