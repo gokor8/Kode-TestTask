@@ -9,8 +9,7 @@ import javax.inject.Inject
 
 class WorkersCloudEntityToUIMapper @Inject constructor(
     private val mapper: Base.Mapper<WorkerInfoEntity, PreviewWorkerInfoUIModel>
-) :
-    Base.Mapper<WorkersStateEntity.WithConnection, MainStatesUI.Success.Cloud> {
+) : Base.Mapper<WorkersStateEntity.WithConnection, MainStatesUI.Success.Cloud> {
 
     override fun map(model: WorkersStateEntity.WithConnection) = MainStatesUI.Success.Cloud(
         model.workers.map { mapper.map(it) }

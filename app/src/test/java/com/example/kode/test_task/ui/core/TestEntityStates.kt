@@ -1,12 +1,12 @@
 package com.example.kode.test_task.ui.core
 
-import com.example.kode.domain.core.Base
+import com.example.kode.domain.core.usecase.UseCaseModel
 
-sealed class TestEntityStates : Base.IgnorantMapper<TestEntityStates>{
+sealed interface TestEntityStates<SM> : UseCaseModel {
 
-    override fun <I : Base.Mapper<TestEntityStates, R>, R> map(model: I) = model.map(this)
+    abstract class Success<SM>(val model: SM) : TestEntityStates<SM>
 
-    class Success(val id: String) : TestEntityStates()
-    class Fail(val error: String) : TestEntityStates()
-    class NoConnection(val id: String) : TestEntityStates()
+    class WithConnection<SM>(id: SM) : Success<SM>(id)
+    class NoConnection<SM>(id: SM) : Success<SM>(id)
+    class Fail<SM>(val error: String) : TestEntityStates<SM>
 }

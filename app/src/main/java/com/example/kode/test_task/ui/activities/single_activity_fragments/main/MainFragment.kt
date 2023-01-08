@@ -9,6 +9,7 @@ import com.example.kode.test_task.databinding.FragmentMainBinding
 import com.example.kode.test_task.databinding.ItemMainBinding
 import com.example.kode.test_task.ui.activities.SingleActivity
 import com.example.kode.test_task.ui.activities.models.SingleActivityStatesUI
+import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.MainSearchStates
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.MainStatesUI
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.PreviewWorkerInfoUIModel
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.recycler_view.MainViewHolder
@@ -18,7 +19,7 @@ import java.lang.ref.WeakReference
 import javax.inject.Inject
 
 class MainFragment :
-    SearchFragment<FragmentMainBinding, MainViewModel<SingleActivityStatesUI, MainStatesUI, *>,
+    SearchFragment<FragmentMainBinding, MainViewModel<SingleActivityStatesUI, MainStatesUI, MainSearchStates, *>,
             SingleActivityStatesUI>() {
 
     @Inject
@@ -29,10 +30,13 @@ class MainFragment :
     lateinit var uiStateMapper: Base.Mapper<MainStatesUI, Unit>
 
     @Inject
+    lateinit var uiSearchStateMapper: Base.Mapper<MainSearchStates, Unit>
+
+    @Inject
     lateinit var viewModelFactory: MainViewModelFactory<SingleActivityStatesUI, MainStatesUI>
 
     override val viewModel
-            : MainViewModel<SingleActivityStatesUI, MainStatesUI, *> by viewModels { viewModelFactory }
+            : MainViewModel<SingleActivityStatesUI, MainStatesUI, MainSearchStates, *> by viewModels { viewModelFactory }
 
     override fun setUI(): Unit = with(binding) {
         provide<SingleActivity>().binding.iSearch.cToolbar.isVisible = true
@@ -53,6 +57,9 @@ class MainFragment :
     override fun setObservers() {
         viewModel.observe(viewLifecycleOwner) {
             uiStateMapper.map(it)
+        }
+        viewModel.observeSearch(viewLifecycleOwner) {
+            uiSearchStateMapper.map(it)
         }
     }
 

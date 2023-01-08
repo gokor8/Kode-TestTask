@@ -1,7 +1,7 @@
-package com.example.kode.test_task.ui.core
+package com.example.kode.test_task.ui.core.communications
 
 // Относледоваться и сделать BaseValueCommunication в конструктор BaseValue
 abstract class AbstractCommunication<M : Any, CM> : BaseCommunication<M> {
 
-    protected abstract val communicationModel: CM
+    abstract val communicationModel: CM
 }

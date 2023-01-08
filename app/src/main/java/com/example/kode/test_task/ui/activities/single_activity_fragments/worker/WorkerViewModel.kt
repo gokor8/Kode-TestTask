@@ -4,9 +4,8 @@ import androidx.lifecycle.viewModelScope
 import com.example.kode.domain.core.Base
 import com.example.kode.domain.core.usecase.UseCaseModel
 import com.example.kode.domain.usecase.worker.GetWorkerUseCase
-import com.example.kode.test_task.ui.core.BaseCommunication
+import com.example.kode.test_task.ui.core.communications.BaseCommunication
 import com.example.kode.test_task.ui.core.view_model.BaseViewModel
-import com.example.kode.test_task.ui.core.NullableBaseCommunication
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

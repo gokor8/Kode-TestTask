@@ -51,7 +51,7 @@ class TestStringStateSortUseCase {
     }
 
     @Test
-    fun `test sort with FailSort`(): Unit = runBlocking {
+    fun `test sort with Fail sort`(): Unit = runBlocking {
         val sortModel = StringSortEntity("aboba", testSortState)
         val sortUseCase = StringStateSortUseCase(
             this.coroutineContext,

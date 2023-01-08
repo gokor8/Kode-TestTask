@@ -9,7 +9,9 @@ import com.example.kode.test_task.ui.activities.single_activity_fragments.main.m
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.mappers.ui.fail.UIUsualErrorStateMapper
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.mappers.ui.success.UICacheStateMapper
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.mappers.ui.success.UICloudStateMapper
+import com.example.kode.test_task.ui.activities.single_activity_fragments.main.mappers.ui.success.UISearchSuccessStateMapper
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.mappers.ui.success.UISuccessMapper
+import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.MainSearchStates
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.MainStatesUI
 import com.example.kode.test_task.ui.activities.single_activity_fragments.worker.mappers.entity_to_ui.WorkerFailEntityToUIMapper
 import com.example.kode.test_task.ui.activities.single_activity_fragments.worker.mappers.entity_to_ui.WorkerFullInfoStateTUIMapper
@@ -29,6 +31,10 @@ interface BUIWorkersStateMapperModule {
     @Binds
     fun bindUIStateSuccessMapper(uiStateSuccessMapper: UIStateSuccessMapper)
             : Base.Mapper<MainStatesUI.Success, Unit>
+
+    @Binds
+    fun bindUIStateSearchSuccessMapper(uiSearchSuccessStateMapper: UISearchSuccessStateMapper)
+            : UISuccessMapper<MainSearchStates.SearchSuccess>
 
     @Binds
     fun bindUICacheStateMapper(uiCacheStateMapper: UICacheStateMapper)

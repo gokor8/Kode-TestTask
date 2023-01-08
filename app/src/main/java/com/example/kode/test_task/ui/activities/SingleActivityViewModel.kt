@@ -1,7 +1,7 @@
 package com.example.kode.test_task.ui.activities
 
 import com.example.kode.domain.core.Base
-import com.example.kode.test_task.ui.core.BaseCommunication
+import com.example.kode.test_task.ui.core.communications.BaseCommunication
 import com.example.kode.test_task.ui.core.view_model.BaseViewModel
 import javax.inject.Inject
 

@@ -1,10 +1,9 @@
-package com.example.kode.test_task.ui.core
+package com.example.kode.test_task.ui.core.communications
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.example.kode.domain.core.Read
-import com.example.kode.domain.core.Save
 
 // Will be good if we needing postValue realization and value
 open class LiveDataCommunication<M : Any> : BaseCommunication<M>,

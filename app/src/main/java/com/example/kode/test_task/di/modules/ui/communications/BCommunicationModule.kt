@@ -6,17 +6,18 @@ import com.example.kode.test_task.ui.activities.single_activity_fragments.main.c
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.communications.NewMainCommunication
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.MainStatesUI
 import com.example.kode.test_task.ui.activities.single_activity_fragments.worker.communications.WorkerCommunication
+import com.example.kode.test_task.ui.activities.single_activity_fragments.worker.models.WorkerStatesUI
+import com.example.kode.test_task.ui.core.communications.BaseCommunication
+import com.example.kode.test_task.ui.core.search.states.UISearchState
 import dagger.Binds
 import dagger.Module
-import com.example.kode.test_task.ui.activities.single_activity_fragments.worker.models.WorkerStatesUI
-import com.example.kode.test_task.ui.core.BaseCommunication
 
 
 @Module
 interface BCommunicationModule {
 
     @Binds
-    fun bindMainCommunication(communication: NewMainCommunication): MixSearchCommunication<MainStatesUI>
+    fun bindMainCommunication(communication: NewMainCommunication): MixSearchCommunication<MainStatesUI, UISearchState>
 
     @Binds
     fun bindWorkerCommunication(communication: WorkerCommunication): BaseCommunication<WorkerStatesUI>

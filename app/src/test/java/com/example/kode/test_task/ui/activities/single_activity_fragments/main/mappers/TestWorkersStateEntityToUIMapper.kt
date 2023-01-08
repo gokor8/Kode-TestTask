@@ -7,6 +7,7 @@ import com.example.kode.test_task.ui.activities.single_activity_fragments.main.m
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.mappers.entity_to_ui.fail.WorkersFailEntityToUIMapper
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.mappers.entity_to_ui.success.WorkersCacheEntityToUIMapper
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.mappers.entity_to_ui.success.WorkersCloudEntityToUIMapper
+import com.example.kode.test_task.ui.activities.single_activity_fragments.main.mappers.entity_to_ui.success.WorkersSuccessEntityToUIMapper
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.MainStatesUI
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.PreviewWorkerInfoUIModel
 import org.junit.Assert
@@ -15,14 +16,15 @@ import org.junit.Test
 class TestWorkersStateEntityToUIMapper {
 
     private val entityMapper = WorkerInfoEntityToUIMapper()
-    private val successMapper = WorkersCloudEntityToUIMapper(entityMapper)
-    private val noConnectionMapper = WorkersCacheEntityToUIMapper(entityMapper)
+    private val successMapper = WorkersSuccessEntityToUIMapper(
+        WorkersCloudEntityToUIMapper(entityMapper),
+        WorkersCacheEntityToUIMapper(entityMapper)
+    )
     private val failMapper = WorkersFailEntityToUIMapper()
+    private val mapper = WorkersStateEntityToUIMapper(successMapper, failMapper)
 
     @Test
     fun `test success cloud mapping`() {
-        val mapper = WorkersStateEntityToUIMapper(successMapper, noConnectionMapper, failMapper)
-
         val testData = WorkersStateEntity.WithConnection(
             listOf(
                 WorkerInfoEntity(
@@ -55,8 +57,6 @@ class TestWorkersStateEntityToUIMapper {
 
     @Test
     fun `test no connection mapping`() {
-        val mapper = WorkersStateEntityToUIMapper(successMapper, noConnectionMapper, failMapper)
-
         val testData = WorkersStateEntity.NoConnection(
             listOf(
                 WorkerInfoEntity(
@@ -89,8 +89,6 @@ class TestWorkersStateEntityToUIMapper {
 
     @Test
     fun `test fail generic mapping`() {
-        val mapper = WorkersStateEntityToUIMapper(successMapper, noConnectionMapper, failMapper)
-
         val testData = WorkersStateEntity.Fail(
             UseCaseExceptions.GenericException
         )
