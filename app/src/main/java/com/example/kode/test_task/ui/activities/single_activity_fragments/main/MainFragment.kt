@@ -29,11 +29,11 @@ class MainFragment :
     @Inject
     lateinit var uiStateMapper: Base.Mapper<MainStatesUI, Unit>
 
-    @Inject
-    lateinit var uiSearchStateMapper: Base.Mapper<MainSearchStates, Unit>
+//    @Inject
+//    lateinit var uiSearchStateMapper: Base.Mapper<MainSearchStates, Unit>
 
     @Inject
-    lateinit var viewModelFactory: MainViewModelFactory<SingleActivityStatesUI, MainStatesUI>
+    lateinit var viewModelFactory: MainViewModelFactory<SingleActivityStatesUI, MainStatesUI, MainSearchStates>
 
     override val viewModel
             : MainViewModel<SingleActivityStatesUI, MainStatesUI, MainSearchStates, *> by viewModels { viewModelFactory }
@@ -59,7 +59,7 @@ class MainFragment :
             uiStateMapper.map(it)
         }
         viewModel.observeSearch(viewLifecycleOwner) {
-            uiSearchStateMapper.map(it)
+            //uiSearchStateMapper.map(it)
         }
     }
 

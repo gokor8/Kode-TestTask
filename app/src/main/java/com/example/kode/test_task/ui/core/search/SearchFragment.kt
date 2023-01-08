@@ -10,7 +10,7 @@ import com.example.kode.test_task.ui.core.view_model.BaseViewModel
 
 typealias SingleActivity<SM> = BaseActivity<*, SingleActivityViewModel<SM>>
 
-abstract class SearchFragment<VB : ViewBinding, VM : SearchViewModel<*, *, SM>, SM : Any>
+abstract class SearchFragment<VB : ViewBinding, VM : SearchViewModel<*, *, *, SM>, SM : Any>
     : BaseFragment<VB, VM>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

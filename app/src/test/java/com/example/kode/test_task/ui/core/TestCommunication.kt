@@ -12,7 +12,7 @@ class TestCommunication<M : Any>(baseListValue: MutableList<M>? = null) : Abstra
         communicationModel = baseListValue ?: mutableListOf()
     }
 
-    fun get() = communicationModel.last()
+    fun get() = communicationModel.lastOrNull()
 
     override fun observe(lifecycleOwner: LifecycleOwner, observer: Observer<M>) {}
 
