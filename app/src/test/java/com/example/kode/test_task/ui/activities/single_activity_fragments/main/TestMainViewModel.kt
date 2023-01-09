@@ -8,7 +8,6 @@ import com.example.kode.domain.usecase.workers.GetWorkersUseCase
 import com.example.kode.test_task.ui.activities.models.SingleActivityStatesUI
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.communications.MixSearchCommunication
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.MainCommunicationModel
-import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.MainSearchStates
 import com.example.kode.test_task.ui.core.TestCommunication
 import com.example.kode.test_task.ui.core.TestEntityStates
 import com.example.kode.test_task.ui.core.TestFailMapper
@@ -27,6 +26,7 @@ import org.junit.Test
 import kotlin.coroutines.CoroutineContext
 
 typealias TestEntityState = TestEntityStates<List<String>>
+typealias TestEntity = TestEntityStates<List<String>>
 typealias TestEntitySuccess = TestEntityStates.Success<List<String>>
 
 class TestMainViewModel {
@@ -37,11 +37,12 @@ class TestMainViewModel {
     private val testSuccessEntity = TestEntityStates.WithConnection(listOf("test", "aboba"))
     var communicationStartList = TestSearchCommunication()
 
-    fun CoroutineScope.setupViewModel(
-        returnSearchState: TestEntitySuccess = testSuccessEntity,
-        returnWorkersState: TestEntitySuccess = testSuccessEntity,
+    private fun CoroutineScope.setupViewModel(
+        returnSearchState: TestEntity = testSuccessEntity,
+        returnWorkersState: TestEntity = testSuccessEntity,
     ) =
-        MainViewModel<SingleActivityStatesUI, TestMainViewModelState, TestMainSearchStates, TestEntityState>(
+        MainViewModel<SingleActivityStatesUI, TestMainViewModelState,
+                TestMainViewModelState.Success, TestMainSearchStates, TestEntityState>(
             communicationStartList,
             TestEntityStateToTestMainState(),
             TestGetWorkersUseCase(this.coroutineContext, returnWorkersState),
@@ -51,7 +52,7 @@ class TestMainViewModel {
         )
 
     @Before
-    fun before() {
+    fun before() = runBlocking {
         communicationStartList = TestSearchCommunication()
     }
 
@@ -151,6 +152,25 @@ class TestMainViewModel {
         assertEquals(expected, actual)
     }
 
+    @ExperimentalCoroutinesApi
+    @Test
+    fun `test search when communication has fail model return Skip`() = runTest {
+        val viewModel = setupViewModel(returnWorkersState = TestEntityStates.Fail(""))
+        val testData = SingleActivityStatesUI.Cancel()
+
+        viewModel.getWorkers().join()
+        viewModel.search(testData)
+
+        advanceUntilIdle()
+
+        val actual = communicationStartList.searchCommunication.get()
+        val expected = TestMainSearchStates.SearchSkip()
+
+        assertEquals(1, communicationStartList.baseCommunication.communicationModel.size)
+        assertEquals(1, communicationStartList.searchCommunication.communicationModel.size)
+        assertEquals(expected, actual)
+    }
+
 
     // TEST REALIZATION
     // MODELS
@@ -158,7 +178,7 @@ class TestMainViewModel {
 
         data class BaseSuccess(override val list: List<TestSuccessModel>) : Success()
 
-        abstract class Success : TestMainViewModelState {
+        abstract class Success : TestMainViewModelState, MainCommunicationModel.Success {
             abstract val list: List<TestSuccessModel>
         }
 
@@ -238,7 +258,7 @@ class TestMainViewModel {
     // USECASES
     class TestGetWorkersUseCase(
         coroutineContext: CoroutineContext,
-        private val returnSuccessState: TestEntitySuccess,
+        private val returnSuccessState: TestEntity,
         private val exception: Exception? = null,
     ) : GetWorkersUseCase<TestEntityState>(coroutineContext, TestFailMapper()) {
 
@@ -251,14 +271,14 @@ class TestMainViewModel {
 
     class TestSearchSortUseCase(
         coroutineContext: CoroutineContext,
-        private val returnSuccessState: TestEntitySuccess,
+        private val returnSuccessState: TestEntity,
         private val exception: Exception? = null,
-    ) : UseCaseSuspend.UseCaseWithInput<Pair<String, TestMainViewModelState>, TestEntityState>(
+    ) : UseCaseSuspend.UseCaseWithInput<Pair<String, TestMainViewModelState.Success>, TestEntityState>(
         coroutineContext,
         TestFailMapper()
     ) {
 
-        override suspend fun withSafe(equalsAttribute: Pair<String, TestMainViewModelState>): TestEntityState {
+        override suspend fun withSafe(equalsAttribute: Pair<String, TestMainViewModelState.Success>): TestEntityState {
             exception?.run { throw this }
 
             return returnSuccessState

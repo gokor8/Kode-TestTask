@@ -18,9 +18,9 @@ import com.example.kode.test_task.ui.core.search.SearchFragment
 import java.lang.ref.WeakReference
 import javax.inject.Inject
 
-class MainFragment :
-    SearchFragment<FragmentMainBinding, MainViewModel<SingleActivityStatesUI, MainStatesUI, MainSearchStates, *>,
-            SingleActivityStatesUI>() {
+class MainFragment : SearchFragment<FragmentMainBinding,
+        MainViewModel<SingleActivityStatesUI, MainStatesUI, MainStatesUI.Success, MainSearchStates, *>,
+        SingleActivityStatesUI>() {
 
     @Inject
     lateinit var recyclerAdapter
@@ -33,10 +33,11 @@ class MainFragment :
 //    lateinit var uiSearchStateMapper: Base.Mapper<MainSearchStates, Unit>
 
     @Inject
-    lateinit var viewModelFactory: MainViewModelFactory<SingleActivityStatesUI, MainStatesUI, MainSearchStates>
+    lateinit var viewModelFactory
+            : MainViewModelFactory<SingleActivityStatesUI, MainStatesUI, MainStatesUI.Success, MainSearchStates>
 
-    override val viewModel
-            : MainViewModel<SingleActivityStatesUI, MainStatesUI, MainSearchStates, *> by viewModels { viewModelFactory }
+    override val viewModel: MainViewModel<SingleActivityStatesUI, MainStatesUI, MainStatesUI.Success,
+            MainSearchStates, *> by viewModels { viewModelFactory }
 
     override fun setUI(): Unit = with(binding) {
         provide<SingleActivity>().binding.iSearch.cToolbar.isVisible = true

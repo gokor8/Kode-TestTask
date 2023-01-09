@@ -20,8 +20,10 @@ import dagger.Module
 interface BViewModelModule {
 
     @Binds
-    fun bindMainViewModel(mainViewModel: MainViewModel<SingleActivityStatesUI, MainStatesUI, MainSearchStates, WorkersStateEntity>)
-            : MainViewModel<SingleActivityStatesUI, MainStatesUI, MainSearchStates, *>
+    fun bindMainViewModel(
+        mainViewModel:
+        MainViewModel<SingleActivityStatesUI, MainStatesUI, MainStatesUI.Success, MainSearchStates, WorkersStateEntity>,
+    ) : MainViewModel<SingleActivityStatesUI, MainStatesUI, MainStatesUI.Success, MainSearchStates, *>
 
 //    @Binds
 //    fun bindSingleActivityViewModel(mainViewModel: SingleActivityViewModel<SingleActivityStatesUI>)

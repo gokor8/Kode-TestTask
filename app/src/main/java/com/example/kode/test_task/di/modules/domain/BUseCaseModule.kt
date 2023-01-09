@@ -3,12 +3,10 @@ package com.example.kode.test_task.di.modules.domain
 import com.example.kode.domain.core.usecase.UseCaseSuspend
 import com.example.kode.domain.entity.worker.WorkerFullStateEntity
 import com.example.kode.domain.entity.worker.WorkerInputEntity
-import com.example.kode.domain.entity.workers.sort.name.WorkerNameSortableEntity
 import com.example.kode.domain.entity.workers.WorkersStateEntity
 import com.example.kode.domain.entity.workers.sort.WorkerStringSortableEntity
 import com.example.kode.domain.entity.workers.sort.WorkersSortableStateEntity
 import com.example.kode.domain.usecase.sort.AbstractStateSortableUseCase
-import com.example.kode.domain.usecase.sort.StringStateSortUseCase
 import com.example.kode.domain.usecase.sort.StringStateSortableUseCase
 import com.example.kode.domain.usecase.worker.GetWorkerUseCase
 import com.example.kode.domain.usecase.worker.GetWorkerUseCaseImpl
@@ -36,10 +34,14 @@ interface BUseCaseModule {
 //    fun bindWorkersStringStateSortUseCase(useCase: StringStateSortUseCase<WorkersSortableStateEntity, WorkerStringSortableEntity, WorkersStateEntity>)
 //            : StringStateSortUseCase<WorkersSortableStateEntity, WorkerStringSortableEntity, WorkersStateEntity>
 
-    @Binds fun bindStringStateSortableUseCase(sortableUseCase: StringStateSortableUseCase<
-            WorkersSortableStateEntity, WorkerStringSortableEntity, WorkersStateEntity>)
-            : AbstractStateSortableUseCase<WorkersSortableStateEntity, WorkersStateEntity>
+    @Binds
+    fun bindStringStateSortableUseCase(
+        sortableUseCase: StringStateSortableUseCase<
+                WorkersSortableStateEntity, WorkerStringSortableEntity, WorkersStateEntity>,
+    ): AbstractStateSortableUseCase<WorkersSortableStateEntity, WorkersStateEntity>
 
-    @Binds fun bindWorkersSearchUseCase(workersSearchUseCase: WorkersSearchUseCase<Pair<String, MainStatesUI>, WorkersStateEntity>)
-            : UseCaseSuspend.UseCaseWithInput<Pair<String, MainStatesUI>, WorkersStateEntity>
+    @Binds
+    fun bindWorkersSearchUseCase(
+        workersSearchUseCase: WorkersSearchUseCase<Pair<String, MainStatesUI.Success>, WorkersStateEntity>
+    ): UseCaseSuspend.UseCaseWithInput<Pair<String, MainStatesUI.Success>, WorkersStateEntity>
 }

@@ -8,11 +8,12 @@ import com.example.kode.test_task.ui.core.view_model.BaseViewModelFactory
 import javax.inject.Inject
 import javax.inject.Named
 
-class MainViewModelFactory<IM : SingleActivityStatesUI, RM : MainStatesUI, SM : MainSearchStates> @Inject constructor(
-    private val viewModel: MainViewModel<IM, RM, SM, *>
-) : BaseViewModelFactory<MainViewModel<*, *, *, *>> {
+class MainViewModelFactory<IM : SingleActivityStatesUI, RM : MainStatesUI, RSM : MainStatesUI.Success, SM : MainSearchStates>
+@Inject constructor(
+    private val viewModel: MainViewModel<IM, RM, RSM, SM, *>
+) : BaseViewModelFactory<MainViewModel<*, *, *, *, *>> {
 
-    override val modelClass: Class<MainViewModel<*, *, *, *>> = MainViewModel::class.java
+    override val modelClass: Class<MainViewModel<*, *, *, *, *>> = MainViewModel::class.java
 
     override fun createViewModel() = viewModel
 }

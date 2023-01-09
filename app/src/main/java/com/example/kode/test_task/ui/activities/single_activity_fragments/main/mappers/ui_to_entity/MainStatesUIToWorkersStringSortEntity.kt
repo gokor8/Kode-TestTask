@@ -12,17 +12,18 @@ import javax.inject.Inject
 class MainStatesUIToWorkersStringSortEntity @Inject constructor(
     private val mainStateSuccessToUserTag: Base.Mapper<MainStatesUI.Success, List<WorkerUserTagSortableEntity>>,
     private val mainStateSuccessToName: Base.Mapper<MainStatesUI.Success, List<WorkerNameSortableEntity>>,
-) : Base.Mapper<Pair<@JvmSuppressWildcards String, MainStatesUI>, StringSortEntity<WorkersSortableStateEntity, WorkerStringSortableEntity>> {
+) : Base.Mapper<Pair<@JvmSuppressWildcards String, MainStatesUI.Success>,
+        StringSortEntity<WorkersSortableStateEntity, WorkerStringSortableEntity>> {
 
-    override fun map(model: Pair<String, MainStatesUI>): StringSortEntity<WorkersSortableStateEntity, WorkerStringSortableEntity> {
+    override fun map(model: Pair<String, MainStatesUI.Success>): StringSortEntity<WorkersSortableStateEntity, WorkerStringSortableEntity> {
         val currentState = model.second
 
-        val workersSortableList = if (currentState is MainStatesUI.Success) {
+        val workersSortableList =
             if (model.first.length == 2 && model.first.all { it.isUpperCase() })
                 mainStateSuccessToUserTag.map(currentState)
             else
                 mainStateSuccessToName.map(currentState)
-        } else throw java.lang.IllegalStateException()
+
 
         return StringSortEntity(
             model.first,

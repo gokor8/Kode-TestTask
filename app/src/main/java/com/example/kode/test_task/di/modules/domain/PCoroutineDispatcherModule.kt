@@ -10,37 +10,35 @@ import com.example.kode.domain.entity.workers.sort.user_tag.WorkerUserTagSortabl
 import com.example.kode.domain.usecase.sort.StringStateSortUseCase
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.mappers.ui_to_entity.MainStatesUIToWorkersStringSortEntity
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.MainStatesUI
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlin.coroutines.CoroutineContext
 
 @Module
 class PCoroutineDispatcherModule {
 
-  @Provides
-  fun provideIODispatcher(): CoroutineContext = Dispatchers.IO
+    @Provides
+    fun provideIODispatcher(): CoroutineContext = Dispatchers.IO
 
-  @Provides
-  fun bindMainStatesUIToWorkersStringSortEntity(
-    mainStateSuccessToUserTag: Base.Mapper<MainStatesUI.Success, List<WorkerUserTagSortableEntity>>,
-    mainStateSuccessToName: Base.Mapper<MainStatesUI.Success, List<WorkerNameSortableEntity>>
-  ): Base.Mapper<Pair<String, MainStatesUI>, StringSortEntity<WorkersSortableStateEntity, WorkerStringSortableEntity>> {
-    return MainStatesUIToWorkersStringSortEntity(mainStateSuccessToUserTag, mainStateSuccessToName)
-          }
+    @Provides
+    fun bindMainStatesUIToWorkersStringSortEntity(
+      mainStateSuccessToUserTag: Base.Mapper<MainStatesUI.Success, List<WorkerUserTagSortableEntity>>,
+      mainStateSuccessToName: Base.Mapper<MainStatesUI.Success, List<WorkerNameSortableEntity>>,
+    ): Base.Mapper<Pair<String, MainStatesUI.Success>, StringSortEntity<WorkersSortableStateEntity, WorkerStringSortableEntity>> {
+        return MainStatesUIToWorkersStringSortEntity(mainStateSuccessToUserTag,
+            mainStateSuccessToName)
+    }
 
-  @Provides
-  fun bindWorkersStringStateSortUseCase(
-    coroutineContext: CoroutineContext,
-    failMapper: Base.Mapper<Exception, WorkersStateEntity>,
-    toStateMapper: Base.Mapper<WorkersSortableStateEntity, WorkersStateEntity>
-  )
-          : StringStateSortUseCase<WorkersSortableStateEntity, WorkerStringSortableEntity, WorkersStateEntity> {
-    return StringStateSortUseCase<WorkersSortableStateEntity, WorkerStringSortableEntity, WorkersStateEntity>(
-      coroutineContext, failMapper, toStateMapper
-    )
-  }
+    @Provides
+    fun bindWorkersStringStateSortUseCase(
+      coroutineContext: CoroutineContext,
+      failMapper: Base.Mapper<Exception, WorkersStateEntity>,
+      toStateMapper: Base.Mapper<WorkersSortableStateEntity, WorkersStateEntity>,
+    ): StringStateSortUseCase<WorkersSortableStateEntity, WorkerStringSortableEntity, WorkersStateEntity> {
+        return StringStateSortUseCase(
+            coroutineContext, failMapper, toStateMapper
+        )
+    }
 
 }
