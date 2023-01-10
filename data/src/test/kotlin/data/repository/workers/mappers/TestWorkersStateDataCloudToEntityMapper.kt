@@ -36,6 +36,7 @@ class TestWorkersStateDataCloudToEntityMapper {
         val expected = WorkersStateEntity.WithConnection(
             listOf(
                 WorkerInfoEntity(
+                    "id",
                     "avatar",
                     "name",
                     "lastName",

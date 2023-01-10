@@ -26,7 +26,7 @@ class TestWorkerInfoDataModelToDomainMapper {
 
         val actual = workerInfoDataModelToDomainMapper.map(workersSuccessDataModel)
         val expected = WorkerInfoEntity(
-            "avatar", "name", "lastName", "userTag", "position"
+            "id","avatar", "name", "lastName", "userTag", "position"
         )
 
         Assert.assertEquals(expected, actual)

@@ -48,6 +48,7 @@ class TestWorkersStateDataToEntityMapper {
         val expected = WorkersStateEntity.WithConnection(
             listOf(
                 WorkerInfoEntity(
+                    "id",
                     "avatar",
                     "name",
                     "lastName",
@@ -88,6 +89,7 @@ class TestWorkersStateDataToEntityMapper {
         val expected = WorkersStateEntity.NoConnection(
             listOf(
                 WorkerInfoEntity(
+                    "id",
                     "avatar",
                     "name",
                     "lastName",

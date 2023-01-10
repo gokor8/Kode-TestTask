@@ -35,6 +35,7 @@ class TestWorkersStateDataCacheToDomainMapper {
         val expected = WorkersStateEntity.NoConnection(
             listOf(
                 WorkerInfoEntity(
+                    "id",
                     "avatar",
                     "name",
                     "lastName",

@@ -40,16 +40,15 @@ class TestMainViewModel {
     private fun CoroutineScope.setupViewModel(
         returnSearchState: TestEntity = testSuccessEntity,
         returnWorkersState: TestEntity = testSuccessEntity,
-    ) =
-        MainViewModel<SingleActivityStatesUI, TestMainViewModelState,
-                TestMainViewModelState.Success, TestMainSearchStates, TestEntityState>(
-            communicationStartList,
-            TestEntityStateToTestMainState(),
-            TestGetWorkersUseCase(this.coroutineContext, returnWorkersState),
-            TestEntityStateToTestSearchMainState(),
-            TestSearchStatesFactory(),
-            TestSearchSortUseCase(this.coroutineContext, returnSearchState)
-        )
+    ) = MainViewModel<SingleActivityStatesUI, TestMainViewModelState,
+            TestMainViewModelState.Success, TestMainSearchStates, TestEntityState>(
+        communicationStartList,
+        TestEntityStateToTestMainState(),
+        TestGetWorkersUseCase(this.coroutineContext, returnWorkersState),
+        TestEntityStateToTestSearchMainState(),
+        TestSearchStatesFactory(),
+        TestSearchSortUseCase(this.coroutineContext, returnSearchState)
+    )
 
     @Before
     fun before() = runBlocking {

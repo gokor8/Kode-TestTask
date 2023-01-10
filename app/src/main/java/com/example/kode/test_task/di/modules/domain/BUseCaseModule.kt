@@ -23,7 +23,7 @@ interface BUseCaseModule {
 
     @Binds
     fun bindGetWorkersUseCase(
-        useCase: GetWorkersUseCaseImpl<WorkersSortableStateEntity, WorkersStateEntity.WithConnection, WorkersStateEntity>,
+        useCase: GetWorkersUseCaseImpl<WorkersSortableStateEntity, WorkersStateEntity.Success, WorkersStateEntity>,
     ): GetWorkersUseCase<WorkersStateEntity>
 
     @Binds

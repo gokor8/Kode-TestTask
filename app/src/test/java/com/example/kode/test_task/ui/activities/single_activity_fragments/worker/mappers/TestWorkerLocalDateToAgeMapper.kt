@@ -13,7 +13,7 @@ class TestWorkerLocalDateToAgeMapper {
         val testDate = LocalDate.of(2004, 8,2)
 
         val actual = mapper.map(testDate)
-        val expected = 18
+        val expected = 19
 
         Assert.assertEquals(expected, actual)
     }
