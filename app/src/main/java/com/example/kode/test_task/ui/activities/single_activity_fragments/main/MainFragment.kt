@@ -29,8 +29,8 @@ class MainFragment : SearchFragment<FragmentMainBinding,
     @Inject
     lateinit var uiStateMapper: Base.Mapper<MainStatesUI, Unit>
 
-//    @Inject
-//    lateinit var uiSearchStateMapper: Base.Mapper<MainSearchStates, Unit>
+    @Inject
+    lateinit var uiSearchStateMapper: Base.Mapper<MainSearchStates, Unit>
 
     @Inject
     lateinit var viewModelFactory

@@ -8,7 +8,8 @@ import dagger.Binds
 import dagger.Module
 import java.time.LocalDate
 
-@Module(includes = [BUIWorkersMapperModule::class, BUIWorkerMapperModule::class])
+@Module(includes = [BUIWorkersMapperModule::class, BUIWorkersSearchStateMapperModule::class,
+    BUIWorkerMapperModule::class])
 interface BUIMapperModule {
 
     @Binds
