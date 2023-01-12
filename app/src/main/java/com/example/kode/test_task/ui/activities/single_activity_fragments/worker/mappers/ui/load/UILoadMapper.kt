@@ -11,11 +11,13 @@ import javax.inject.Inject
 class UILoadMapper @Inject constructor(
     @WorkerFragmentBinding
     private val binding: WeakReference<FragmentWorkerBinding>,
-    private val visibilityVGHandler: VisibilityVGHandler
+    private val visibilityVGHandler: VisibilityVGHandler,
 ) : Base.Mapper<WorkerStatesUI.Load, Unit> {
 
-    override fun map(model: WorkerStatesUI.Load) = binding.get()?.apply {
+    override fun map(model: WorkerStatesUI.Load) {
+        binding.get()?.apply {
 
-        visibilityVGHandler.comboInverse(pbLoad, llMain, iError.llError)
-    }.let{}
+            visibilityVGHandler.comboInverse(pbLoad, llMain, iError.llError)
+        }
+    }
 }

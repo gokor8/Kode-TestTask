@@ -11,11 +11,12 @@ import javax.inject.Inject
 class UIFatalErrorMapper @Inject constructor(
     @WorkerFragmentBinding
     private val binding: WeakReference<FragmentWorkerBinding>,
-    private val visibilityVGHandler: VisibilityVGHandler
+    private val visibilityVGHandler: VisibilityVGHandler,
 ) : Base.Mapper<WorkerStatesUI.FatalError, Unit> {
 
-    override fun map(model: WorkerStatesUI.FatalError) = binding.get()?.apply {
-
-        visibilityVGHandler.comboInverse( iError.llError, pbLoad, llMain)
-    }.let {}
+    override fun map(model: WorkerStatesUI.FatalError) {
+        binding.get()?.apply {
+            visibilityVGHandler.comboInverse(iError.llError, pbLoad, llMain)
+        }
+    }
 }

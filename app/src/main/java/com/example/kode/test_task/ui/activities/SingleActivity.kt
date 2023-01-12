@@ -1,21 +1,20 @@
 package com.example.kode.test_task.ui.activities
 
 import android.os.Bundle
+import android.view.inputmethod.InputMethodManager
 import androidx.activity.viewModels
+import androidx.core.content.getSystemService
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.FragmentActivity
 import com.example.kode.test_task.R
 import com.example.kode.test_task.databinding.ActivityMainBinding
 import com.example.kode.test_task.ui.activities.models.SingleActivityStatesUI
-import com.example.kode.test_task.ui.activities.single_activity_fragments.worker.WorkerViewModelFactory
-import com.example.kode.test_task.ui.activities.single_activity_fragments.worker.models.WorkerStatesUI
 import com.example.kode.test_task.ui.core.BaseActivity
-import com.example.kode.test_task.ui.core.view_model.BaseViewModel
-import java.lang.ref.WeakReference
 import javax.inject.Inject
 
-class SingleActivity : BaseActivity<ActivityMainBinding, SingleActivityViewModel<SingleActivityStatesUI>>() {
+class SingleActivity :
+    BaseActivity<ActivityMainBinding, SingleActivityViewModel<SingleActivityStatesUI>>() {
 
     @Inject
     lateinit var viewModelFactory: SingleActivityViewModelFactory<SingleActivityStatesUI>
@@ -45,21 +44,26 @@ class SingleActivity : BaseActivity<ActivityMainBinding, SingleActivityViewModel
 
     override fun setListeners() = with(binding.iSearch) {
         etSearch.doOnTextChanged { text, _, _, _ ->
-            tvCancel.isVisible = text == null || text.isEmpty()
+            tvCancel.isVisible = text?.isNotEmpty() == true
 
             viewModel.setSearchText(text.toString())
         }
 
         etSearch.setOnFocusChangeListener { _, isFocused ->
-            tilSearch.hint = if (isFocused && etSearch.text.isNotEmpty()) {
+            tilSearch.hint = if (isFocused || etSearch.text.isNotEmpty()) {
                 ""
             } else {
                 resources.getString(R.string.main_tool_bar_hint)
+            }
+
+            if (!isFocused) getSystemService<InputMethodManager>()?.apply {
+                hideSoftInputFromWindow(etSearch.windowToken, 0)
             }
         }
 
         tvCancel.setOnClickListener {
             etSearch.setText("")
+            etSearch.clearFocus()
             tvCancel.isVisible = false
         }
     }

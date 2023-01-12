@@ -60,7 +60,7 @@ class MainFragment : SearchFragment<FragmentMainBinding,
             uiStateMapper.map(it)
         }
         viewModel.observeSearch(viewLifecycleOwner) {
-            //uiSearchStateMapper.map(it)
+            uiSearchStateMapper.map(it)
         }
     }
 
