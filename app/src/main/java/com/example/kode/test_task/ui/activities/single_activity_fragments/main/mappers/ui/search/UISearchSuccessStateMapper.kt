@@ -9,18 +9,13 @@ import com.example.kode.test_task.ui.activities.single_activity_fragments.main.m
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.PreviewWorkerInfoUIModel
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.recycler_view.MainViewHolder
 import com.example.kode.test_task.ui.core.recycler_view.BaseRecyclerViewAdapter
+import com.example.kode.test_task.ui.core.visibility_handler.VisibilityVGHandler
 import java.lang.ref.WeakReference
 import javax.inject.Inject
 
 class UISearchSuccessStateMapper @Inject constructor(
     @MainFragmentBinding
-    private val binding: WeakReference<FragmentMainBinding>,
+    binding: WeakReference<FragmentMainBinding>,
+    visibilityVGHandler: VisibilityVGHandler,
     adapter: BaseRecyclerViewAdapter<PreviewWorkerInfoUIModel, ItemMainBinding, MainViewHolder>
-): UISuccessMapper<MainSearchStates.SearchSuccess>(adapter) {
-
-    override fun map(model: MainSearchStates.SearchSuccess) {
-        binding.get()?.llSearchError?.isVisible = false
-        binding.get()?.rvMain?.isVisible = true
-        super.map(model)
-    }
-}
+): UISuccessMapper<MainSearchStates.SearchSuccess>(adapter, binding, visibilityVGHandler)
