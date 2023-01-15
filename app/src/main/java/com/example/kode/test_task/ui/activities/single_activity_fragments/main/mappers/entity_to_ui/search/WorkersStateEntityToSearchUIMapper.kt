@@ -11,10 +11,10 @@ class WorkersStateEntityToSearchUIMapper @Inject constructor(
     private val mapper: Base.Mapper<WorkerInfoEntity, PreviewWorkerInfoUIModel>,
 ) : Base.Mapper<WorkersStateEntity, MainSearchStates> {
 
-    override fun map(model: WorkersStateEntity): MainSearchStates = when (model) {
-        is WorkersStateEntity.Success -> MainSearchStates.SearchSuccess(model.workers.map {
+    override fun map(model: WorkersStateEntity): MainSearchStates = when {
+        model is WorkersStateEntity.Success && model.workers.isNotEmpty() -> MainSearchStates.SearchSuccess(model.workers.map {
             mapper.map(it)
         })
-        is WorkersStateEntity.Fail -> MainSearchStates.SearchNotFound()
+        else -> MainSearchStates.SearchNotFound()
     }
 }
