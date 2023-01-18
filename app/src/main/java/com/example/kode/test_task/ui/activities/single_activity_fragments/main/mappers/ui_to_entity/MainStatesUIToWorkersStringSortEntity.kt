@@ -16,7 +16,7 @@ class MainStatesUIToWorkersStringSortEntity @Inject constructor(
     private val toSortableStateEntity: Base.Mapper<PAIR_WITH_MAIN, WorkersSortableStateEntity>,
     private val mainStateSuccessToUserTag: Base.Mapper<MainStatesUI.Success, List<WorkerUserTagSortableEntity>>,
     private val mainStateSuccessToName: Base.Mapper<MainStatesUI.Success, List<WorkerNameSortableEntity>>,
-) : Base.Mapper<Pair<@JvmSuppressWildcards String, MainStatesUI.Success>,
+) : Base.Mapper<@JvmSuppressWildcards Pair<String, MainStatesUI.Success>,
         StringSortEntity<WorkersSortableStateEntity, WorkerStringSortableEntity>> {
 
     override fun map(model: Pair<String, MainStatesUI.Success>)

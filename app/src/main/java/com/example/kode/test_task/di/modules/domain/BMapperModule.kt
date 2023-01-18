@@ -39,23 +39,4 @@ interface BMapperModule {
     fun bindWorkersNameSortableStateToWorkersState(mapper: WorkersSortableStateToWorkersState)
             : Base.Mapper<WorkersSortableStateEntity, WorkersStateEntity>
 
-    @Binds
-    fun bindWorkersStateToWorkersNameSortableState(mapper: WorkersStateToWorkersNameSortableState)
-            : Base.Mapper<WorkersStateEntity.Success, WorkersSortableStateEntity>
-
-    @Binds
-    fun bindListWorkerInfoToListWorkerNameSortable(mapper: ListWorkerInfoToListWorkerNameSortable)
-            : Base.Mapper<List<WorkerInfoEntity>, List<WorkerNameSortableEntity>>
-
-//    @Binds
-//    fun bindMainStatesUIToWorkersStringSortEntity(mapper: MainStatesUIToWorkersStringSortEntity)
-//            : Base.Mapper<Pair<String, MainStatesUI>, StringSortEntity<WorkersSortableStateEntity, WorkerStringSortableEntity>>
-
-    @Binds
-    fun bindMainStateSuccessToUserTag(mapper: MainStateSuccessToUserTag)
-            : Base.Mapper<MainStatesUI.Success, List<WorkerUserTagSortableEntity>>
-
-    @Binds
-    fun bindMainStateSuccessToName(mapper: MainStateSuccessToName)
-            : Base.Mapper<MainStatesUI.Success, List<WorkerNameSortableEntity>>
 }

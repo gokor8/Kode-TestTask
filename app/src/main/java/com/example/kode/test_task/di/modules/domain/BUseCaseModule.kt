@@ -1,5 +1,6 @@
 package com.example.kode.test_task.di.modules.domain
 
+import com.example.kode.domain.core.Base
 import com.example.kode.domain.core.usecase.UseCaseSuspend
 import com.example.kode.domain.entity.worker.WorkerFullStateEntity
 import com.example.kode.domain.entity.worker.WorkerInputEntity
@@ -14,11 +15,14 @@ import com.example.kode.domain.usecase.workers.GetWorkersUseCase
 import com.example.kode.domain.usecase.workers.GetWorkersUseCaseImpl
 import com.example.kode.domain.usecase.workers.WorkersSearchUseCase
 import com.example.kode.test_task.di.modules.data.BRepositoryModule
+import com.example.kode.test_task.ui.activities.single_activity_fragments.main.mappers.ui_to_entity.MainStateSuccessAndListToSortableState
+import com.example.kode.test_task.ui.activities.single_activity_fragments.main.mappers.ui_to_entity.PAIR_WITH_MAIN
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.models.MainStatesUI
 import dagger.Binds
 import dagger.Module
 
-@Module(includes = [PCoroutineDispatcherModule::class, BRepositoryModule::class, BMapperModule::class])
+@Module(includes = [PCoroutineDispatcherModule::class, BRepositoryModule::class,
+    BMapperModule::class, BMapperSortModule::class])
 interface BUseCaseModule {
 
     @Binds
@@ -29,10 +33,6 @@ interface BUseCaseModule {
     @Binds
     fun bindGetWorkerUseCase(useCase: GetWorkerUseCaseImpl<WorkerInputEntity, WorkerFullStateEntity>)
             : GetWorkerUseCase<WorkerInputEntity, WorkerFullStateEntity>
-
-//    @Binds
-//    fun bindWorkersStringStateSortUseCase(useCase: StringStateSortUseCase<WorkersSortableStateEntity, WorkerStringSortableEntity, WorkersStateEntity>)
-//            : StringStateSortUseCase<WorkersSortableStateEntity, WorkerStringSortableEntity, WorkersStateEntity>
 
     @Binds
     fun bindStringStateSortableUseCase(

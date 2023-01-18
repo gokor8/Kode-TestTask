@@ -4,7 +4,8 @@ import androidx.recyclerview.widget.DiffUtil
 import javax.inject.Inject
 import kotlin.jvm.internal.Intrinsics
 
-class BaseDiffUtilCallback<M : BaseRecyclerViewModel<*>> @Inject constructor() : DiffUtil.ItemCallback<M>() {
+class BaseDiffUtilCallback<M : BaseRecyclerViewModel<*>> @Inject constructor() :
+    DiffUtil.ItemCallback<M>() {
 
     override fun areItemsTheSame(oldItem: M, newItem: M): Boolean {
         return oldItem.getRVEqualsValue() == newItem.getRVEqualsValue()

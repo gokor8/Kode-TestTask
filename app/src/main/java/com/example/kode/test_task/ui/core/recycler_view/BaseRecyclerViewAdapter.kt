@@ -5,11 +5,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.viewbinding.ViewBinding
+import com.example.kode.test_task.di.subcomponents.MainFragmentScope
 import javax.inject.Inject
 
-class BaseRecyclerViewAdapter<M : BaseRecyclerViewModel<*>, VB : ViewBinding, VH : BaseViewHolder<M, VB>> constructor(
+@MainFragmentScope
+class BaseRecyclerViewAdapter<M : BaseRecyclerViewModel<*>, VB : ViewBinding, VH : BaseViewHolder<M, VB>>
+@Inject constructor(
     private val viewHolderFactory: BaseViewHolderFactory<VB, VH>,
-    diffUtilCallback: DiffUtil.ItemCallback<M>,
+    diffUtilCallback: BaseDiffUtilCallback<M>,
 ) : ListAdapter<M, VH>(diffUtilCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {

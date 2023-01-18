@@ -8,14 +8,14 @@ import com.example.kode.test_task.di.annotations.main_fragment.MainFragmentConte
 import com.example.kode.test_task.di.annotations.main_fragment.MainFragmentView
 import com.example.kode.test_task.di.modules.ui.mappers.BUIWorkersSearchStateMapperModule
 import com.example.kode.test_task.di.modules.ui.mappers.BUIWorkersStateMapperModule
-import com.example.kode.test_task.di.modules.ui.recycler_views.UnitedRecyclerViewModule
+import com.example.kode.test_task.di.modules.ui.recycler_views.BRecyclerViewModule
 import com.example.kode.test_task.ui.activities.single_activity_fragments.main.MainFragment
 import dagger.BindsInstance
 import dagger.Subcomponent
 import java.lang.ref.WeakReference
 
 @MainFragmentScope
-@Subcomponent(modules = [UnitedRecyclerViewModule::class, BUIWorkersSearchStateMapperModule::class,
+@Subcomponent(modules = [BRecyclerViewModule::class, BUIWorkersSearchStateMapperModule::class,
     BUIWorkersStateMapperModule::class])
 interface MainFragmentSubcomponent {
 

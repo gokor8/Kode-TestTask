@@ -23,33 +23,4 @@ class PCoroutineDispatcherModule {
     @Provides
     fun provideIODispatcher(): CoroutineContext = Dispatchers.IO
 
-    @Provides
-    fun bindMainStatesUIToWorkersStringSortEntity(
-        toSortableStateEntity: Base.Mapper<PAIR_WITH_MAIN, WorkersSortableStateEntity>,
-        mainStateSuccessToUserTag: Base.Mapper<MainStatesUI.Success, List<WorkerUserTagSortableEntity>>,
-        mainStateSuccessToName: Base.Mapper<MainStatesUI.Success, List<WorkerNameSortableEntity>>,
-    ): Base.Mapper<Pair<String, MainStatesUI.Success>, StringSortEntity<WorkersSortableStateEntity, WorkerStringSortableEntity>> {
-        return MainStatesUIToWorkersStringSortEntity(
-            toSortableStateEntity,
-            mainStateSuccessToUserTag,
-            mainStateSuccessToName
-        )
-    }
-
-    @Provides
-    fun bindMainStateSuccessAndListToSortableState(): Base.Mapper<PAIR_WITH_MAIN, WorkersSortableStateEntity> {
-        return MainStateSuccessAndListToSortableState()
-    }
-
-    @Provides
-    fun bindWorkersStringStateSortUseCase(
-        coroutineContext: CoroutineContext,
-        failMapper: Base.Mapper<Exception, WorkersStateEntity>,
-        toStateMapper: Base.Mapper<WorkersSortableStateEntity, WorkersStateEntity>,
-    ): StringStateSortUseCase<WorkersSortableStateEntity, WorkerStringSortableEntity, WorkersStateEntity> {
-        return StringStateSortUseCase(
-            coroutineContext, failMapper, toStateMapper
-        )
-    }
-
 }

@@ -7,8 +7,4 @@ sealed class WorkersSortableStateEntity(
 ) : StringSortableState<WorkersSortableStateEntity, WorkerStringSortableEntity> {
 
     override fun getSortableList(): List<WorkerStringSortableEntity> = listSortable
-
-    /*override fun copyByModel(model: List<WorkerStringSortableEntity>): WorkersSortableStateEntity {
-        return WorkersSortableStateEntity(model)
-    }*/
 }
