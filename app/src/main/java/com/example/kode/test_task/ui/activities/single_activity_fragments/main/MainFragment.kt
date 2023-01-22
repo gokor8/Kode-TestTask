@@ -48,21 +48,26 @@ class MainFragment : SearchFragment<FragmentMainBinding,
         viewModel.initialization()
     }
 
-    override fun setListeners() {
-        binding.iError.tvTryAgain.setOnClickListener {
+    override fun setListeners() = binding.apply {
+        iError.tvTryAgain.setOnClickListener {
             binding.vfMain.showPrevious()
             viewModel.getWorkers()
         }
-    }
+        srMain.setOnRefreshListener {
+            srMain.isRefreshing = true
+            viewModel.getWorkers()
+        }
+    }.let {}
 
-    override fun setObservers() {
+    override fun setObservers() = binding.apply {
         viewModel.observe(viewLifecycleOwner) {
+            srMain.isRefreshing = false
             uiStateMapper.map(it)
         }
         viewModel.observeSearch(viewLifecycleOwner) {
             uiSearchStateMapper.map(it)
         }
-    }
+    }.let {}
 
     override fun setBind() = FragmentMainBinding.inflate(layoutInflater)
 

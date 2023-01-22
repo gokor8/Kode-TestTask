@@ -51,6 +51,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
     implementation "androidx.fragment:fragment:$fragmentVersion"
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 
     // TESTS
     testImplementation "junit:junit:$jUnitVersion"
