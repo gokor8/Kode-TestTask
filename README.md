@@ -3,7 +3,7 @@
 # Technologies used
 * LiveData(State)
 * Coroutines
-* Room(Deprecated Realm)
+* Room
 * Retrofit
 * Glide
 * And many OOP + Abstractions
